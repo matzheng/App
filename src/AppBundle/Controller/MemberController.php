@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\DedeMember;
+use AppBundle\Entity\DedeMemberPerson;
 
 class MemberController extends Controller{
     /**
@@ -32,6 +33,13 @@ class MemberController extends Controller{
         if($rmb == "1"){
             setcookie('anzhi_m', $user->getMid(),time()+3600*24*7);
         }
+        //set last login time and login IP
+        $user->setLogintime(time());
+        $user->setLoginip($this->container->get('request')->getClientIp());
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        //store in session
         $session = $this->get('session');
         $session->set('anzhi_m', $user->getMid());
         return new JsonResponse(array('success'=>'1', 'msg'=>'登录成功'));
@@ -101,6 +109,16 @@ class MemberController extends Controller{
         $member->setLoginip($this->container->get('request')->getClientIp());
         $em = $this->getDoctrine()->getManager();
         $em->persist($member);
+        $em->flush();
+        //dede_member_person
+
+        $member_person = new DedeMemberPerson();
+        $member_person->setMid($member->getMid());
+        $member_person->setSex($s);
+        $member_person->setMobile($m);
+        $member_person->setBirthday(new \DateTime('1980-01-01'));
+        $member_person->setUname($m);
+        $em->persist($member_person);
         $em->flush();
         //set session
         $session = $this->get('session');

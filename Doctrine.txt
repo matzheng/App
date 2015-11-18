@@ -1,0 +1,21 @@
+#tips
+#运行php服务器
+php app/console server:run
+#访问 http://localhost:8000
+
+#0创建symfony项目
+#拷贝symfony文件到指定目录并运行以下指令
+php symfony new my_project_name
+
+#1.从数据库中导出orm结构xml到目录
+
+$ php app/console doctrine:mapping:import --force AcmeBlogBundle xml
+#AcmeBlogBundle默认应改成AppBundle, xml可改成yml
+
+#2. 从orm结构生成entity class
+$ php app/console doctrine:mapping:convert annotation ./src
+#或者
+#The first command generates entity classes with annotation mappings. But if you wan
+#XML mapping instead of annotations, you should execute the second command only.
+#3.
+$ php app/console doctrine:generate:entities AcmeBlogBundle

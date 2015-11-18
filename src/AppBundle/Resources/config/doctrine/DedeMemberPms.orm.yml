@@ -1,0 +1,84 @@
+AppBundle\Entity\DedeMemberPms:
+    type: entity
+    table: dede_member_pms
+    indexes:
+        sendtime:
+            columns:
+                - sendtime
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        floginid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        fromid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        toid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        tologinid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        folder:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+        subject:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''
+        sendtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        writetime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        hasview:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        isadmin:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        message:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

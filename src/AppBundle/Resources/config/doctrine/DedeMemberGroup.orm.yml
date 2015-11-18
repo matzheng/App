@@ -1,0 +1,29 @@
+AppBundle\Entity\DedeMemberGroup:
+    type: entity
+    table: dede_member_group
+    indexes:
+        id:
+            columns:
+                - id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        groupname:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

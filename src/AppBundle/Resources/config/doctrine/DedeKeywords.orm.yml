@@ -1,0 +1,46 @@
+AppBundle\Entity\DedeKeywords:
+    type: entity
+    table: dede_keywords
+    indexes:
+        keyword:
+            columns:
+                - keyword
+                - rank
+                - sta
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        keyword:
+            type: string
+            nullable: false
+            length: 16
+            options:
+                fixed: true
+                default: ''
+        rank:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        sta:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        rpurl:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: true
+                default: ''
+    lifecycleCallbacks: {  }

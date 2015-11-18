@@ -1,0 +1,55 @@
+AppBundle\Entity\DedePlusSeoinfo:
+    type: entity
+    table: dede_plus_seoinfo
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createTime:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: create_time
+        alexaNum:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: alexa_num
+        alexaAreaNum:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: alexa_area_num
+        baiduCount:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: baidu_count
+        sogouCount:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: sogou_count
+        haosou360Count:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: haosou360_count
+    lifecycleCallbacks: {  }

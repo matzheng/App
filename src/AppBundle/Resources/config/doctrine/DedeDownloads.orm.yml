@@ -1,0 +1,27 @@
+AppBundle\Entity\DedeDownloads:
+    type: entity
+    table: dede_downloads
+    id:
+        hash:
+            type: string
+            nullable: false
+            length: 32
+            options:
+                fixed: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        downloads:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,38 @@
+AppBundle\Entity\DedeMemberSnsmsg:
+    type: entity
+    table: dede_member_snsmsg
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        userid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        sendtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        msg:
+            type: string
+            nullable: false
+            length: 250
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

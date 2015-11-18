@@ -1,0 +1,71 @@
+AppBundle\Entity\DedeMemberFeed:
+    type: entity
+    table: dede_member_feed
+    id:
+        fid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        userid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        uname:
+            type: string
+            nullable: false
+            length: 36
+            options:
+                fixed: true
+                default: ''
+        type:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: '0'
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        dtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        title:
+            type: string
+            nullable: false
+            length: 253
+            options:
+                fixed: true
+        note:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: true
+                default: ''
+        ischeck:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

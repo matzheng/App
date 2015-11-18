@@ -1,0 +1,19 @@
+AppBundle\Entity\DedeSphinx:
+    type: entity
+    table: dede_sphinx
+    id:
+        countid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        maxaid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+    lifecycleCallbacks: {  }

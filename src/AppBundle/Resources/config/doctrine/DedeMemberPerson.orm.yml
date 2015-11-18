@@ -1,0 +1,121 @@
+AppBundle\Entity\DedeMemberPerson:
+    type: entity
+    table: dede_member_person
+    id:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        onlynet:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+        sex:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        uname:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: true
+                default: ''
+        qq:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        tel:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: false
+                default: ''
+        mobile:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: false
+                default: ''
+        place:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        oldplace:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        birthday:
+            type: date
+            nullable: false
+            options:
+                default: '1980-01-01'
+        income:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        education:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        vocation:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: '0'
+        marital:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        drink:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        address:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        company:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        job:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

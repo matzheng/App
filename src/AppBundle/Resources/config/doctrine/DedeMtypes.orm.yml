@@ -1,0 +1,32 @@
+AppBundle\Entity\DedeMtypes:
+    type: entity
+    table: dede_mtypes
+    id:
+        mtypeid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mtypename:
+            type: string
+            nullable: false
+            length: 40
+            options:
+                fixed: true
+        channelid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+    lifecycleCallbacks: {  }

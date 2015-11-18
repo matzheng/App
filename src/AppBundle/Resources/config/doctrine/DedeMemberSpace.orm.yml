@@ -1,0 +1,61 @@
+AppBundle\Entity\DedeMemberSpace:
+    type: entity
+    table: dede_member_space
+    id:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        pagesize:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '10'
+        matt:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        spacename:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        spacelogo:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        spacestyle:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        sign:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: 没签名
+        spacenews:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

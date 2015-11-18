@@ -1,0 +1,82 @@
+AppBundle\Entity\DedeMemberOperation:
+    type: entity
+    table: dede_member_operation
+    indexes:
+        buyid:
+            columns:
+                - buyid
+        pid:
+            columns:
+                - pid
+                - mid
+                - sta
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        buyid:
+            type: string
+            nullable: false
+            length: 80
+            options:
+                fixed: false
+                default: ''
+        pname:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        product:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: ''
+        money:
+            type: decimal
+            nullable: false
+            precision: 13
+            scale: 2
+            options:
+                default: '0.00'
+        mtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        pid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        sta:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        oldinfo:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

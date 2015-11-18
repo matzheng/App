@@ -1,0 +1,182 @@
+AppBundle\Entity\DedeChanneltype:
+    type: entity
+    table: dede_channeltype
+    indexes:
+        nid:
+            columns:
+                - nid
+                - isshow
+                - arcsta
+                - sendrank
+    id:
+        id:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        typename:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        maintable:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: dede_archives
+        addtable:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        addcon:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        mancon:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        editcon:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        useraddcon:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        usermancon:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        usereditcon:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        fieldset:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        listfields:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        allfields:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        issystem:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        isshow:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        issend:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        arcsta:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '-1'
+        usertype:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: true
+                default: ''
+        sendrank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '10'
+        isdefault:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        needdes:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+        needpic:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+        titlename:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: 标题
+        onlyone:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        dfcid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    注册
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/sm.css">
+    <link rel="stylesheet" href="css/sm-extend.css">
+    <link rel="stylesheet" href="css/reg.css">
+{% endblock %}
+{% block body %}
+    <form id="form1" method="post" action="{{ path('regdone') }}">
+    <div class="page">
+        <header class="bar bar-nav">
+            <h1 class="title">注册</h1>
+        </header>
+        <div class="content">
+            <!-- 这里是页面内容区 -->
+            <div class="ui-form-item ui-form-item-pure ui-border-b" style=" margin-top:1em;">
+                <input name="mobile" id="mobile" placeholder="请输入手机号" style="color:#ccc;"  type="tel" maxlength="11">
+                <!--<a href="#" class="ui-icon-close"></a>-->
+            </div>
+            <div class="ui-form-item ui-form-item-r ui-border-b">
+                <input name="code" id="code" placeholder="请输入验证码" type="tel" maxlength="8">
+                <!-- 若按钮不可点击则添加 disabled 类 -->
+                <button type="button" class="ui-border-l">发送验证码</button>
+            </div>
+            <div class="ui-form-item ui-form-item-pure ui-border-b" style=" ">
+                <input name="pwd" id="pwd" placeholder="请输入6至20位新密码" type="password" style="color:#ccc;">
+                <!--<a href="#" class="ui-icon-close"></a>-->
+            </div>
+            <p class="tips"><span>绑定手机，让您的帐户更安全！</span></p>
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary" type="button">
+                    下一步
+                </button>
+            </div>
+
+        </div>
+    </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $('.ui-btn-primary').on('click', function () {
+                var mob = $('#mobile');
+                if($.trim(mob.val()) == ''){
+                    $.alert('请输入手机号');
+                    return false;
+                }
+                var pwd = $('#pwd');
+                if($.trim(pwd.val()) == ''){
+                    $.alert('请输入密码');
+                    return false;
+                }
+                //check mobile number if exists
+                $.ajax({
+                    url:'{{ path("regcheck") }}' + '/' + mob.val(),
+                    type: "GET",
+                    success: function (data) {
+                        if(data.success == "0")
+                        {
+                            $.alert(data.msg);
+                            event.preventDefault();
+                            return false;
+                        }
+                        else
+                        {
+                            $('#form1').submit();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

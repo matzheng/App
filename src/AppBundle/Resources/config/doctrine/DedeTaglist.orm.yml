@@ -1,0 +1,39 @@
+AppBundle\Entity\DedeTaglist:
+    type: entity
+    table: dede_taglist
+    id:
+        tid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+    fields:
+        arcrank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        tag:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

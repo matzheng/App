@@ -1,0 +1,89 @@
+AppBundle\Entity\DedeSysTask:
+    type: entity
+    table: dede_sys_task
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        taskname:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        dourl:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+        islock:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        runtype:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        runtime:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+                default: '0000'
+        starttime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        endtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        freq:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        lastrun:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        description:
+            type: string
+            nullable: false
+            length: 250
+            options:
+                fixed: false
+        parameter:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        settime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        sta:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+    lifecycleCallbacks: {  }

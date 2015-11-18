@@ -1,0 +1,60 @@
+AppBundle\Entity\DedeArctiny:
+    type: entity
+    table: dede_arctiny
+    indexes:
+        sortrank:
+            columns:
+                - sortrank
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        typeid2:
+            type: string
+            nullable: false
+            length: 90
+            options:
+                fixed: false
+                default: '0'
+        arcrank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        channel:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        senddate:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        sortrank:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+    lifecycleCallbacks: {  }

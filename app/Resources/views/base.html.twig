@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="http://frozenui.github.io/frozenui/css/frozen.css">
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        <script src="js/zepto.js"></script>
+        <script src="js/sm.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

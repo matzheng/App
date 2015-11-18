@@ -1,0 +1,68 @@
+AppBundle\Entity\DedeMemberFriends:
+    type: entity
+    table: dede_member_friends
+    indexes:
+        fid:
+            columns:
+                - fid
+                - mid
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        floginid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        funame:
+            type: string
+            nullable: false
+            length: 36
+            options:
+                fixed: true
+                default: ''
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        addtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        ftype:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        groupid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        description:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

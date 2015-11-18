@@ -1,0 +1,34 @@
+AppBundle\Entity\DedeMemberFlink:
+    type: entity
+    table: dede_member_flink
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        title:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        url:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

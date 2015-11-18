@@ -1,0 +1,36 @@
+AppBundle\Entity\DedeStepselect:
+    type: entity
+    table: dede_stepselect
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        itemname:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: true
+        egroup:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: true
+        issign:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+        issystem:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+    lifecycleCallbacks: {  }

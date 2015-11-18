@@ -1,0 +1,46 @@
+AppBundle\Entity\DedeSysEnum:
+    type: entity
+    table: dede_sys_enum
+    id:
+        id:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ename:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: true
+                default: ''
+        evalue:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: '0'
+        egroup:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        disorder:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        issign:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+    lifecycleCallbacks: {  }

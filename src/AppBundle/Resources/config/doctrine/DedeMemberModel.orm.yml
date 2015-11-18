@@ -1,0 +1,50 @@
+AppBundle\Entity\DedeMemberModel:
+    type: entity
+    table: dede_member_model
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        table:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        description:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        state:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        issystem:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        info:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,72 @@
+AppBundle\Entity\DedeArcmulti:
+    type: entity
+    table: dede_arcmulti
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        tagid:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: true
+                default: ''
+        uptime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        innertext:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        pagesize:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        arcids:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        ordersql:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        addfieldssql:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: addfieldsSql
+        addfieldssqljoin:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: addfieldsSqlJoin
+        attstr:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,227 @@
+AppBundle\Entity\DedeArchives:
+    type: entity
+    table: dede_archives
+    indexes:
+        sortrank:
+            columns:
+                - sortrank
+        mainindex:
+            columns:
+                - arcrank
+                - typeid
+                - channel
+                - flag
+                - mid
+        lastpost:
+            columns:
+                - lastpost
+                - scores
+                - goodpost
+                - badpost
+                - notpost
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        typeid2:
+            type: string
+            nullable: false
+            length: 90
+            options:
+                fixed: false
+                default: '0'
+        sortrank:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        flag:
+            type: simple_array
+            nullable: true
+            length: null
+            options:
+                fixed: false
+        ismake:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        channel:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        arcrank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        click:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        money:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        title:
+            type: string
+            nullable: false
+            length: 500
+            options:
+                fixed: false
+                default: ''
+        shorttitle:
+            type: string
+            nullable: false
+            length: 36
+            options:
+                fixed: true
+                default: ''
+        color:
+            type: string
+            nullable: false
+            length: 7
+            options:
+                fixed: true
+                default: ''
+        writer:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        source:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: true
+                default: ''
+        litpic:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: true
+                default: ''
+        pubdate:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        senddate:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        keywords:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: true
+                default: ''
+        lastpost:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        scores:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        goodpost:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        badpost:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        voteid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        notpost:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        description:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        filename:
+            type: string
+            nullable: false
+            length: 40
+            options:
+                fixed: false
+                default: ''
+        dutyadmin:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        tackid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        mtype:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        weight:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

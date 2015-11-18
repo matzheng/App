@@ -1,0 +1,80 @@
+AppBundle\Entity\DedeCoNote:
+    type: entity
+    table: dede_co_note
+    indexes:
+        isok:
+            columns:
+                - isok
+                - channelid
+                - cotime
+    id:
+        nid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        channelid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        notename:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        sourcelang:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: gb2312
+        uptime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        cotime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        pnum:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        isok:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        usemore:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        listconfig:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        itemconfig:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

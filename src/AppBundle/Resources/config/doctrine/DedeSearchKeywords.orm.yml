@@ -1,0 +1,58 @@
+AppBundle\Entity\DedeSearchKeywords:
+    type: entity
+    table: dede_search_keywords
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        keyword:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: true
+                default: ''
+        spwords:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        count:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '1'
+        result:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        lasttime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        channelid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+    lifecycleCallbacks: {  }

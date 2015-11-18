@@ -1,0 +1,119 @@
+AppBundle\Entity\DedeMemberCompany:
+    type: entity
+    table: dede_member_company
+    id:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        company:
+            type: string
+            nullable: false
+            length: 36
+            options:
+                fixed: false
+                default: ''
+        product:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        place:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        vocation:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        cosize:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        tel:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        fax:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        linkman:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        address:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        mobile:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        email:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        url:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        uptime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        checked:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        introduce:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        comface:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

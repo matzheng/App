@@ -1,0 +1,57 @@
+AppBundle\Entity\DedeDiyforms:
+    type: entity
+    table: dede_diyforms
+    id:
+        diyid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        posttemplate:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        viewtemplate:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        listtemplate:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        table:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        info:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        public:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+    lifecycleCallbacks: {  }

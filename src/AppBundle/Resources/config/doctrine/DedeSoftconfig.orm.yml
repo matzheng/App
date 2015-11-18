@@ -1,0 +1,69 @@
+AppBundle\Entity\DedeSoftconfig:
+    type: entity
+    table: dede_softconfig
+    id:
+        downtype:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ismoresite:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        gotojump:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        islocal:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '1'
+        sites:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        downmsg:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        moresitedo:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '1'
+        dfrank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        dfywboy:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        argrange:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+    lifecycleCallbacks: {  }

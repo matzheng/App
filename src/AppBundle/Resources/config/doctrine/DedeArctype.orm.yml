@@ -1,0 +1,213 @@
+AppBundle\Entity\DedeArctype:
+    type: entity
+    table: dede_arctype
+    indexes:
+        reid:
+            columns:
+                - reid
+                - isdefault
+                - channeltype
+                - ispart
+                - corank
+                - topid
+                - ishidden
+        sortrank:
+            columns:
+                - sortrank
+    id:
+        id:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        reid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        topid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        sortrank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '50'
+        typename:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: true
+                default: ''
+        typedir:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: true
+                default: ''
+        isdefault:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        defaultname:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+                default: index.html
+        issend:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        channeltype:
+            type: smallint
+            nullable: true
+            options:
+                unsigned: false
+                default: '1'
+        maxpage:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '-1'
+        ispart:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        corank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        tempindex:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        templist:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        temparticle:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        namerule:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        namerule2:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        modname:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        description:
+            type: string
+            nullable: false
+            length: 150
+            options:
+                fixed: true
+                default: ''
+        keywords:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''
+        seotitle:
+            type: string
+            nullable: false
+            length: 80
+            options:
+                fixed: false
+                default: ''
+        moresite:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        sitepath:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: true
+                default: ''
+        siteurl:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        ishidden:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        cross:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        crossid:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        content:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        smalltypes:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,52 @@
+AppBundle\Entity\DedeAddonarticle:
+    type: entity
+    table: dede_addonarticle
+    indexes:
+        typeid:
+            columns:
+                - typeid
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        body:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+        redirecturl:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        templet:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        userip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+                default: ''
+    lifecycleCallbacks: {  }

@@ -1,0 +1,54 @@
+AppBundle\Entity\DedeShopsProducts:
+    type: entity
+    table: dede_shops_products
+    indexes:
+        oid:
+            columns:
+                - oid
+        userid:
+            columns:
+                - userid
+    id:
+        oid:
+            type: string
+            nullable: false
+            length: 80
+            options:
+                fixed: false
+                default: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        userid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        title:
+            type: string
+            nullable: false
+            length: 80
+            options:
+                fixed: false
+                default: ''
+        price:
+            type: float
+            nullable: false
+            precision: 13
+            scale: 2
+            options:
+                default: '0.00'
+        buynum:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '9'
+    lifecycleCallbacks: {  }

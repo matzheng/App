@@ -1,0 +1,69 @@
+AppBundle\Entity\DedePayment:
+    type: entity
+    table: dede_payment
+    uniqueConstraints:
+        code:
+            columns:
+                - code
+    id:
+        id:
+            type: boolean
+            nullable: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        code:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        name:
+            type: string
+            nullable: false
+            length: 120
+            options:
+                fixed: false
+                default: ''
+        fee:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: '0'
+        description:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        rank:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        config:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        enabled:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        cod:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        online:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+    lifecycleCallbacks: {  }

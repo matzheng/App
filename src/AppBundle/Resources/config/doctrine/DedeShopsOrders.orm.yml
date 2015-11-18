@@ -1,0 +1,85 @@
+AppBundle\Entity\DedeShopsOrders:
+    type: entity
+    table: dede_shops_orders
+    indexes:
+        stime:
+            columns:
+                - stime
+        userid:
+            columns:
+                - userid
+        oid:
+            columns:
+                - oid
+    id:
+        oid:
+            type: string
+            nullable: false
+            length: 80
+            options:
+                fixed: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        userid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        pid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        paytype:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+        cartcount:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        dprice:
+            type: decimal
+            nullable: false
+            precision: 13
+            scale: 2
+            options:
+                default: '0.00'
+        price:
+            type: decimal
+            nullable: false
+            precision: 13
+            scale: 2
+            options:
+                default: '0.00'
+        pricecount:
+            type: decimal
+            nullable: false
+            precision: 13
+            scale: 2
+            column: priceCount
+        state:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        ip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+                default: ''
+        stime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

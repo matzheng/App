@@ -1,0 +1,74 @@
+AppBundle\Entity\DedeMoneycardRecord:
+    type: entity
+    table: dede_moneycard_record
+    indexes:
+        ctid:
+            columns:
+                - ctid
+        cardid:
+            columns:
+                - cardid
+        uid:
+            columns:
+                - uid
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ctid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        cardid:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        uid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        isexp:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        mtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        utime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        money:
+            type: decimal
+            nullable: false
+            precision: 13
+            scale: 2
+            options:
+                default: '0.00'
+        num:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,48 @@
+AppBundle\Entity\DedeSysconfig:
+    type: entity
+    table: dede_sysconfig
+    id:
+        varname:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        aid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        info:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+        groupid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        type:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: string
+        value:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

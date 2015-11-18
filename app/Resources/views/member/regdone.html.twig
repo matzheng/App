@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    完成注册
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/sm.css">
+    <link rel="stylesheet" href="css/sm-extend.css">
+    <link rel="stylesheet" href="css/reg.css">
+{% endblock %}
+
+{% block body %}
+    <div class="page" id="page-modal">
+        <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left back" onclick="history.back()">
+                <span class="icon icon-left"></span>
+            </a>
+            <h1 class="title">完成注册</h1>
+        </header>
+        <div class="content">
+            <!-- 这里是页面内容区 -->
+            <p class="tips"><span>所有资料均为必填。</span></p>
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">姓名</div>
+                                <div class="item-input">
+                                    <input name="uname" id="uname" placeholder="你的真实姓名" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">E-mail</div>
+                                <div class="item-input">
+                                    <input name="email" id="email" placeholder="E-mail" type="email">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">性别</div>
+                                <div class="item-input">
+                                    <select name="sex" id="sex">
+                                        <option value="">请选择</option>
+                                        <option value="1">男士</option>
+                                        <option value="2">女士</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">关注的行业</div>
+                                <div class="item-input">
+                                    <select name="prod" id="prod">
+                                        <option value="">请选择</option>
+                                        <option value="安防">安防</option>
+                                        <option value="煤化工">煤化工</option>
+                                        <option value="汽车制造">汽车制造</option>
+                                        <option value="工业">工业</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary" >
+                    完成注册
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $('.ui-btn-primary').on('click', function () {
+                var mobile = '{{ m }}';
+                if($.trim(mobile) == ''){
+                    window.location = '{{ path("regpage") }}';
+                    return;
+                }
+                var pwd = '{{ p }}';
+                var uname = $('#uname');
+                if($.trim(uname.val()) == ''){
+                    $.alert('请输入姓名');
+                    return;
+                }
+                var email = $('#email');
+                if($.trim(email.val()) == ''){
+                    $.alert('请输入邮箱');
+                    return false;
+                }
+                //check register result
+                $.ajax({
+                    url:'{{ path("regdoneresult") }}',
+                    type: "POST",
+                    data: "m=" + mobile + "&w=" + pwd + "&n=" + uname.val() + "&e=" + email.val() + "&s=" + $("#sex").val() + "&p=" + $("#prod").val(),
+                    success: function (data) {
+                        if(data.success == "0")
+                        {
+                            $.alert(data.msg);
+                        }
+                        window.location = '{{ path("homepage") }}'
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

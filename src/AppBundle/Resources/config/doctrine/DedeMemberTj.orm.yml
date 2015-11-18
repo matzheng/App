@@ -1,0 +1,80 @@
+AppBundle\Entity\DedeMemberTj:
+    type: entity
+    table: dede_member_tj
+    id:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        article:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        album:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        archives:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        homecount:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        pagecount:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        feedback:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        friend:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        stow:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        soft:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        info:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        shop:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,97 @@
+AppBundle\Entity\DedeAddonshop:
+    type: entity
+    table: dede_addonshop
+    indexes:
+        typeid:
+            columns:
+                - typeid
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        body:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+        price:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            options:
+                default: '0'
+        trueprice:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            options:
+                default: '0'
+        brand:
+            type: string
+            nullable: false
+            length: 250
+            options:
+                fixed: false
+                default: ''
+        units:
+            type: string
+            nullable: false
+            length: 250
+            options:
+                fixed: false
+                default: ''
+        templet:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        userip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+        redirecturl:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        vocation:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: '0'
+        infotype:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: '0'
+        uptime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,31 @@
+AppBundle\Entity\DedeDiySubscribe:
+    type: entity
+    table: dede_diy_subscribe
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        email:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        ip:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        regtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

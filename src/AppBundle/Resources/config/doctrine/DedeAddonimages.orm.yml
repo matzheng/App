@@ -1,0 +1,100 @@
+AppBundle\Entity\DedeAddonimages:
+    type: entity
+    table: dede_addonimages
+    indexes:
+        imagesMain:
+            columns:
+                - typeid
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        pagestyle:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        maxwidth:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '600'
+        imgurls:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        row:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        col:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        isrm:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        ddmaxwidth:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '200'
+        pagepicnum:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '12'
+        templet:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        userip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+                default: ''
+        redirecturl:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        body:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

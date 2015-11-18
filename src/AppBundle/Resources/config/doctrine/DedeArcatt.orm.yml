@@ -1,0 +1,29 @@
+AppBundle\Entity\DedeArcatt:
+    type: entity
+    table: dede_arcatt
+    id:
+        att:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: true
+                default: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        sortid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        attname:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: true
+                default: ''
+    lifecycleCallbacks: {  }

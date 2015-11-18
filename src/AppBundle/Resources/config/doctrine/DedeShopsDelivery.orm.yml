@@ -1,0 +1,43 @@
+AppBundle\Entity\DedeShopsDelivery:
+    type: entity
+    table: dede_shops_delivery
+    indexes:
+        orders:
+            columns:
+                - orders
+    id:
+        pid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        dname:
+            type: string
+            nullable: false
+            length: 80
+            options:
+                fixed: true
+        price:
+            type: float
+            nullable: false
+            precision: 13
+            scale: 2
+            options:
+                default: '0.00'
+        des:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: true
+        orders:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

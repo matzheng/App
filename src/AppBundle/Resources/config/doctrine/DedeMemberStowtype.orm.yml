@@ -1,0 +1,27 @@
+AppBundle\Entity\DedeMemberStowtype:
+    type: entity
+    table: dede_member_stowtype
+    id:
+        stowname:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        indexname:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        indexurl:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

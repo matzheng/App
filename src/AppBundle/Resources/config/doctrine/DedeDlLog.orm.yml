@@ -1,0 +1,60 @@
+AppBundle\Entity\DedeDlLog:
+    type: entity
+    table: dede_dl_log
+    indexes:
+        dltime:
+            columns:
+                - dltime
+        dl_ip:
+            columns:
+                - ip
+                - dltime
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        ip:
+            type: string
+            nullable: false
+            length: 16
+            options:
+                fixed: true
+        lang:
+            type: string
+            nullable: false
+            length: 6
+            options:
+                fixed: true
+        dtype:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+        dltime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        referrer:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        userAgent:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: user_agent
+    lifecycleCallbacks: {  }

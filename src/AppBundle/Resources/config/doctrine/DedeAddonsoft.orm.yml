@@ -1,0 +1,134 @@
+AppBundle\Entity\DedeAddonsoft:
+    type: entity
+    table: dede_addonsoft
+    indexes:
+        softMain:
+            columns:
+                - typeid
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        filetype:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: ''
+        language:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: ''
+        softtype:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: ''
+        accredit:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: ''
+        os:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        softrank:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        officialurl:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+            column: officialUrl
+        officialdemo:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+            column: officialDemo
+        softsize:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: ''
+        softlinks:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        introduce:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        daccess:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        needmoney:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        templet:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        userip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+                default: ''
+        redirecturl:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

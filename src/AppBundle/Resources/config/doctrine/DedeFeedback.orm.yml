@@ -1,0 +1,102 @@
+AppBundle\Entity\DedeFeedback:
+    type: entity
+    table: dede_feedback
+    indexes:
+        aid:
+            columns:
+                - aid
+                - ischeck
+                - mid
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        username:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        arctitle:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''
+        ip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+                default: ''
+        ischeck:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        dtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        bad:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        good:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        ftype:
+            type: simple_array
+            nullable: false
+            length: null
+            options:
+                fixed: false
+                default: feedback
+        face:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        msg:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

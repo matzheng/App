@@ -1,0 +1,65 @@
+AppBundle\Entity\DedeMytag:
+    type: entity
+    table: dede_mytag
+    indexes:
+        tagname:
+            columns:
+                - tagname
+                - typeid
+                - timeset
+                - endtime
+                - starttime
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeid:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        tagname:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+                default: ''
+        timeset:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        starttime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        endtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        normbody:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        expbody:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

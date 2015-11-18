@@ -1,0 +1,56 @@
+AppBundle\Entity\DedeAdvancedsearch:
+    type: entity
+    table: dede_advancedsearch
+    uniqueConstraints:
+        mid:
+            columns:
+                - mid
+    id:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        maintable:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+                default: ''
+        mainfields:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        addontable:
+            type: string
+            nullable: true
+            length: 256
+            options:
+                fixed: false
+        addonfields:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        forms:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        template:
+            type: string
+            nullable: false
+            length: 256
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

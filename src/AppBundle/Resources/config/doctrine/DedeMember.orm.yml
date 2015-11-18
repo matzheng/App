@@ -1,0 +1,163 @@
+AppBundle\Entity\DedeMember:
+    type: entity
+    table: dede_member
+    indexes:
+        userid:
+            columns:
+                - userid
+                - sex
+        logintime:
+            columns:
+                - logintime
+    id:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mobile:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        mtype:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: 个人
+        userid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        pwd:
+            type: string
+            nullable: false
+            length: 32
+            options:
+                fixed: true
+                default: ''
+        uname:
+            type: string
+            nullable: false
+            length: 36
+            options:
+                fixed: true
+                default: ''
+        sex:
+            type: boolean
+            nullable: false
+            options:
+                default: '0'
+        rank:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        uptime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        exptime:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        money:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        email:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: true
+                default: ''
+        scores:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        matt:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        spacesta:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        face:
+            type: string
+            nullable: false
+            length: 250
+            options:
+                fixed: true
+                default: ''
+        safequestion:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        safeanswer:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: true
+                default: ''
+        jointime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        joinip:
+            type: string
+            nullable: false
+            length: 16
+            options:
+                fixed: true
+                default: ''
+        logintime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        loginip:
+            type: string
+            nullable: false
+            length: 16
+            options:
+                fixed: true
+                default: ''
+        checkmail:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '-1'
+    lifecycleCallbacks: {  }

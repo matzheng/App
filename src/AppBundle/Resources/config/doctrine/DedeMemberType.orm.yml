@@ -1,0 +1,40 @@
+AppBundle\Entity\DedeMemberType:
+    type: entity
+    table: dede_member_type
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        rank:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        pname:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        money:
+            type: decimal
+            nullable: false
+            precision: 13
+            scale: 2
+            options:
+                default: '0.00'
+        exptime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '30'
+    lifecycleCallbacks: {  }

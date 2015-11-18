@@ -1,0 +1,51 @@
+AppBundle\Entity\DedeCoOnepage:
+    type: entity
+    table: dede_co_onepage
+    indexes:
+        url:
+            columns:
+                - url
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        url:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''
+        title:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''
+        issource:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        lang:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+                default: gb2312
+        rule:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

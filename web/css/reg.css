@@ -1,0 +1,77 @@
+
+/*111111111*/
+.title { background-color:#007c84; color:#FFF;
+}
+body {
+    font-family:Arial,"Lucida Grande",Verdana,"Microsoft YaHei","微软雅黑",hei;
+}
+.topbar {
+    background-color: #fff; border-top:1px solid #ccc;
+
+}
+
+
+.ui-form {
+    background:none;
+}
+.ui-btn-primary {
+    background-color: #007c84;
+    border-color: #007c84;
+    color: #FFF;
+    background-clip: padding-box;
+}
+.ui-btn-primary {
+    background-color: #007c84;
+    border-color:  #007c84;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0.5,#007c84),to(#00757d));
+    color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+.ui-btn-primary:before {
+    border: none;
+}
+.ui-checkbox input:checked:before, .ui-checkbox-s input:checked:before {
+    content: "";
+    color: #007c84;
+}
+.ui-form-item {
+    padding-right: 1.5em;
+    padding-left: 1.5em; background:#fff; border-top:1px solid #ddd;
+}
+
+
+
+.tips {
+    padding: 0px 10px 5px;
+    font-size: 0.8em;
+    line-height: 3em; height:3em;
+    text-align: center;
+    color: #999;
+    background-color: #F2F2F2;
+}
+p{ margin:0px;}
+
+.ui-btn-lg {
+    font-size: 18px;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+}
+
+
+.bar .button-link {
+    top: 0;
+    height: 2.2rem;
+    padding: 0;
+    font-size: .8rem;
+    line-height: 2.2rem;
+    color: #FFFFFF;
+    border: 0;
+}
+.list-block {
+    margin:  0;
+    font-size: .85rem;
+}

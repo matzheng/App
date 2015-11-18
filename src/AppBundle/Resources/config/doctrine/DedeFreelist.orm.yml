@@ -1,0 +1,93 @@
+AppBundle\Entity\DedeFreelist:
+    type: entity
+    table: dede_freelist
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        namerule:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        listdir:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''
+        defaultpage:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+                default: ''
+        nodefault:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        templet:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+                default: ''
+        edtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        maxpage:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '100'
+        click:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '1'
+        listtag:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+        keywords:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+                default: ''
+        description:
+            type: string
+            nullable: false
+            length: 250
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

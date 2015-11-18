@@ -1,0 +1,67 @@
+AppBundle\Entity\DedeMemberVhistory:
+    type: entity
+    table: dede_member_vhistory
+    indexes:
+        vtime:
+            columns:
+                - vtime
+        mid:
+            columns:
+                - mid
+                - vid
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        loginid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        vid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        vloginid:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: true
+                default: ''
+        count:
+            type: smallint
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+        vip:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: true
+                default: ''
+        vtime:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: '0'
+    lifecycleCallbacks: {  }

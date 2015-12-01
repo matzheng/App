@@ -107,7 +107,7 @@ $(function () {
   $(document).on("pageInit", "#page-modal", function(e, id, page) {
     var $content = $(page).find('.content');
     $content.on('click','.alert-text',function () {
-      $.alert('这是一段提示消息');
+      $.alert('注册成功');
     });
 
     $content.on('click','.alert-text-title', function () {

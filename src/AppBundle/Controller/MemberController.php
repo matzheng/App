@@ -30,9 +30,9 @@ class MemberController extends Controller{
         $user = $rep->findOneBy(array('mobile' => $m, 'pwd'=> md5($p)));
         if(!$user)
             return new JsonResponse(array('success'=>'0', 'msg'=>'手机号或密码错误！'));
-        if($rmb == "1"){
-            setcookie('anzhi_m', $user->getMid(),time()+3600*24*7);
-        }
+        //if($rmb == "1"){
+            setcookie('anzhi_m', $user->getMid(),time()+3600*24*7);  //设置cookie
+        //}
         //set last login time and login IP
         $user->setLogintime(time());
         $user->setLoginip($this->container->get('request')->getClientIp());
@@ -51,7 +51,8 @@ class MemberController extends Controller{
         session_unset();
         session_destroy();
         setcookie('anzhi_m', null);
-        return new Response("已注销");
+        //return new Response("已注销");
+        return $this->redirectToRoute('homepage');
     }
     /**
      * @Route("/reg", name="regpage")
@@ -123,6 +124,7 @@ class MemberController extends Controller{
         //set session
         $session = $this->get('session');
         $session->set('anzhi_m', $member->getMid());
+        setcookie('anzhi_m', $member->getMid(),time()+3600*24*7);  //设置cookie
         return new JsonResponse(array('success'=>"1", 'msg'=>'注册成功'));
     }
 }

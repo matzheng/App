@@ -2818,8 +2818,8 @@ Framework7 Swiper Additions
                         '</div>';
 
         var photoTemplate = !pb.params.lazyLoading ? 
-            (pb.params.photoTemplate || '<div class="photo-browser-slide swiper-slide"><span class="photo-browser-zoom-container"><img src="{{url}}"></span></div>') : 
-            (pb.params.photoLazyTemplate || '<div class="photo-browser-slide photo-browser-slide-lazy swiper-slide"><div class="preloader' + (pb.params.theme === 'dark' ? ' preloader-white' : '') + '"></div><span class="photo-browser-zoom-container"><img data-src="{{url}}" class="swiper-lazy"></span></div>');
+            (pb.params.photoTemplate || '<div class="photo-browser-slide swiper-slide"><span class="photo-browser-zoom-container"><img src="other/.org/demos/modal/{{url}}"></span></div>') : 
+            (pb.params.photoLazyTemplate || '<div class="photo-browser-slide photo-browser-slide-lazy swiper-slide"><div class="preloader' + (pb.params.theme === 'dark' ? ' preloader-white' : '') + '"></div><span class="photo-browser-zoom-container"><img data-src="other/.org/demos/modal/{{url}}" class="swiper-lazy"></span></div>');
 
         var captionsTheme = pb.params.captionsTheme || pb.params.theme;
         var captionsTemplate = pb.params.captionsTemplate || '<div class="photo-browser-captions photo-browser-captions-' + captionsTheme + '">{{captions}}</div>';
@@ -2839,7 +2839,7 @@ Framework7 Swiper Additions
                 if (photo.indexOf('<') >= 0 || photo.indexOf('>') >= 0) {
                     thisTemplate = objectTemplate.replace(/{{html}}/g, photo);
                 } else {
-                    thisTemplate = photoTemplate.replace(/{{url}}/g, photo);
+                    thisTemplate = photoTemplate.replace(/other/.org/demos/modal/{{url}}/g, photo);
                 }
 
                 //photo is a string, thus has no caption, so remove the caption template placeholder
@@ -2850,7 +2850,7 @@ Framework7 Swiper Additions
                 if (photo.hasOwnProperty('html') && photo.html.length > 0) {
                     thisTemplate = objectTemplate.replace(/{{html}}/g, photo.html);
                 } else if (photo.hasOwnProperty('url') && photo.url.length > 0) {
-                    thisTemplate = photoTemplate.replace(/{{url}}/g, photo.url);
+                    thisTemplate = photoTemplate.replace(/other/.org/demos/modal/{{url}}/g, photo.url);
                 }
 
                 //check if photo has a caption

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ topic.title }} - 我的安全私董会
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/aq.css">
+{% endblock %}
+
+{% block body %}
+
+<header class="bar bar-nav">
+      <a class="button button-link button-nav pull-left back" href="{{ path('addtopicpage') }}">
+      <span class="icon icon-left"></span>
+    </a>
+     <h1 class="title">{{ topic.title }}</h1>
+  </header>
+  <div class="content">
+    <!-- 这里是页面内容区 -->
+    <div class="card facebook-card">
+      <div class="card-header no-border">
+        <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+        <div class="facebook-name">{{ author.uname }}</div>
+        <div class="facebook-date">{{ topic.tid | date("Y-m-d") }}</div>
+      </div>
+      <div class="card-header color-white no-border ui-nowrap-multi1">问：{{ topic.title }}</div>
+      <div class="card-content" style="padding: .3rem .75rem;">{{ topic.detail }}</div>
+      <div class="card-footer no-border" style=" text-align:right;">
+        <a href="#" class="link" >我来回答</a>
+      </div>
+    </div>
+
+    <div class="list-block cards-list">
+      <ul>
+        <li class="card">
+           <div class="card-header no-border nocolor">
+        <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+        <div class="facebook-name">夜萧</div>
+        <div class="facebook-date">星期一 3:47pm</div>
+      </div>
+          <div class="card-content">
+            <div class="card-content-inner">黄岛的事故因为我没到现场，我们没有发言权。所以我们只是讲讲应急预案。应急预案在全国有一个共性的问题，不是个性的问题。在出了很多事故以后，我们应急处理不当，</div>
+          </div>
+          <div class="card-footer">
+        <a href="#" class="link"> <span class="icon iconfont" >&#xe635;</span> <i>32</i></a>
+        <a href="#" class="link infoaq">彭小燕/<i>石油化工</i></a>
+      </div>
+        </li>
+
+      <li class="card">
+           <div class="card-header no-border nocolor">
+        <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+        <div class="facebook-name">夜萧</div>
+        <div class="facebook-date">星期一 3:47pm</div>
+      </div>
+          <div class="card-content">
+            <div class="card-content-inner">黄岛的事故因为我没到现场，我们没有发言权。所以我们只是讲讲应急预案。应急预案在全国有一个共性的问题，不是个性的问题。在出了很多事故以后，我们应急处理不当，</div>
+          </div>
+          <div class="card-footer">
+        <a href="#" class="link"> <span class="icon iconfont" >&#xe635;</span> <i>32</i></a>
+        <a href="#" class="link infoaq">赵信/<i>石油化工</i></a>
+      </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}

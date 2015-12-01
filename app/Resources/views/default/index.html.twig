@@ -2,31 +2,34 @@
 {% block title %}
     安知 - 我的安全私董会
 {% endblock %}
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="css/aq.css">
+{% endblock %}
+
 {% block body %}
-
-
   <header class="bar bar-nav">
      <h1 class="title">安 知</h1>
   </header>
 
-  <nav class="bar bar-tab topbar">
-    <a class="tab-item  active" href="main.html">
-      <span class="icon icon-home"></span>
-      <span class="tab-label">首页</span>
+<nav class="bar bar-tab topbar">
+    <a class="tab-item active" href="{{ path('homepage') }}">
+        <span class="icon icon-home"></span>
+        <span class="tab-label">首页</span>
     </a>
-    <a class="tab-item " href="partment.html">
-      <span class="icon icon-me"></span>
-      <span class="tab-label">私董会</span>
+    <a class="tab-item " href="{{ path('partmentindex') }}">
+        <span class="icon iconfont" >&#xe635;</span>
+        <span class="tab-label">私董会</span>
     </a>
-    <a class="tab-item" href="aq.html">
-      <span class="icon icon-star"></span>
-      <span class="tab-label">快答</span>
+    <a class="tab-item " href="{{ path('topicindex') }}">
+        <span class="icon iconfont" >&#xe63c;</span>
+        <span class="tab-label">快答</span>
     </a>
-    <a class="tab-item" href="my.html">
-      <span class="icon icon-settings"></span>
-      <span class="tab-label">我的</span>
+    <a class="tab-item " href="{{ path('myindex') }}">
+        <span class="icon iconfont" >&#xe619;</span>
+        <span class="tab-label">我的</span>
     </a>
-  </nav>
+</nav>
 
   <div class="content">
     <!-- 这里是页面内容区 -->
@@ -89,9 +92,4 @@
 </div>
   </div>
 </div>
-
-{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="css/sm.css">
 {% endblock %}

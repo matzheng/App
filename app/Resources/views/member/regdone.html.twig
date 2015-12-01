@@ -114,6 +114,7 @@
                         if(data.success == "0")
                         {
                             $.alert(data.msg);
+                            return false;
                         }
                         window.location = '{{ path("homepage") }}'
                     }

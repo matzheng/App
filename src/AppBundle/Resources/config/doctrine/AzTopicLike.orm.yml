@@ -1,0 +1,34 @@
+AppBundle\Entity\AzTopicLike:
+    type: entity
+    table: az_topic_like
+    id:
+        time:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: 时间
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        tid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                comment: 'topic id'
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: 'member id'
+                default: '0'
+        zan:
+            type: boolean
+            nullable: false
+            options:
+                comment: 赞
+                default: '1'
+    lifecycleCallbacks: {  }

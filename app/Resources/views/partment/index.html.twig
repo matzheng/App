@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    私董会 - 安知
+{% endblock %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <header class="bar bar-nav">
+        <h1 class="title">私董会</h1>
+    </header>
+    <nav class="bar bar-tab topbar">
+        <a class="tab-item" href="{{ path('homepage') }}">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item active" href="{{ path('partmentindex') }}">
+            <span class="icon iconfont" >&#xe635;</span>
+            <span class="tab-label">私董会</span>
+        </a>
+        <a class="tab-item " href="{{ path('topicindex') }}">
+            <span class="icon iconfont" >&#xe63c;</span>
+            <span class="tab-label">快答</span>
+        </a>
+        <a class="tab-item " href="{{ path('myindex') }}">
+            <span class="icon iconfont" >&#xe619;</span>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+{% endblock %}

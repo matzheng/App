@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+   我的 - 安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/my.css">
+{% endblock %}
+
+{% block body %}
+        <header class="bar bar-nav" >
+
+            <h1 class="title">我的</h1>
+        </header>
+
+        <nav class="bar bar-tab topbar">
+            <a class="tab-item" href="{{ path('homepage') }}">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item " href="{{ path('partmentindex') }}">
+                <span class="icon iconfont" >&#xe635;</span>
+                <span class="tab-label">私董会</span>
+            </a>
+            <a class="tab-item" href="{{ path('topicindex') }}">
+                <span class="icon iconfont" >&#xe63c;</span>
+                <span class="tab-label">快答</span>
+            </a>
+            <a class="tab-item active" href="{{ path('myindex') }}">
+                <span class="icon iconfont" >&#xe619;</span>
+                <span class="tab-label">我的</span>
+            </a>
+        </nav>
+
+        <div class="content">
+            <!-- 这里是页面内容区 -->
+            <div class="ui-tooltips ui-tooltips-warn">
+                <div class="ui-tooltips-cnt ui-border-b" style="color:#666;">
+                    <i></i>您的称赞数打败了92%的同行！<a class="ui-icon-close"></a>
+                </div>
+            </div>
+
+            <div class="demo-block">
+                <ul class="ui-list ui-list-link ui-border-tb">
+                    <!--style="  background:#ff7900;-->
+                    <li style=" background: url(images/bg011.jpg) no-repeat; background-size:cover;color:#FFF;height:150px;">
+                        <div class="ui-avatar" style=" margin:50px 15px 25px 20px">
+                            <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                        </div>
+                        <div class="ui-list-info ui-border-t" style=" height:150px;">
+                            <div class="ui-list-info">
+                                <h4 class="ui-nowrap">{{ data.uname }}</h4>
+                                <p class="ui-nowrap">认证董事3级</p>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="demo-item">
+                        <div class="demo-block" style=" border-top: 1px solid #eee; padding-top:0.2rem;">
+                            <ul class="ui-row-flex">
+                                <li class="ui-col ui-flex ui-flex-pack-start"><div class="myli"><span style=" color:#F00; font-size:1.3rem;">300.00</span><br>余额/元</div></li>
+                                <li class="ui-col ui-flex ui-flex-pack-center"><div class="myli"><span style=" color: #F90; font-size:1.3rem;">12</span><br>赞/次</div></li>
+                                <li class="ui-col ui-flex ui-flex-pack-end"><div class="myli"><span style=" color: #0C0; font-size:1.3rem;">26</span><br>回答/个</div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="demo-block" style=" margin-top:0.5rem;">
+                <ul class="ui-list ui-list-one ui-list-link ui-border-tb">
+                    <li class="ui-border-t" >
+                        <div class="ui-list-thumb">
+                            <span class="iconfont"  style="font-size:1.2rem; text-align: right;color: #F90;">&#xe606;</span>
+                        </div>
+                        <div class="ui-list-info">
+                            <h4 class="ui-nowrap">私董会咨询</h4>
+                            <div class="ui-txt-info">36</div>
+                        </div>
+                    </li>
+                    <li class="ui-border-t">
+                        <div class="ui-list-thumb">
+                            <span class="iconfont"  style="font-size:1.2rem; text-align: right; color: #06C;">&#xe600;</span>
+                        </div>
+                        <div class="ui-list-info">
+                            <h4 class="ui-nowrap">我的问答</h4>
+                            <div class="ui-reddot ui-reddot-static"></div>
+                        </div>
+                    </li>
+                    <li class="ui-border-t" >
+                        <div class="ui-list-thumb">
+                            <span class="iconfont"  style="font-size:1.2rem; text-align: right; color: #C00;">&#xe602;</span>
+                        </div>
+                        <a class="ui-list-info" href="{{ path('myfav') }}">
+                            <h4 class="ui-nowrap">我的收藏</h4>
+                            <div class="ui-txt-info">12</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ui-btn-wrap" style="text-align:center;">
+                <!--    <button class="ui-btn-lg ui-btn-primary alert-text">
+                        成为安知认证董事
+                    </button>-->
+                <!--<div class="ui-btn-wrap">
+                    <a class="ui-btn-lg ui-btn-primary" href="reg">
+                        成为安知认证董事
+                    </a>
+                </div>
+                -->
+                <div class="ui-btn-wrap">
+                    <a class="ui-btn-lg ui-btn-primary" href="{{ path('logoutpage') }}">
+                        退出登录
+                    </a>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function(){
+            $(".ui-icon-close").click(function(){
+                window.localStorage.setItem('/my/hideresult', '1');
+                $('.ui-tooltips-cnt').css('display','none');
+            });
+
+            if(window.localStorage && window.localStorage.getItem('/my/hideresult') == '1')
+                $('.ui-tooltips-cnt').css('display','none');
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,43 @@
+AppBundle\Entity\AzTopic:
+    type: entity
+    table: az_topic
+    id:
+        tid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: 'topic id'
+            id: true
+    fields:
+        title:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        detail:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        mid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                comment: dede_member会员id
+                default: '0'
+        annoy:
+            type: boolean
+            nullable: true
+            options:
+                comment: 匿名
+                default: '0'
+        deleted:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+    lifecycleCallbacks: {  }

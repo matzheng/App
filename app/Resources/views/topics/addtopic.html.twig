@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    提问 - 我的安全私董会
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/reg.css">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left " onclick="javascript:window.location.href='{{ path('topicindex') }}'">
+                <span class="icon icon-left"></span>
+            </a>
+            <h1 class="title">提问</h1>
+            <button class="button pull-right" id="submitQ">
+                提交
+            </button>
+        </header>
+
+        <div class="content">
+            <!-- 这里是页面内容区 -->
+
+            <div class="ui-form-item ui-form-item-pure ui-border-b" style=" margin-top:1em;">
+                <input placeholder="问题标题" type="text" id="title" style="color:#ccc;" maxlength="50">
+                <!--<a href="#" class="ui-icon-close"></a>-->
+            </div>
+            <div class="ui-form-item ui-form-item-textarea ui-border-b" style=" height:200px; border-top:1px solid #f2f2f2;">
+                <textarea placeholder="请输入问题详情" rows=4 id="desc"></textarea>
+            </div>
+        </div>
+
+        <nav class="bar bar-tab topbar">
+            <a class="tab-item " href="{{ path('homepage') }}">
+                <span class="icon icon-home"></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item " href="{{ path('partmentindex') }}">
+                <span class="icon iconfont" >&#xe635;</span>
+                <span class="tab-label">私董会</span>
+            </a>
+            <a class="tab-item active" href="{{ path('topicindex') }}">
+                <span class="icon iconfont" >&#xe63c;</span>
+                <span class="tab-label">快答</span>
+            </a>
+            <a class="tab-item " href="{{ path('myindex') }}">
+                <span class="icon iconfont" >&#xe619;</span>
+                <span class="tab-label">我的</span>
+            </a>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function () {
+            $("#submitQ").on('click', function(){
+                var title = $("#title").val();
+                var desc = $('#desc').val();
+                if($.trim(title) == ''){
+                    $.alert('请输入问题描述');
+                    return false;
+                }
+                if($.trim(desc) == ''){
+                    $.alert('请输入详情');
+                    return false;
+                }
+
+                $.ajax({
+                    url: '{{ path("submittopicpage") }}',
+                    type: "POST",
+                    data: "title=" + title + "&desc=" + desc,
+                    success: function(d){
+                        //console.log(d);
+                        if(d.success == '1')
+                        {
+                            window.location = "{{ path('topicdetail', {'tid':  ''}) }}" + "/" + d.data;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

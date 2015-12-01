@@ -53,9 +53,9 @@ body {
 p{ margin:0px;}
 
 .ui-btn-lg {
-    font-size: 18px;
-    height: 40px;
-    line-height: 40px;
+    font-size: 0.7rem;
+    height: 32px;
+    line-height: 32px;
     display: block;
     width: 100%;
     border-radius: 5px;
@@ -75,12 +75,36 @@ p{ margin:0px;}
     margin:  0;
     font-size: .85rem;
 }
-
-.ui-form-item textarea {
-    padding-left: 0px;
+.ui-flex {
+    border: 1px solid #ddd;
+    min-height: 80px;
+    margin-bottom: 10px;
 }
-.button {
-    color: #fff;
-    background: none;
-    border: 1px solid #fff;
+.ui-col {
+    padding: 5px;
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+	border: 0px solid #fff;
+     border-right: 1px solid #eee; 
+}
+.myli{width:100%; text-align:center; font-size:0.7rem; margin-top:0.5rem;}
+.ui-list>li {
+    margin-left: 0px;
+
+}
+.ui-txt-info {
+    color: #ccc;
+}
+.ui-list-info p {
+    color: #fff; opacity:0.6;
+    font-size: 14px;
+}
+.bar-tab .tab-item.active, .bar-tab .tab-item:active {
+    color: #007c84;
+}
+
+a {
+    color: #333;
+
 }

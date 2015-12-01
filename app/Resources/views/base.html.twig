@@ -7,14 +7,17 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" href="http://frozenui.github.io/frozenui/css/frozen.css">
+        <link rel="stylesheet" href="/css/frozen.css">
+        <link rel="stylesheet" href="/css/sm.css">
+        <link rel="stylesheet" href="/css/sm-extend.css">
+        <link rel="stylesheet" href="/fonts/iconfont.css">
         {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="/css/index.css">
     </head>
     <body>
         {% block body %}{% endblock %}
-        <script src="js/zepto.js"></script>
-        <script src="js/sm.js"></script>
+        <script src="/js/zepto.js"></script>
+        <script src="/js/sm.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

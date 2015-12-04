@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\DedeMember;
 use AppBundle\Entity\DedeMemberPerson;
 use AppBundle\Entity\AzTopic;
-use Doctrine\ORM\Query\ResultSetMapping;
-use Doctrine\ORM\Query\ResultSetMappingBuilder;
+//use Doctrine\ORM\Query\ResultSetMapping;
+//use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 class TopicsController extends Controller{
     /**
@@ -20,10 +20,6 @@ class TopicsController extends Controller{
      */
     public function indexAction(){
         $em = $this->getDoctrine()->getManager();
-        //$sql =  "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,c.zans from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,sum(n.zan) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid order by a.tid desc";
-        //$sql = "select p.tid,p.title,p.detail,p.mid, d.uname from AppBundle:AzTopic p left join AppBundle:DedeMember d with p.mid=d.mid left JOIN (select t.tid, sum(t.zan) as zans from AppBundle:AzTopicLike t group by t.tid) c WITH p.tid=c.tid order by p.tid desc";
-        //$query = $em->createQuery($sql);
-        //$topics = $query->getResult();
         $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,sum(n.zan) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid order by a.tid desc";
         //$rsm = new ResultSetMapping();
         //$rsm->addEntityResult("AppBundle:AzTopic", "a");
@@ -34,12 +30,13 @@ class TopicsController extends Controller{
         //$rsm->addFieldResult("a", "detail", "detail");
         //$rsm->addFieldResult("b", "face", "face");
         //$rsm->addFieldResult("b", "uname", "uname");
-
         //$query = $em->createNativeQuery($sql, $rsm);
 
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
-        return $this->render('topics/index.html.twig', array('result' =>$q->fetchAll()));
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        return $this->render('topics/index.html.twig', array('result' =>$q->fetchAll(), 'mid'=>$ck));
     }
 
     /**

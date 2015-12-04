@@ -1,0 +1,28 @@
+AppBundle\Entity\AzAnswer:
+    type: entity
+    table: az_answer
+    id:
+        aid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Aid
+            generator:
+                strategy: IDENTITY
+    fields:
+        answer:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+                comment: 回答
+        mid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                comment: 'member id'
+    lifecycleCallbacks: {  }

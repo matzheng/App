@@ -22,6 +22,10 @@ class AzAnswer
      */
     private $mid;
 
+    /**
+     * @var integer
+     */
+    private $tid;
 
     /**
      * Get aid
@@ -33,6 +37,16 @@ class AzAnswer
         return $this->aid;
     }
 
+    /**
+     * @param integer $aid
+     *
+     * @return AnAnswer
+     */
+    public function setAid($aid){
+        $this->aid = $aid;
+
+        return $this;
+    }
     /**
      * Set answer
      *
@@ -79,6 +93,28 @@ class AzAnswer
     public function getMid()
     {
         return $this->mid;
+    }
+
+    /**
+     * Get tid
+     *
+     * @return integer
+     */
+    public function getTid(){
+        return $this->tid;
+    }
+
+    /**
+     * Set tid
+     *
+     * @param integer $tid
+     *
+     * @return AzAnswer
+     */
+    public function setTid($tid){
+        $this->tid = $tid;
+
+        return $this;
     }
 }
 

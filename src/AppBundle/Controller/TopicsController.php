@@ -19,18 +19,17 @@ class TopicsController extends Controller{
      * @Route("/topics", name="topicindex", methods={"GET"})
      */
     public function indexAction(){
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        $sql = "";
+        if(!$ck){
+            $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans,0 as myzan,0 as myfav from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,sum(n.zan) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid order by a.tid desc";
+        }
+        else{
+            $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans, ifnull(d.myzan,0) myzan,ifnull(e.fid,0) as myfav from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,count(n.time) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid left join (select tid, time as myzan from az_topic_like where mid=".$ck.") d on a.tid=d.tid left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid order by a.tid desc";
+        }
         $em = $this->getDoctrine()->getManager();
-        $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,sum(n.zan) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid order by a.tid desc";
-        //$rsm = new ResultSetMapping();
-        //$rsm->addEntityResult("AppBundle:AzTopic", "a");
-        //$rsm->addEntityResult("AppBundle:DedeMember", "b");
-        //$rsm->addEntityResult("AppBundle:AzTopicLike", "c");
-        //$rsm->addFieldResult("a", "tid", "tid");
-        //$rsm->addFieldResult("a", "title", "title");
-        //$rsm->addFieldResult("a", "detail", "detail");
-        //$rsm->addFieldResult("b", "face", "face");
-        //$rsm->addFieldResult("b", "uname", "uname");
-        //$query = $em->createNativeQuery($sql, $rsm);
+        //$sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,sum(n.zan) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid order by a.tid desc";
 
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
@@ -79,6 +78,14 @@ class TopicsController extends Controller{
             return $this->redirectToRoute('homepage');
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
         $author = $rep->find($t->getMid());
-        return $this->render('topics/topicdetail.html.twig', array('topic'=>$t, 'author'=>$author));
+        //当前登录用户
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        //所有相关回答
+        $sql = "select a.Aid,a.answer,a.mid,b.uname,b.face from az_answer a inner join dede_member b on a.mid=b.mid where a.tid=".$t->getTid()." order by a.Aid desc";
+        $em = $this->getDoctrine()->getManager();
+        $q = $em->getConnection()->prepare($sql);
+        $q->execute();
+        return $this->render('topics/topicdetail.html.twig', array('topic'=>$t, 'author'=>$author, 'loginuser'=>$ck, 'answers'=>$q->fetchAll()));
     }
 }

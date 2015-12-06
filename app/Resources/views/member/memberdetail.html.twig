@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ member.uname }}
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/aq.css">
+    <link rel="stylesheet" href="/css/my.css">
+{% endblock %}
+
+{% block body %}
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="javascript:;" onclick="javascript:window.history.back()">
+            <span class="icon icon-left"></span>
+        </a>
+        <h1 class="title">{{ member.uname }}</h1>
+    </header>
+
+    <nav class="bar bar-tab topbar">
+        <a class="tab-item" href="{{ path('homepage') }}">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item " href="{{ path('partmentindex') }}">
+            <span class="icon iconfont" >&#xe635;</span>
+            <span class="tab-label">私董会</span>
+        </a>
+        <a class="tab-item" href="{{ path('topicindex') }}">
+            <span class="icon iconfont" >&#xe63c;</span>
+            <span class="tab-label">快答</span>
+        </a>
+        <a class="tab-item" href="{{ path('myindex') }}">
+            <span class="icon iconfont" >&#xe619;</span>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="content">
+        <div class="demo-block">
+            <ul class="ui-list ui-list-link ui-border-tb">
+                <li style=" background: url(images/bg011.jpg) no-repeat; background-size:cover;color:#FFF;height:150px;">
+                    <div class="ui-avatar" style=" margin:50px 15px 25px 20px">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                    </div>
+                    <div class="ui-list-info ui-border-t" style=" height:150px;">
+                        <div class="ui-list-info">
+                            <h4 class="ui-nowrap">{{ member.uname }}</h4>
+                            <p class="ui-nowrap">认证董事3级</p>
+                        </div>
+                    </div>
+                </li>
+                <div class="demo-item">
+                    <div class="demo-block" style=" border-top: 1px solid #eee; padding-top:0.2rem;">
+                        <ul class="ui-row-flex">
+                            <li class="ui-col ui-flex ui-flex-pack-center"><div class="myli"><span style=" color: #F90; font-size:1.3rem;">12</span><br>赞/次</div></li>
+                            <li class="ui-col ui-flex ui-flex-pack-end"><div class="myli"><span style=" color: #0C0; font-size:1.3rem;">26</span><br>回答/个</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

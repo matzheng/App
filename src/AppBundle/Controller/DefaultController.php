@@ -13,10 +13,16 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $session = $this->get('session');
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
+
+        //$session = $this->get('session');
         //return $this->render('default/index.html.twig', array(
         //    'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         //));
-        return $this->render('default/index.html.twig',array('mid'=>$session->get('anzhi_m')));
+        //return $this->render('default/index.html.twig',array('mid'=>$session->get('anzhi_m')));
+        return $this->render('default/index.html.twig');
     }
 }

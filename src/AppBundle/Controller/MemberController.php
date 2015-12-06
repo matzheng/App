@@ -127,4 +127,13 @@ class MemberController extends Controller{
         setcookie('anzhi_m', $member->getMid(),time()+3600*24*7);  //设置cookie
         return new JsonResponse(array('success'=>"1", 'msg'=>'注册成功'));
     }
+
+    /**
+     * @Route("/memberdetail/{mid}", defaults={"mid": 0}, name="memberdetailpage", methods={"GET"})
+     */
+    public function memberdetailAction($mid){
+        $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
+        $mb = $rep->find($mid);
+        return $this->render('member/memberdetail.html.twig', array('member'=> $mb));
+    }
 }

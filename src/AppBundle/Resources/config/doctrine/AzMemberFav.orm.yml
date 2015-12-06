@@ -9,8 +9,6 @@ AppBundle\Entity\AzMemberFav:
                 unsigned: false
                 comment: 收藏时间
             id: true
-            generator:
-                strategy: IDENTITY
     fields:
         mid:
             type: integer

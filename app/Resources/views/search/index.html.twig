@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    我的收藏 - 安知
+    搜索结果
 {% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="css/list.css">
@@ -12,7 +12,7 @@
         <a class="button button-link button-nav pull-left back" onclick="javascript:window.history.back()">
             <span class="icon icon-left"></span>
         </a>
-        <h1 class="title">我的收藏</h1>
+        <h1 class="title">搜索结果</h1>
     </header>
 
     <nav class="bar bar-tab topbar">
@@ -35,14 +35,13 @@
     </nav>
 
     <div class="content">
-        <!-- 这里是页面内容区 -->
-        {% for d in data %}
-        <a href="{{ path('topicdetail', {'tid': d.tid}) }}">
+        <h3>您搜索的是: {{ keyword }}, {{ result | length }}个结果:</h3>
+        {% for d in result %}
             <div class="card">
-                <div valign="bottom" class="card-header color-white no-border ui-nowrap-multi1">问: {{ d.title }}</div>
+                <a href="{{ path('topicdetail', {'tid': d.tid}) }}"><div valign="bottom" class="card-header color-white no-border ui-nowrap-multi1">{{ d.title }}</div></a>
                 <div class="card-content">
                     <div class="card-content-inner">
-                        <p class="color-gray">发表于 {{ d.tid | date('Y-m-d') }}</p>
+                        <p class="color-gray">发表于 2015/01/15</p>
                         <div class="demo-block">
                             <div class="ui-nowrap-multi3">
                                 {{ d.detail }}
@@ -51,7 +50,6 @@
                     </div>
                 </div>
             </div>
-        </a>
         {% endfor %}
     </div>
 {% endblock %}

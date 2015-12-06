@@ -34,6 +34,19 @@ class AzMemberFav
     }
 
     /**
+     * Set fid
+     *
+     * @param integer $fid
+     *
+     * @return AzMemberFav
+     */
+    public function setFid($fid){
+        $this->fid = $fid;
+
+        return $this;
+    }
+
+    /**
      * Set mid
      *
      * @param integer $mid

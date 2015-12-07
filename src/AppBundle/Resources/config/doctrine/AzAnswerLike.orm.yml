@@ -8,8 +8,6 @@ AppBundle\Entity\AzAnswerLike:
             options:
                 unsigned: false
             id: true
-            generator:
-                strategy: IDENTITY
     fields:
         mid:
             type: integer

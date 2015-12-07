@@ -36,7 +36,11 @@ class MyController extends Controller{
         $favsql = "select ifnull(count(fid),0) as favs from az_member_fav where mid=".$ck;
         $favq = $em->getConnection()->prepare($favsql);
         $favq->execute();
-        return $this->render('my/index.html.twig', array('data'=>$m, 'answers'=>$q->fetchAll()[0]['answers'], 'favs'=>$favq->fetchAll()[0]['favs']));
+        //赞数
+        $zansql = "select ifnull(count(a.time),0) as zans from az_answer_like a inner join az_answer b on a.aid=b.Aid where b.mid=".$ck;
+        $zanq = $em->getConnection()->prepare($zansql);
+        $zanq->execute();
+        return $this->render('my/index.html.twig', array('data'=>$m, 'answers'=>$q->fetchAll()[0]['answers'], 'favs'=>$favq->fetchAll()[0]['favs'], 'zans'=>$zanq->fetchAll()[0]['zans']));
     }
 
     /**

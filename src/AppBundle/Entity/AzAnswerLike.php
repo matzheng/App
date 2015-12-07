@@ -22,7 +22,6 @@ class AzAnswerLike
      */
     private $aid;
 
-
     /**
      * Get time
      *
@@ -33,6 +32,18 @@ class AzAnswerLike
         return $this->time;
     }
 
+    /**
+     * Set time
+     *
+     * @param integer $time
+     *
+     * @return AzAnswerLike
+     */
+    public function setTime($time){
+        $this->time = $time;
+
+        return $this;
+    }
     /**
      * Set mid
      *

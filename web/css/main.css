@@ -19,6 +19,9 @@
   border-radius: 1.25rem;
   display: inline-block;
 }
+.bar-tab .tab-item.active, .bar-tab .tab-item:active {
+    color: #007c84;
+}
 /*111111111*/
 .title { background-color:#007c84; color:#FFF;
 }

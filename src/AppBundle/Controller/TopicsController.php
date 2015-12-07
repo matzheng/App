@@ -21,20 +21,20 @@ class TopicsController extends Controller{
     public function indexAction(){
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
         $sql = "";
         if(!$ck){
-            $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans,0 as myzan,0 as myfav from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,sum(n.zan) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid order by a.tid desc";
+            $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,0 as myfav,ifnull(c.favs,0) favs from az_topic  a left join dede_member b on a.mid=b.mid left join(select tid,count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid order by a.tid desc";
         }
         else{
-            $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans, ifnull(d.myzan,0) myzan,ifnull(e.fid,0) as myfav from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,count(n.time) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid left join (select tid, time as myzan from az_topic_like where mid=".$ck.") d on a.tid=d.tid left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid order by a.tid desc";
+            $sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(e.fid,0) as myfav,ifnull(c.favs,0) as favs from az_topic  a left join dede_member b on a.mid=b.mid left join (select tid, count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid order by a.tid desc";
         }
         $em = $this->getDoctrine()->getManager();
         //$sql = "select a.tid,a.title, a.detail,a.mid,ifnull(b.uname,'') as uname,b.face,ifnull(c.zans,0) as zans from az_topic  a left join dede_member b on a.mid=b.mid left join (select n.tid,sum(n.zan) as zans from az_topic_like n group by n.tid) c on a.tid=c.tid order by a.tid desc";
 
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
-        $req = Request::createFromGlobals();
-        $ck = $req->cookies->get('anzhi_m');
         return $this->render('topics/index.html.twig', array('result' =>$q->fetchAll(), 'mid'=>$ck));
     }
 

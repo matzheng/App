@@ -16,7 +16,7 @@
     </header>
     <nav class="bar bar-tab topbar">
         <a class="tab-item" href="{{ path('homepage') }}">
-            <span class="icon icon-home"></span>
+            <span class="icon iconfont">&#xe606;</span>
             <span class="tab-label">首页</span>
         </a>
         <a class="tab-item " href="{{ path('partmentindex') }}">
@@ -56,16 +56,16 @@
               <li class="card">
                   <a name="{{ d.Aid }}"></a>
                   <div class="card-header no-border nocolor">
-                      <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
-                      <div class="facebook-name">{{ d.uname }}</div>
+                      <div class="facebook-avatar"></div>
+                      <div class="facebook-name"></div>
                       <div class="facebook-date">{{ d.Aid | date("Y-m-d") }}</div>
                   </div>
                   <div class="card-content">
                       <div class="card-content-inner">{{ d.answer }}</div>
                   </div>
                   <div class="card-footer">
-                      <a href="#" class="link"> <span class="icon iconfont" >&#xe627;</span> <i>0</i></a>
-                      <!--<a href="#" class="link infoaq">彭小燕/<i>石油化工</i></a>-->
+                      <a href="javascript:;" class="link fav" data-aid="{{ d.Aid }}" data-mid="{{ topic.mid }}"> <span class="icon iconfont" >&#xe627;</span> <i>0</i></a>
+                      <a href="{{ path('memberdetailpage', {'mid': topic.mid}) }}" class="link infoaq">{{ d.uname }}/<i>石油化工</i></a>
                   </div>
               </li>
           {% endfor %}
@@ -77,6 +77,7 @@
 {% block javascripts %}
 <script>
     $(document).ready(function(){
+        //提交答案
         $(".submitAnswer").on('click', function () {
             if($(this).data('mid') == undefined){
                 $.alert('请先登录');
@@ -85,7 +86,6 @@
                 }, 1000);
                 return false;
             }
-
             $.ajax({
                 url: '{{ path("answerpost") }}',
                 type: "POST",
@@ -97,6 +97,7 @@
                 }
             });
         });
+        //点赞
     });
 </script>
 {% endblock %}

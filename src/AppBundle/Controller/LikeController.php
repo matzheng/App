@@ -49,4 +49,11 @@ class LikeController extends Controller{
         $qzan->execute();
         return new JsonResponse(array('success'=>'1', 'msg'=>'点赞成功', 'data'=>$q->fetchAll()[0]['zans'], 'zid'=>$zid == '0' ? $qzan->fetchAll()[0]['zid'] : '0'));
     }
+
+    /**
+     * @Route("/likeanswer", name="likeanswerpost", methods={"POST"})
+     */
+    public function likeAnswerAction(){
+
+    }
 }

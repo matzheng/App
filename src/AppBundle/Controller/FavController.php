@@ -43,6 +43,9 @@ class FavController extends Controller{
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
 
-        return new JsonResponse(array('success'=>'1', 'msg'=>'收藏成功', 'fid'=> $fid == '0' ? $q->fetchAll()[0]['fid'] : '0'));
+        $favsql = "select ifnull(count(fid),0) as favs from az_member_fav where tid=".$tid;
+        $qfav = $em->getConnection()->prepare($favsql);
+        $qfav->execute();
+        return new JsonResponse(array('success'=>'1', 'msg'=>$fid == '0' ? '收藏成功': '取消收藏成功', 'fid'=> $fid == '0' ? $q->fetchAll()[0]['fid'] : '0', 'favs'=>$qfav->fetchAll()[0]['favs']));
     }
 }

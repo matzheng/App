@@ -1,0 +1,24 @@
+AppBundle\Entity\AzAnswerLike:
+    type: entity
+    table: az_answer_like
+    id:
+        time:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        aid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

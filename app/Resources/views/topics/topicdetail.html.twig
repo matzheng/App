@@ -43,11 +43,11 @@
       </div>
     </a>
       <div class="card-header color-white no-border ui-nowrap-multi1">问：{{ topic.title }}</div>
-      <div class="card-content" style="padding: .3rem .75rem;">{{ topic.detail }}</div>
-      <div class="card-footer no-border" style=" text-align:right;">
-          <textarea placeholder="我的答案" style="width:100%;" rows='2' name="desc" id="desc"></textarea>
-      </div>
-        <div class="card-footer no-border" style=" text-align:right;"><button class="ui-btn-lg ui-btn-primary submitAnswer" data-tid="{{ topic.tid }}" data-mid="{{ loginuser }}">我来回答</button></div>
+      <div class="card-content" style="padding: .3rem .75rem;">{{ topic.detail | replace({'\n':'<br/>'}) | raw  }}</div>
+        <div class="card-footer no-border" style=" text-align:right;">
+            <a href="javascript:;" class="link" id="fav" data-tid="{{ topic.tid }}" data-mid="{{ loginuser }}" data-fid="{{ favs.myfav }}" style="color:{{ favs.myfav == 0 ? '': '#ff7900' }}"> <span class="icon iconfont"></span><i id="{{ topic.tid }}">{{ favs.favs }}</i></a>
+            <a href="{{ path('topicanswer', {'tid': topic.tid}) }}" class="link">我来回答</a>
+        </div>
     </div>
 
     <div class="list-block cards-list">
@@ -61,10 +61,10 @@
                       <div class="facebook-date">{{ d.Aid | date("Y-m-d") }}</div>
                   </div>
                   <div class="card-content">
-                      <div class="card-content-inner">{{ d.answer | replace({'\t': '<br/>'}) }}</div>
+                      <div class="card-content-inner">{{ d.answer | replace({'\n':'<br/>'}) | raw }}</div>
                   </div>
                   <div class="card-footer">
-                      <a href="javascript:;" class="link fav" data-aid="{{ d.Aid }}" data-mid="{{ loginuser }}" data-zid="{{ d.myzan }}" style="color:{{ d.myzan == 0 ? "#CCC" : "" }}"> <span class="icon iconfont" >&#xe627;</span> <i id="{{ d.Aid }}">{{ d.zans }}</i></a>
+                      <a href="javascript:;" class="link zan" data-aid="{{ d.Aid }}" data-mid="{{ loginuser }}" data-zid="{{ d.myzan }}" style="color:{{ d.myzan == 0 ? "#CCC" : "" }}"> <span class="icon iconfont" >&#xe627;</span> <i id="{{ d.Aid }}">{{ d.zans }}</i></a>
                       <a href="{{ path('memberdetailpage', {'mid': d.mid}) }}" class="link infoaq">{{ d.uname }}/<i>石油化工</i></a>
                   </div>
               </li>
@@ -98,7 +98,7 @@
             });
         });
         //点赞
-        $(".fav").each(function(index,item){
+        $(".zan").each(function(index,item){
             $(item).on('click', function () {
                 if ($(item).data('mid') == undefined) {
                     $.alert('请先登录');
@@ -124,6 +124,23 @@
                 });
             })
         });
+        //收藏
+        $("#fav").on('click', function () {
+            $.ajax({
+                url:"{{ path('favpost') }}",
+                type: "POST",
+                data: "mid=" + $(this).data('mid') + "&tid=" + $(this).data('tid') + "&fid=" + $(this).data('fid'),
+                success: function (d) {
+                    $("#fav").attr('data-fid', d.fid);
+                    if(d.fid == '0'){
+                        $("#fav").css('color', '');
+                    }else{
+                        $("#fav").css('color', '#ff7900');
+                    }
+                    $("#" + $("#fav").data('tid')).html(d.favs);
+                }
+            });
+        })
     });
 </script>
 {% endblock %}

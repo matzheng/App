@@ -51,7 +51,7 @@
             <li class="card">
           <a href="{{ path('topicdetail', {'tid': d.tid}) }}"><div class="card-header color-white no-border ui-nowrap-multi1">问：{{ d.title }}</div></a>
           <div class="card-content">
-            <div class="card-content-inner">{{ d.detail }}</div>
+            <div class="card-content-inner">{{ d.detail | replace({'\n':'<br/>'}) | raw }}</div>
           </div>
           <div class="card-footer">
         <a href="javascript:;" class="link fav" data-tid="{{ d.tid }}" data-mid="{{ mid }}" data-fid="{{ d.myfav }}" style="color:{{ d.myfav == 0 ? '#CCC': '' }}"><span class="icon iconfont" >&#xe60e;</span><i id="{{ d.tid }}">{{ d.favs }}</i></a>

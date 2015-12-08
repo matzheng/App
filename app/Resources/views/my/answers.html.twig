@@ -45,7 +45,7 @@
                             <p class="color-gray">发表于 {{ d.tid | date('Y-m-d') }}</p>
                             <div class="demo-block">
                                 <div class="ui-nowrap-multi3">
-                                    我的回答: {{ d.answer }}
+                                    我的回答: {{ d.answer | replace({'\n':'<br/>'}) | raw }}
                                 </div>
                             </div>
                         </div>

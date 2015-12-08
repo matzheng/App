@@ -86,6 +86,20 @@ class TopicsController extends Controller{
         $em = $this->getDoctrine()->getManager();
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
-        return $this->render('topics/topicdetail.html.twig', array('topic'=>$t, 'author'=>$author, 'loginuser'=>$ck, 'answers'=>$q->fetchAll()));
+        //当前用户收藏情况
+        $favsql = "select ifnull(count(fid),0) as favs, ifnull(b.myfav,0) as myfav from az_member_fav a left join (select tid,ifnull(fid, 0) as myfav from az_member_fav where mid=".$ck." and tid=".$tid.") b on a.tid=b.tid  where a.tid=".$tid;
+        $favq = $em->getConnection()->prepare($favsql);
+        $favq->execute();
+        return $this->render('topics/topicdetail.html.twig', array('topic'=>$t, 'author'=>$author, 'loginuser'=>$ck, 'answers'=>$q->fetchAll(), 'favs'=>$favq->fetchAll()[0]));
+    }
+
+    /**
+     * @Route("/answer/{tid}", defaults={"tid"=""},name="topicanswer", methods={"GET"})
+     */
+    public function topicanswerAction($tid){
+        //当前登录用户
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        return $this->render("topics/answer.html.twig", array('tid'=>$tid, 'mid'=>$ck));
     }
 }

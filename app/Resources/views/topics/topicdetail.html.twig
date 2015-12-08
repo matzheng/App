@@ -61,7 +61,7 @@
                       <div class="facebook-date">{{ d.Aid | date("Y-m-d") }}</div>
                   </div>
                   <div class="card-content">
-                      <div class="card-content-inner">{{ d.answer }}</div>
+                      <div class="card-content-inner">{{ d.answer | replace({'\t': '<br/>'}) }}</div>
                   </div>
                   <div class="card-footer">
                       <a href="javascript:;" class="link fav" data-aid="{{ d.Aid }}" data-mid="{{ loginuser }}" data-zid="{{ d.myzan }}" style="color:{{ d.myzan == 0 ? "#CCC" : "" }}"> <span class="icon iconfont" >&#xe627;</span> <i id="{{ d.Aid }}">{{ d.zans }}</i></a>

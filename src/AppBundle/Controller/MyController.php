@@ -15,7 +15,7 @@ class MyController extends Controller{
     /**
      * @Route("/my", name="myindex", methods={"GET"})
      */
-    public function indexAction(){
+    public function indexAction(){		
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
         if(!$ck)

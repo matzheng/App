@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\DedeMember;
 use AppBundle\Entity\DedeMemberPerson;
 use AppBundle\Entity\AzTopic;
-//use Doctrine\ORM\Query\ResultSetMapping;
-//use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 class TopicsController extends Controller{
     /**

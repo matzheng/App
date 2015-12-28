@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    私董会 - 安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/reg.css">
+{% endblock %}
+
+{% block body %}
+    <header class="bar bar-nav">
+      <a class="button button-link button-nav pull-left back" onclick="javascript:window.history.back()">
+      <span class="icon icon-left"></span>
+    </a>
+        <h1 class="title">添加问题</h1>
+        <button class="button pull-right" id='addtopic' >发布</button>
+    </header>
+    <nav class="bar bar-tab topbar">
+        <a class="tab-item" href="{{ path('homepage') }}">
+            <span class="icon iconfont">&#xe606;</span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item active" href="{{ path('partmentindex') }}">
+            <span class="icon iconfont" >&#xe619;</span>
+            <span class="tab-label">私董会</span>
+        </a>
+        <a class="tab-item " href="{{ path('topicindex') }}">
+            <span class="icon iconfont" >&#xe622;</span>
+            <span class="tab-label">快答</span>
+        </a>
+        <a class="tab-item " href="{{ path('myindex') }}">
+            <span class="icon iconfont" >&#xe613;</span>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+<div class="content javascript-scroll"><div class="content-inner" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+    <div class="buttons-tab">
+      <a href="#tab1" class="tab-link button active">问题</a>
+      <a href="#tab2" class="tab-link button">描述</a>
+      <a href="#tab3" class="tab-link button">标签</a>
+       <a href="#tab4" class="tab-link button ">邀答</a>
+    </div>
+
+    <div class="tabs">
+      <div id="tab1" class="tab active">
+        <div class="content-block">
+          
+             <div class="ui-form-item ui-form-item-textarea ui-border-b" style=" height:200px; border-top:1px solid #f2f2f2;">
+                      
+                      
+                        <textarea id='title' placeholder="请输入标题" rows=4 maxlength=255></textarea>
+          </div>
+        </div>
+      </div>
+      <div id="tab2" class="tab">
+        <div class="content-block">
+          <div class="ui-form-item ui-form-item-textarea ui-border-b" style=" height:400px; border-top:1px solid #f2f2f2;">
+                      
+                        <textarea id='desc' placeholder="请输入具体描述" rows=8></textarea>
+          </div>
+        </div>
+      </div>
+      <div id="tab3" class="tab">
+        <div class="content-block">
+          <p>请选择标签</p>
+        </div>
+      </div>
+       <div id="tab4" class="tab">
+       <div class="ui-tooltips ui-tooltips-guide">
+                <div class="ui-tooltips-cnt ui-border-b" style=" font-size:0.8em; text-align:center;">
+                    <i></i>最多可邀请7个专家席位。<a class="ui-icon-close"></a>
+                </div>
+            </div>
+       <div class="demo-block">
+            <ul class="ui-list ui-list-function ui-list-link ui-border-tb">
+                <li class="ui-border-t">
+                    <div class="ui-avatar-s">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>
+                    </div>
+                    <div class="ui-list-info">
+                        <h4 class="ui-nowrap">李强</h4>
+                        <span style=" font-size:0.7em; color:#999;">EHS专家</span>
+                    </div>
+                    <div class="ui-btn">邀请</div>
+                </li>
+                <li class="ui-border-t">
+                    <div class="ui-avatar-s">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>
+                    </div>
+                    <div class="ui-list-info">
+                        <h4 class="ui-nowrap">赵信</h4><span style=" font-size:0.7em; color:#999;">安全专家</span>
+                    </div>
+                    <div class="ui-btn">邀请</div>
+                </li>
+                 <li class="ui-border-t">
+                    <div class="ui-avatar-s">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>
+                    </div>
+                    <div class="ui-list-info">
+                        <h4 class="ui-nowrap">赵信</h4><span style=" font-size:0.7em; color:#999;">安全专家</span>
+                    </div>
+                    <div class="ui-btn btn_ok">已邀请</div>
+                </li>
+            </ul>
+        </div>
+      </div>
+      
+    </div>
+  </div></div>
+{% endblock %}
+
+{% block javascripts %}
+  <script type='text/javascript'>
+    $(document).ready(function(){
+      $('#addtopic').on('click', function(){
+        if($.trim($('#title').val()) == ''){
+          $.alert('请输入问题');
+          return false;
+        }
+
+        if($.trim($('#desc').val()) == ''){
+          $.alert('请输入描述');
+          return false;
+        }
+      });
+    });
+  </script>
+{% endblock %}

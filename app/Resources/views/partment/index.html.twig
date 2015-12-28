@@ -4,12 +4,13 @@
     私董会 - 安知
 {% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="css/aq.css">
+    <link rel="stylesheet" href="css/partment.css">
 {% endblock %}
 
 {% block body %}
     <header class="bar bar-nav">
         <h1 class="title">私董会</h1>
+        <button class="button pull-right" onclick="javascript:window.location.href='{{path('partmentadd')}}'">发布</button>
     </header>
     <nav class="bar bar-tab topbar">
         <a class="tab-item" href="{{ path('homepage') }}">
@@ -33,8 +34,73 @@
     <div class="content">
         <!-- 这里是页面内容区 -->
 
-        <div class="page-index">
-            <h1 style="text-align: center">敬请期待</h1>
-        </div>
+        <div class="list-block media-list">
+      <ul style=" background:#f2f2f2;" class="zulist">
+        <li onclick="javascript:window.location.href='page2.html'">
+          <a href="#" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title">安知热门话题</div>
+               <!-- <div class="item-after">12-15</div>-->
+              </div>
+              <div class="item-subtitle">21人参与描述，56人关注</div>
+              <div class="item-text">欢迎参加讨论我们的热门话题</div>
+            </div>
+          </a>
+        </li>
+        
+               <li onclick="javascript:window.location.href='page2.html'">
+          <a href="#" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><span class="biaoqian">安全管理</span>  危险化学品</div>
+                
+              </div>
+              <div class="item-subtitle">7人参与描述，56人关注</div>
+              <div class="item-text">欢迎参加讨论我们的热门话题</div>
+            </div>
+          </a>
+        </li>
+         <li onclick="javascript:window.location.href='page2.html'">
+          <a href="#" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><span class="biaoqian2">安全技术</span> SES手册</div>
+                
+              </div>
+              <div class="item-subtitle">7人参与描述，56人关注</div>
+              <div class="item-text">欢迎参加讨论我们的热门话题</div>
+            </div>
+          </a>
+        </li>
+         <li>
+          <a href="#" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><span class="biaoqian3">职业健康</span>  危险化学品</div>
+                
+              </div>
+              <div class="item-subtitle">7人参与描述，56人关注</div>
+              <div class="item-text">欢迎参加讨论我们的热门话题</div>
+            </div>
+          </a>
+        </li>
+         <li>
+          <a href="#" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><span class="biaoqian">安全管理</span>  危险化学品</div>
+                
+              </div>
+              <div class="item-subtitle">7人参与描述，56人关注</div>
+              <div class="item-text">欢迎参加讨论我们的热门话题</div>
+            </div>
+          </a>
+        </li>
+
+
+
+
+      </ul>
     </div>
 {% endblock %}

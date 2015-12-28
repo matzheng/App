@@ -90,6 +90,7 @@ body {
     width: 100%;
 }
 .swiper-container {
+	
     padding-bottom: 0em;
 
 }
@@ -98,3 +99,20 @@ body {
 
 }
 .footmain {/*padding: 0rem .75rem .5rem .75rem;*/ font-size:0.5rem;}
+
+/*222*/
+.card-header {
+    font-size: .75rem;
+    border-radius: .1rem .1rem 0 0;
+    padding: .5rem .75rem 0rem;
+    color: #007c84;
+}
+.ui-nowrap-multi1 {
+    max-width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.wen {
+    color: #999;
+}

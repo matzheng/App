@@ -18,4 +18,11 @@ class PartmentController extends Controller{
     public function indexAction(){
         return $this->render('partment/index.html.twig');
     }
+
+    /**
+     * @Route("/partment/add",name="partmentadd")
+     */
+    public function addAction(){
+    	return $this->render("partment/add.html.twig");
+    }
 }

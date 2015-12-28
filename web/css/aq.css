@@ -156,5 +156,11 @@ a:active { color:#999;}
 }
 
 .facebook-card .card-footer {
-    background: #fff;
+    background: #fff; 
+}
+.bar-footer-secondary {
+    bottom: 0rem;background-color: #eeeeee;
+}
+.bar-footer-secondary ~ .content {
+    bottom: 44px;
 }

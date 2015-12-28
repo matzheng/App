@@ -31,7 +31,7 @@ body {
 }
 .list-block ul {
 
-    background: none;    }
+  /*  background: none;*/    }
 
 .list-block ul:before {
 
@@ -120,7 +120,28 @@ a {
 .bar-tab2 {
     bottom: 2.5rem;
     width: 100%;
-    height: 5em;
+    height: 4em;
     padding: 0; 
-    table-layout: fixed;
+    table-layout: fixed;background-color: #fff;
 }
+.list-block .item-link .item-inner {
+    padding-right: 1.5rem;
+    background-image: url("../images/i-list-chevron-right.png");}
+	
+.list-block {
+    margin: 0.75rem 0;
+    font-size: .75rem;
+}
+.biaoqian { border:1px solid #007c84; padding:1px 5px; border-radius:5px; color:#007c84;}
+.biaoqian2 { border:1px solid #F90; padding:1px 5px; border-radius:5px; color:#F90;}
+.biaoqian3 { border:1px solid #C00; padding:1px 5px; border-radius:5px; color:#C00;}
+ .item-title { height:26px;
+}
+.bar-tab ~ .content {
+    bottom: 2.5rem;
+}
+
+.list-block .item-text {
+    height: 1.1rem;}
+.zulist li {margin:0.6em; background:#fff; border:1px solid #ccc; border-radius:0.5em;}
+.list-block .item-title {color:#007c84;}

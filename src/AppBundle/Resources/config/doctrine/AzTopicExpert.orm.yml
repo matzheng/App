@@ -1,0 +1,24 @@
+AppBundle\Entity\AzTopicExpert:
+    type: entity
+    table: az_topic_expert
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        addtime:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

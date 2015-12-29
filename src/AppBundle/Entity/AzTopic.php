@@ -173,5 +173,62 @@ class AzTopic
     {
         return $this->deleted;
     }
-}
+    /**
+     * @var string
+     */
+    private $tags;
 
+    /**
+     * @var integer
+     */
+    private $qtypes;
+
+
+    /**
+     * Set tags
+     *
+     * @param string $tags
+     *
+     * @return AzTopic
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return string
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set qtypes
+     *
+     * @param integer $qtypes
+     *
+     * @return AzTopic
+     */
+    public function setQtypes($qtypes)
+    {
+        $this->qtypes = $qtypes;
+
+        return $this;
+    }
+
+    /**
+     * Get qtypes
+     *
+     * @return integer
+     */
+    public function getQtypes()
+    {
+        return $this->qtypes;
+    }
+}

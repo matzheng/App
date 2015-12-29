@@ -134,6 +134,17 @@ class MemberController extends Controller{
     public function memberdetailAction($mid){
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
         $mb = $rep->find($mid);
-        return $this->render('member/memberdetail.html.twig', array('member'=> $mb));
+
+        //回答数
+        $sql = "select ifnull(count(a.aid),0) as answers from az_answer a inner join az_topic b on a.tid=b.tid where a.mid=".$mid;
+        $em = $this->getDoctrine()->getManager();
+        $q = $em->getConnection()->prepare($sql);
+        $q->execute();
+
+        //赞数
+        $zansql = "select ifnull(count(a.time),0) as zans from az_answer_like a inner join az_answer b on a.aid=b.Aid where b.mid=".$mid;
+        $zanq = $em->getConnection()->prepare($zansql);
+        $zanq->execute();
+        return $this->render('member/memberdetail.html.twig', array('member'=> $mb,'answers'=>$q->fetchAll()[0]['answers'], 'zans'=>$zanq->fetchAll()[0]['zans']));
     }
 }

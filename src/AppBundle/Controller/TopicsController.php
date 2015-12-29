@@ -60,6 +60,7 @@ class TopicsController extends Controller{
         $t->setTitle($title);
         $t->setDetail($desc);
         $t->setMid($ck);
+        $t->setQtypes('1');
         $em = $this->getDoctrine()->getManager();
         $em->persist($t);
         $em->flush();

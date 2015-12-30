@@ -70,9 +70,11 @@ class PartmentController extends Controller{
         $t->setQtypes('2');    //私董会
         $em = $this->getDoctrine()->getManager();
         $em->persist($t);
+        
+        $topicid = $t->getTid();
         //添加自己为专家之一
         $myself = new AzTopicExpert();
-        $myself->setTid($t->getMid());
+        $myself->setTid($topicid);
         $myself->setMid($ck);
         $myself->setAddtime(time());
         $em->persist($myself);
@@ -80,7 +82,7 @@ class PartmentController extends Controller{
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');    
         foreach(explode(',', $experts) as $zj){            
             $exp = new AzTopicExpert();
-            $exp->setTid($t->getMid());
+            $exp->setTid($topicid);
             $exp->setMid($zj);
             $exp->setAddtime(time());
             $em->persist($exp);
@@ -93,7 +95,7 @@ class PartmentController extends Controller{
         }
 
         $em->flush();
-        return new JsonResponse(array('success'=> '1', 'msg'=>'问题添加成功',  'data'=>$current));
+        return new JsonResponse(array('success'=> '1', 'msg'=>'问题添加成功',  'data'=>$topicid));
     }
 
     function Post($curlPost, $url){

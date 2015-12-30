@@ -9,8 +9,6 @@ AppBundle\Entity\AzTopic:
                 unsigned: false
                 comment: 'topic id'
             id: true
-            generator:
-                strategy: IDENTITY
     fields:
         title:
             type: string

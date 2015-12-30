@@ -24,10 +24,10 @@ class PartmentController extends Controller{
             return $this->redirectToRoute('loginpage');
         $sql = "";
         if(!$ck){
-            $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,0 as myfav,ifnull(c.favs,0) favs from az_topic  a left join dede_member b on a.mid=b.mid left join(select tid,count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid order by a.tid where a.qtypes='2' desc";
+            $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,0 as myfav,ifnull(c.favs,0) favs,ifnull(f.answercount,0) as answercount  from az_topic  a left join dede_member b on a.mid=b.mid left join(select tid,count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid left join (select count(distinct mid) as answercount, tid from az_answer group by tid) f on a.tid=f.tid where a.qtypes='2' order by a.tid  desc";
         }
         else{
-            $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,ifnull(e.fid,0) as myfav,ifnull(c.favs,0) as favs from az_topic  a left join dede_member b on a.mid=b.mid left join (select tid, count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid where a.qtypes='2' order by a.tid desc";
+            $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,ifnull(e.fid,0) as myfav,ifnull(c.favs,0) as favs,ifnull(f.answercount,0) as answercount from az_topic  a left join dede_member b on a.mid=b.mid left join (select tid, count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid left join (select count(distinct mid) as answercount, tid from az_answer group by tid) f on a.tid=f.tid where a.qtypes='2' order by a.tid desc";
         }
         $em = $this->getDoctrine()->getManager(); 
         $q = $em->getConnection()->prepare($sql);
@@ -133,12 +133,19 @@ class PartmentController extends Controller{
         $favsql = "select ifnull(count(fid),0) as favs, ifnull(b.myfav,0) as myfav from az_member_fav a left join (select tid,ifnull(fid, 0) as myfav from az_member_fav where mid=".$ck." and tid=".$tid.") b on a.tid=b.tid  where a.tid=".$tid;
         $favq = $em->getConnection()->prepare($favsql);
         $favq->execute();
-        //席位
+        //总席位
         $experts = "select distinct mid from az_topic_expert where tid=".$tid;
         $expq = $em->getConnection()->prepare($experts);
         $expq->execute();
-
-        return $this->render('partment/partmentdetail.html.twig', array('topic'=>$t,'author'=>$author, 'loginuser'=>$ck, 'answers'=>$q->fetchAll(), 'favs'=>$favq->fetchAll()[0], 'xiwei'=> $expq->fetchAll()));
+        //已用席位
+        $used = "select count(distinct mid) as used from az_answer where tid=".$tid;
+        $usedq = $em->getConnection()->prepare($used);
+        $usedq->execute();
+        //是否被邀
+        $invited = "select count(mid) as invited from az_topic_expert where tid=".$tid." and mid=".$ck;
+        $invitedq = $em->getConnection()->prepare($invited);
+        $invitedq->execute();
+        return $this->render('partment/partmentdetail.html.twig', array('topic'=>$t,'author'=>$author, 'loginuser'=>$ck, 'answers'=>$q->fetchAll(), 'favs'=>$favq->fetchAll()[0], 'xiwei'=> $expq->fetchAll(), 'used'=>$usedq->fetchAll()[0], 'invited'=>$invitedq->fetchAll()[0]));
     }
 
     /**

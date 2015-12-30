@@ -37,7 +37,7 @@
     <div class="content">
         <!-- 这里是页面内容区 -->
         {% for d in data %}
-        <a href="{{ path('topicdetail', {'tid': d.tid}) }}">
+        <a href="{{ d.qtypes == '1' ? path('topicdetail', {'tid': d.tid}) : path('partmentdetail',{'tid': d.tid})}}">
             <div class="card">
                 <div valign="bottom" class="card-header color-white no-border ui-nowrap-multi1">问: {{ d.title }}</div>
                 <div class="card-content">

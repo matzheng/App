@@ -14,7 +14,11 @@
      <h1 class="title">{{ topic.title }}</h1>
     </header>
 	<div class="bar bar-footer-secondary">
+    {% if invited.invited == 1 %}
     	<a href="{{path('partmentanswer', {'tid': topic.tid})}}"><button class="button button-block" style="background:#007c84;">立即回答</button></a>
+    {%else%}
+      <a href="javascript:void(0)" onclick="javascript:$.alert('申请成为专家可获得席位');"><button class="button button-block" style="background:#007c84;">立即回答</button></a>
+    {%endif%}
   	</div>
     <div class="content">
     <!-- 这里是页面内容区 -->
@@ -30,8 +34,7 @@
       <div class="card-content" style="padding: .3rem .75rem;">{{ topic.detail | replace({'\n':'<br/>'}) | raw  }}</div>
         <div class="card-footer no-border" style=" text-align:right;">
             <a href="javascript:;" class="link" id="fav" data-tid="{{ topic.tid }}" data-mid="{{ loginuser }}" data-fid="{{ favs.myfav }}" style="color:{{ favs.myfav == 0 ? '': '#ff7900' }}"> <span class="icon iconfont"></span><i id="{{ topic.tid }}">{{ favs.favs }}</i></a>
-            <!--<a href="{{ path('topicanswer', {'tid': topic.tid}) }}" class="link">我来回答</a>-->
-            <a href="javascript:void(0)" class="link">讨论席位数 3/{{xiwei | length}}</a>
+            <a href="javascript:void(0)" class="link">讨论席位数 {{used.used}}/{{xiwei | length}}</a>
         </div>
     </div>
 

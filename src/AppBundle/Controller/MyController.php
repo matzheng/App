@@ -51,7 +51,7 @@ class MyController extends Controller{
         $ck = $req->cookies->get('anzhi_m');
         if(!$ck)
             return $this->redirectToRoute('loginpage');
-        $sql = "select a.tid,b.title,b.detail from az_member_fav a inner join az_topic b on a.tid=b.tid where a.mid=".$ck;
+        $sql = "select a.tid,b.title,b.detail,b.qtypes from az_member_fav a inner join az_topic b on a.tid=b.tid where a.mid=".$ck." order by a.fid desc";
         $em = $this->getDoctrine()->getManager();
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
@@ -66,7 +66,7 @@ class MyController extends Controller{
         $ck = $req->cookies->get('anzhi_m');
         if(!$ck)
             return $this->redirectToRoute('loginpage');
-        $sql = "select a.Aid,a.answer,a.tid,b.title, b.detail from az_answer a inner join az_topic b on a.tid=b.tid where a.mid=".$ck;
+        $sql = "select a.Aid,a.answer,a.tid,b.title, b.detail,b.qtypes from az_answer a inner join az_topic b on a.tid=b.tid where a.mid=".$ck." order by a.Aid desc";
         $em = $this->getDoctrine()->getManager();
         $q = $em->getConnection()->prepare($sql);
         $q->execute();

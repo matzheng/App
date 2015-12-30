@@ -3,7 +3,6 @@
     安知 - 我的安全私董会
 {% endblock %}
 {% block stylesheets %}
-
     <link rel="stylesheet" href="css/aq.css">
 {% endblock %}
 
@@ -47,7 +46,19 @@
   
     <div class="list-block cards-list">
       <ul>
-
+        {%for d in result%}
+          <li class="card">
+            <a href="{{ d.qtypes == '1' ? path('topicdetail', {'tid': d.tid}) : path('partmentdetail', {'tid': d.tid})}}"><div class="card-header color-white no-border ui-nowrap-multi1">问：{{ d.title }}</div></a>
+            <div class="card-content">
+              <div class="card-content-inner">{{ d.detail | replace({'\n':'<br/>'}) | raw }}</div>
+            </div>
+            <div class="card-footer">
+          <a href="javascript:;" class="link fav" data-tid="{{ d.tid }}" data-mid="{{ mid }}" data-fid="{{ d.myfav }}" style="color:{{ d.myfav == 0 ? '#CCC': '' }}"><span class="icon iconfont" >&#xe60e;</span><i id="{{ d.tid }}">{{ d.favs }}</i></a>
+          <a href="{{ path('memberdetailpage', {'mid': d.mid}) }}" class="link infoaq" >{{ d.uname }}/<i>{{d.product}}</i></a>
+          </div>
+          </li>
+        {%endfor%}
+<!--
         <li class="card">
           <div class="card-header color-white no-border ui-nowrap-multi1">问：黄岛的爆炸事故中，根据我们 EHS 人员了解中石化对安全一向很重视，</div>
           <div class="card-content">
@@ -69,11 +80,45 @@
         <a href="#" class="link infoaq">彭小燕/<i>石油化工</i></a>
       </div>
         </li>
+      -->
       </ul>
     </div>
-
-
-
   </div>
 </div>
 {% endblock %}
+
+{% block javascripts%}
+<script src="/js/demos.js"></script>
+<script>
+        $(document).ready(function(){
+            //收藏
+            $(".fav").each(function(index,item){
+                $(item).on('click', function() {
+                    if ($(item).data('mid') == undefined) {
+                        $.alert('请先登录');
+                        window.setTimeout(function () {
+                            window.location.href = '{{ path("loginpage") }}';
+                        }, 1000);
+                        return false;
+                    }
+
+                    $.ajax({
+                        url:"{{ path('favpost') }}",
+                        type: "POST",
+                        data: "mid=" + $(item).data('mid') + "&tid=" + $(item).data('tid') + "&fid=" + $(item).data('fid'),
+                        success: function (d) {
+                            $(item).attr('data-fid', d.fid);
+                            if(d.fid == '0'){
+                                $(item).css('color', '#CCC;');
+                            }else{
+                                $(item).css('color', '');
+                            }
+                            $("#" + $(item).data('tid')).html(d.favs);
+                        }
+                    });
+                });
+            });
+            //搜索
+        });
+    </script>
+{%endblock%}

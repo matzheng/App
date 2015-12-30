@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    我来回答 - 安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/reg.css">
+{% endblock %}
+
+{% block body %}
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="javascript:;" onclick="javascript:window.history.back()">
+            <span class="icon icon-left"></span>
+        </a>
+        <h1 class="title">我来回答</h1>
+        <button class="button pull-right" id="submitA">
+            提交
+        </button>
+    </header>
+
+    <nav class="bar bar-tab topbar">
+        <a class="tab-item" href="{{ path('homepage') }}">
+            <span class="icon iconfont">&#xe606;</span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item active" href="{{ path('partmentindex') }}">
+            <span class="icon iconfont" >&#xe619;</span>
+            <span class="tab-label">私董会</span>
+        </a>
+        <a class="tab-item " href="{{ path('topicindex') }}">
+            <span class="icon iconfont" >&#xe622;</span>
+            <span class="tab-label">快答</span>
+        </a>
+        <a class="tab-item " href="{{ path('myindex') }}">
+            <span class="icon iconfont" >&#xe613;</span>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="content">
+        <div class="ui-form-item ui-form-item-textarea ui-border-b" style=" height:200px; border-top:1px solid #f2f2f2;">
+            <textarea placeholder="请输入详细回答" rows="4" id="answer"></textarea>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function () {
+            $("#submitA").on('click', function(){
+                var answer = $('#answer').val();
+                if($.trim(answer) == ''){
+                    $.alert('请输入详细回答');
+                    return false;
+                }
+                $.ajax({
+                    url: '{{ path("answerpost") }}',
+                    type: "POST",
+                    data: "tid={{ tid }}&mid={{ mid }}&answer=" + answer,
+                    success: function(d){
+                        if(d.success == '1')
+                        {
+                            window.location = "{{ path('partmentdetail', {'tid': tid}) }}";
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

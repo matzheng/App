@@ -10,7 +10,7 @@
 {% block body %}
     <header class="bar bar-nav">
         <h1 class="title">私董会</h1>
-        <button class="button pull-right" onclick="javascript:window.location.href='{{path('partmentadd')}}'">发布</button>
+        <button class="button pull-right" onclick="javascript:window.location.href='{{path("partmentadd")}}'">发布</button>
     </header>
     <nav class="bar bar-tab topbar">
         <a class="tab-item" href="{{ path('homepage') }}">
@@ -36,71 +36,20 @@
 
         <div class="list-block media-list">
       <ul style=" background:#f2f2f2;" class="zulist">
-        <li onclick="javascript:window.location.href='page2.html'">
-          <a href="#" class="item-link item-content">
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title">安知热门话题</div>
-               <!-- <div class="item-after">12-15</div>-->
+        {% for d in result %}
+          <li>
+            <a href="{{path('partmentdetail', {'tid': d.tid})}}" class="item-link item-content">
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title"><span class="biaoqian">{{d.tags}}</span>  {{d.title}}</div>
+                  
+                </div>
+                <div class="item-subtitle">7人参与描述，{{d.favs}}人关注</div>
+                <div class="item-text">欢迎参加讨论我们的热门话题</div>
               </div>
-              <div class="item-subtitle">21人参与描述，56人关注</div>
-              <div class="item-text">欢迎参加讨论我们的热门话题</div>
-            </div>
-          </a>
-        </li>
-        
-               <li onclick="javascript:window.location.href='page2.html'">
-          <a href="#" class="item-link item-content">
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title"><span class="biaoqian">安全管理</span>  危险化学品</div>
-                
-              </div>
-              <div class="item-subtitle">7人参与描述，56人关注</div>
-              <div class="item-text">欢迎参加讨论我们的热门话题</div>
-            </div>
-          </a>
-        </li>
-         <li onclick="javascript:window.location.href='page2.html'">
-          <a href="#" class="item-link item-content">
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title"><span class="biaoqian2">安全技术</span> SES手册</div>
-                
-              </div>
-              <div class="item-subtitle">7人参与描述，56人关注</div>
-              <div class="item-text">欢迎参加讨论我们的热门话题</div>
-            </div>
-          </a>
-        </li>
-         <li>
-          <a href="#" class="item-link item-content">
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title"><span class="biaoqian3">职业健康</span>  危险化学品</div>
-                
-              </div>
-              <div class="item-subtitle">7人参与描述，56人关注</div>
-              <div class="item-text">欢迎参加讨论我们的热门话题</div>
-            </div>
-          </a>
-        </li>
-         <li>
-          <a href="#" class="item-link item-content">
-            <div class="item-inner">
-              <div class="item-title-row">
-                <div class="item-title"><span class="biaoqian">安全管理</span>  危险化学品</div>
-                
-              </div>
-              <div class="item-subtitle">7人参与描述，56人关注</div>
-              <div class="item-text">欢迎参加讨论我们的热门话题</div>
-            </div>
-          </a>
-        </li>
-
-
-
-
+            </a>
+          </li>
+        {% endfor %}       
       </ul>
     </div>
 {% endblock %}

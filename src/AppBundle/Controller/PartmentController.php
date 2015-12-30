@@ -10,19 +10,142 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\DedeMember;
 use AppBundle\Entity\DedeMemberPerson;
+use AppBundle\Entity\AzTopic;
+use AppBundle\Entity\AzTopicExpert;
 
 class PartmentController extends Controller{
     /**
      * @Route("/partment", name="partmentindex", methods={"GET"})
      */
     public function indexAction(){
-        return $this->render('partment/index.html.twig');
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
+        $sql = "";
+        if(!$ck){
+            $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,0 as myfav,ifnull(c.favs,0) favs from az_topic  a left join dede_member b on a.mid=b.mid left join(select tid,count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid order by a.tid where a.qtypes='2' desc";
+        }
+        else{
+            $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,ifnull(e.fid,0) as myfav,ifnull(c.favs,0) as favs from az_topic  a left join dede_member b on a.mid=b.mid left join (select tid, count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid where a.qtypes='2' order by a.tid desc";
+        }
+        $em = $this->getDoctrine()->getManager(); 
+        $q = $em->getConnection()->prepare($sql);
+        $q->execute();
+        return $this->render('partment/index.html.twig',array('result' =>$q->fetchAll(), 'mid'=>$ck));
     }
 
     /**
-     * @Route("/partment/add",name="partmentadd")
+     * @Route("/partmentadd",name="partmentadd")
      */
     public function addAction(){
-    	return $this->render("partment/add.html.twig");
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        //专家列表
+        $sql = "select mid, uname, face, ifnull(product,'') product from dede_member where ifnull(mobile,'') != '' and isexpert=1 and mid!=".$ck;
+        $em = $this->getDoctrine()->getManager();
+        $q = $em->getConnection()->prepare($sql);
+        $q->execute();
+    	return $this->render("partment/add.html.twig", array('experts'=>$q->fetchAll()));
+    }
+
+    /**
+     * @Route("/partment/adddone", name="partmentadddone", methods={"POST"})
+     */
+    public function addDoneAction(){
+        $title = $_POST['title'];
+        $desc = $_POST['desc'];
+        $tags = $_POST['tags'];
+        $experts = $_POST['experts'];
+
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        //话题
+        $t = new AzTopic();
+        $t->setTid(time());
+        $t->setTitle($title);
+        $t->setDetail($desc);
+        $t->setMid($ck);
+        $t->setTags($tags);
+        $t->setQtypes('2');    //私董会
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($t);
+        //添加自己为专家之一
+        $myself = new AzTopicExpert();
+        $myself->setTid($t->getMid());
+        $myself->setMid($ck);
+        $myself->setAddtime(time());
+        $em->persist($myself);
+        //专家   
+        $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');    
+        foreach(explode(',', $experts) as $zj){            
+            $exp = new AzTopicExpert();
+            $exp->setTid($t->getMid());
+            $exp->setMid($zj);
+            $exp->setAddtime(time());
+            $em->persist($exp);
+            //发送短信通知
+            $smsconf = $this->container->getParameter('sms');
+            $url = "http://106.veesing.com/webservice/sms.php?method=Submit";
+            $mb = $rep->find($zj);
+            $post_data = "account=".$smsconf['account']."&password=".md5($smsconf['password'])."&mobile=".$mb->getMobile()."&content=专家".$mb->getUname()."，安知有新问题需要你来解答，请尽快登陆上线。";
+            $this->Post($post_data, $url);
+        }
+
+        $em->flush();
+        return new JsonResponse(array('success'=> '1', 'msg'=>'问题添加成功',  'data'=>$current));
+    }
+
+    function Post($curlPost, $url){
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_NOBODY, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $curlPost);
+        $return_str = curl_exec($curl);
+        curl_close($curl);
+        return $return_str;
+    }
+
+    /**
+     * @Route("/partment/{tid}", name="partmentdetail", defaults={"tid"=""}, methods={"GET"})
+     */
+    public function partmentdetailAction($tid){
+        $rep = $this->getDoctrine()->getRepository('AppBundle:AzTopic');
+        $t = $rep->find($tid);
+        if(!$t)
+            return $this->redirectToRoute('homepage');
+        $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
+        $author = $rep->find($t->getMid());
+        //当前登录用户
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        //所有相关回答
+        $sql = "select a.Aid,a.answer,a.mid,b.uname,b.face,ifnull(b.product,'') product,ifnull(c.zans,0) as zans,ifnull(d.zid,0) as myzan from az_answer a inner join dede_member b on a.mid=b.mid left join (select aid, ifnull(count(time),0) zans from az_answer_like group by aid) c on a.aid=c.aid left join (select aid, time as zid from az_answer_like where mid=".$ck.") d on a.aid=d.aid where a.tid=".$t->getTid()." order by a.Aid desc";
+        $em = $this->getDoctrine()->getManager();
+        $q = $em->getConnection()->prepare($sql);
+        $q->execute();
+        //当前用户收藏情况
+        $favsql = "select ifnull(count(fid),0) as favs, ifnull(b.myfav,0) as myfav from az_member_fav a left join (select tid,ifnull(fid, 0) as myfav from az_member_fav where mid=".$ck." and tid=".$tid.") b on a.tid=b.tid  where a.tid=".$tid;
+        $favq = $em->getConnection()->prepare($favsql);
+        $favq->execute();
+        //席位
+        $experts = "select distinct mid from az_topic_expert where tid=".$tid;
+        $expq = $em->getConnection()->prepare($experts);
+        $expq->execute();
+
+        return $this->render('partment/partmentdetail.html.twig', array('topic'=>$t,'author'=>$author, 'loginuser'=>$ck, 'answers'=>$q->fetchAll(), 'favs'=>$favq->fetchAll()[0], 'xiwei'=> $expq->fetchAll()));
+    }
+
+    /**
+     * @Route("/panswer/{tid}", name="partmentanswer", defaults={"tid"=""}, methods={"GET"})
+     */
+    public function partmentanswerAction($tid){
+        //当前登录用户
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        return $this->render("partment/answer.html.twig", array('tid'=>$tid, 'mid'=>$ck));
     }
 }

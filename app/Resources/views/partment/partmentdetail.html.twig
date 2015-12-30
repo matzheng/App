@@ -1,38 +1,22 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    {{ topic.title }} - 我的安全私董会
+    {{ topic.title }}- 我的安全私董会
 {% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="/css/aq.css">
 {% endblock %}
 
-{% block body %}
-
-    <header class="bar bar-nav">
-      <a class="button button-link button-nav pull-left back" href="javascript:;" onclick="javascript:window.history.back();">
+{% block body%}
+	<header class="bar bar-nav">
+      <a class="button button-link button-nav pull-left back" href="{{path('partmentindex')}}" >
       <span class="icon icon-left"></span>
       </a>
      <h1 class="title">{{ topic.title }}</h1>
     </header>
-    <nav class="bar bar-tab topbar">
-        <a class="tab-item" href="{{ path('homepage') }}">
-            <span class="icon iconfont">&#xe606;</span>
-            <span class="tab-label">首页</span>
-        </a>
-        <a class="tab-item " href="{{ path('partmentindex') }}">
-            <span class="icon iconfont" >&#xe619;</span>
-            <span class="tab-label">私董会</span>
-        </a>
-        <a class="tab-item active" href="{{ path('topicindex') }}">
-            <span class="icon iconfont" >&#xe622;</span>
-            <span class="tab-label">快答</span>
-        </a>
-        <a class="tab-item " href="{{ path('myindex') }}">
-            <span class="icon iconfont" >&#xe613;</span>
-            <span class="tab-label">我的</span>
-        </a>
-    </nav>
-  <div class="content">
+	<div class="bar bar-footer-secondary">
+    	<a href="{{path('partmentanswer', {'tid': topic.tid})}}"><button class="button button-block" style="background:#007c84;">立即回答</button></a>
+  	</div>
+    <div class="content">
     <!-- 这里是页面内容区 -->
     <div class="card facebook-card">
     <a href="{{ path('memberdetailpage', {'mid': topic.mid}) }}">
@@ -46,7 +30,8 @@
       <div class="card-content" style="padding: .3rem .75rem;">{{ topic.detail | replace({'\n':'<br/>'}) | raw  }}</div>
         <div class="card-footer no-border" style=" text-align:right;">
             <a href="javascript:;" class="link" id="fav" data-tid="{{ topic.tid }}" data-mid="{{ loginuser }}" data-fid="{{ favs.myfav }}" style="color:{{ favs.myfav == 0 ? '': '#ff7900' }}"> <span class="icon iconfont"></span><i id="{{ topic.tid }}">{{ favs.favs }}</i></a>
-            <a href="{{ path('topicanswer', {'tid': topic.tid}) }}" class="link">我来回答</a>
+            <!--<a href="{{ path('topicanswer', {'tid': topic.tid}) }}" class="link">我来回答</a>-->
+            <a href="javascript:void(0)" class="link">讨论席位数 3/{{xiwei | length}}</a>
         </div>
     </div>
 
@@ -73,6 +58,7 @@
     </div>
   </div>
 {% endblock %}
+
 
 {% block javascripts %}
 <script>

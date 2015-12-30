@@ -98,7 +98,7 @@ class MemberController extends Controller{
         $member->setMobile($m);
         $member->setUserid($m);
         $member->setPwd($w);
-        $member->setMtype('个人');
+        $member->setMtype('安知');
         $member->setUname($n);
         $member->setSex($s);
         $member->setEmail($e);
@@ -108,6 +108,7 @@ class MemberController extends Controller{
         $member->setRank(10);
         $member->setJoinip($this->container->get('request')->getClientIp());
         $member->setLoginip($this->container->get('request')->getClientIp());
+        $member->setProduct($p);
         $em = $this->getDoctrine()->getManager();
         $em->persist($member);
         $em->flush();

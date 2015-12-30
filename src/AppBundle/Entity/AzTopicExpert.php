@@ -15,6 +15,11 @@ class AzTopicExpert
     /**
      * @var integer
      */
+    private $tid;
+
+    /**
+     * @var integer
+     */
     private $mid;
 
     /**
@@ -31,6 +36,30 @@ class AzTopicExpert
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set tid
+     *
+     * @param integer $tid
+     *
+     * @return AzTopicExpert
+     */
+    public function setTid($tid)
+    {
+        $this->tid = $tid;
+
+        return $this;
+    }
+
+    /**
+     * Get tid
+     *
+     * @return integer
+     */
+    public function getTid()
+    {
+        return $this->tid;
     }
 
     /**

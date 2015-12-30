@@ -122,6 +122,15 @@ class DedeMember
      */
     private $checkmail = '-1';
 
+    /**
+     * @var string
+     */
+    private $product = '';
+
+    /**
+     * @var integer
+     */
+    private $isexpert = '0';
 
     /**
      * Get mid
@@ -659,6 +668,54 @@ class DedeMember
     public function getCheckmail()
     {
         return $this->checkmail;
+    }
+
+    /**
+     * Set product
+     *
+     * @param string $product
+     * 
+     * @return DedeMember
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     * 
+     * @return string
+     */
+    public function getProduct()
+    {
+        return $this->product;        
+    }
+
+    /**
+     * set isexpert
+     *
+     * @param integer $isexpert
+     *
+     * @return DedeMember
+     */
+     public function setIsexpert($isexpert)
+     {
+        $this->isexpert = $isexpert;
+
+        return $this;
+     } 
+
+    /**
+     * Get isexpert
+     * 
+     * @return integer
+     */
+    public function getIsexpert()
+    {
+        return $this->isexpert;        
     }
 }
 

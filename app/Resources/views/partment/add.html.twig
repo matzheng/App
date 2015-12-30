@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    私董会 - 安知
+    添加问题 - 安知
 {% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="/css/reg.css">
@@ -63,44 +63,49 @@
       <div id="tab3" class="tab">
         <div class="content-block">
           <p>请选择标签</p>
+          <div class="list-block">
+            <ul>
+                     <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title label">标签</div>
+                    <div class="item-input">
+                      <select id='options'>
+                       <option value=''>请选择</option>
+                        <option value='EHS安全'>EHS安全</option>
+                        <option value='安全管理'>安全管理</option>
+                        <option value='职业健康'>职业健康</option>
+                        <option value='安全技术'>安全技术</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
        <div id="tab4" class="tab">
        <div class="ui-tooltips ui-tooltips-guide">
                 <div class="ui-tooltips-cnt ui-border-b" style=" font-size:0.8em; text-align:center;">
-                    <i></i>最多可邀请7个专家席位。<a class="ui-icon-close"></a>
+                    <i></i>最多可邀请6个专家席位。<a class="ui-icon-close"></a>
                 </div>
             </div>
        <div class="demo-block">
             <ul class="ui-list ui-list-function ui-list-link ui-border-tb">
+              {% for d in experts%}
                 <li class="ui-border-t">
+                <a href="{{ path('memberdetailpage', {'mid': d.mid}) }}">                  
                     <div class="ui-avatar-s">
                         <span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>
-                    </div>
+                    </div></a>
                     <div class="ui-list-info">
-                        <h4 class="ui-nowrap">李强</h4>
-                        <span style=" font-size:0.7em; color:#999;">EHS专家</span>
+                        <a href="{{ path('memberdetailpage', {'mid': d.mid}) }}"><h4 class="ui-nowrap">{{d.uname}}</h4></a>
+                        <span style=" font-size:0.7em; color:#999;">{{d.product}}</span>
                     </div>
-                    <div class="ui-btn">邀请</div>
+                    <div class="ui-btn" data-mid={{d.mid}}>邀请</div>
                 </li>
-                <li class="ui-border-t">
-                    <div class="ui-avatar-s">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>
-                    </div>
-                    <div class="ui-list-info">
-                        <h4 class="ui-nowrap">赵信</h4><span style=" font-size:0.7em; color:#999;">安全专家</span>
-                    </div>
-                    <div class="ui-btn">邀请</div>
-                </li>
-                 <li class="ui-border-t">
-                    <div class="ui-avatar-s">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>
-                    </div>
-                    <div class="ui-list-info">
-                        <h4 class="ui-nowrap">赵信</h4><span style=" font-size:0.7em; color:#999;">安全专家</span>
-                    </div>
-                    <div class="ui-btn btn_ok">已邀请</div>
-                </li>
+              {%endfor%}
             </ul>
         </div>
       </div>
@@ -112,6 +117,7 @@
 {% block javascripts %}
   <script type='text/javascript'>
     $(document).ready(function(){
+      //add partment
       $('#addtopic').on('click', function(){
         if($.trim($('#title').val()) == ''){
           $.alert('请输入问题');
@@ -122,6 +128,56 @@
           $.alert('请输入描述');
           return false;
         }
+
+        var tag = $('#options option').not(function(){ return !this.selected }).val();
+        if(tag == '')
+        {
+          $.alert('请选择标签');
+          return false;
+        }
+
+        //request
+        var experts = [];
+        $(".btn_ok").each(function(){
+            experts.push($(this).data('mid'));
+          });
+        //console.log(experts.join(","));
+        if(experts.join(",") == ''){
+          $.alert('请选择邀答专家');
+          return;
+        }
+
+        //按钮置灰
+        $(this).prop('disabled', true);
+        $.ajax({
+          url: '{{path("partmentadddone")}}',
+          type: 'POST',
+          data: "title=" + $.trim($('#title').val()) + "&desc=" + $.trim($('#desc').val()) + "&tags=" + tag + "&experts=" + experts.join(","),
+          success: function(d){
+            if(d.success == '1'){
+              $(this).prop('disabled', false);
+              window.location = "{{ path('partmentdetail', {'tid':  ''}) }}" + "/" + d.data;
+            }
+          }
+        });
+      });
+
+      //邀请
+      $(".ui-btn").each(function(index){
+        $(this).on('click', function(){
+          if($('.btn_ok').length >= 6 && !$(this).hasClass('btn_ok'))
+          {
+            $.alert('最多可邀请6个专家席位。');
+            return false;
+          }
+          if(!$(this).hasClass('btn_ok')) {
+            $(this).addClass('btn_ok');
+            $(this).html('已邀请');
+          }else{
+            $(this).removeClass('btn_ok');
+            $(this).html('邀请');
+          }
+        });        
       });
     });
   </script>

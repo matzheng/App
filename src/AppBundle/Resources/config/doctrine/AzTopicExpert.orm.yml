@@ -11,6 +11,11 @@ AppBundle\Entity\AzTopicExpert:
             generator:
                 strategy: IDENTITY
     fields:
+        tid:
+            type: integer
+            nullable: false
+            options:
+                default: '0'            
         mid:
             type: integer
             nullable: true

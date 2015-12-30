@@ -160,4 +160,14 @@ AppBundle\Entity\DedeMember:
             options:
                 unsigned: false
                 default: '-1'
+        product:
+            type: string
+            nullable: true
+            length: 200
+        isexpert:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
     lifecycleCallbacks: {  }

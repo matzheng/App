@@ -20,7 +20,7 @@ class SearchController extends Controller{
         $keyword = $_GET['keyword'];
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery(
-            "select p from AppBundle:AzTopic p where p.title like :keyword or p.detail like :keyword order by p.tid"
+            "select p from AppBundle:AzTopic p where (p.title like :keyword or p.detail like :keyword) and p.qtypes='1' order by p.tid"
         )->setParameter("keyword", "%".$keyword."%");
         return $this->render('search/index.html.twig', array('keyword'=>$keyword, 'result'=>$query->getResult()));
     }

@@ -156,4 +156,38 @@ class MemberController extends Controller{
     {
         return $this->render('member/reset.html.twig');
     }
+
+    /**
+     * @Route("/resetdone", name="resetdonepage", methods={"GET"})
+     */
+    public function resetdonepageAction(){
+        return $this->render('member/resetdone.html.twig');
+    }
+
+    /**
+     * @Route("/resetresult", name="resetresult", methods={"POST"})
+     */
+    public function resetresultAction(){
+        //再次确保手机号未在ajax中被篡改
+        $tel = $_POST['tel'];
+        $pwd = $_POST['pwd'];
+        if($tel != $this->getRequest()->getSession()->get('resettel'))
+        {
+            return new JsonResponse(array('success'=>'0', 'msg'=>'请确认收到验证码的手机号'));
+        }
+        //检测手机号是否存在
+        $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
+        $u = $rep->findOneBy(array('mobile'=>$tel, 'mtype'=>'安知'));
+        if(!$u){
+            return new JsonResponse(array('success'=>'0', 'msg'=>'此手机号尚未注册'));
+        }
+        else{
+            $em = $this->getDoctrine()->getManager();
+            $u->setPwd(md5($pwd));
+            $em->persist($u);
+            $em->flush();
+            return new JsonResponse(array('success'=>'1', 'msg'=>'密码修改成功'));
+        }
+
+    }
 }

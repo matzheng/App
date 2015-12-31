@@ -49,7 +49,7 @@ class SmsController extends Controller{
 	/**
 	 * @Route("/resetpwdget/{tel}", name="resetpwdget", defaults={"tel"=""}, methods={"GET"})
 	 */
-	public function resetpwdgetAction(){
+	public function resetpwdgetAction($tel){
 		$smsconf = $this->container->getParameter('sms');
 		//sms random code
 		$code = rand(1111, 9999);

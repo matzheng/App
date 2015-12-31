@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    密码修改成功 -  安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/reg.css">
+{% endblock %}
+
+{% block body%}
+  <header class="bar bar-nav">
+   <a class="button button-link button-nav pull-left back" href=>
+      <span class="icon icon-left"></span>
+    </a>
+     <h1 class="title">密码已修改，请重新登录</h1>
+  </header>
+<div class="bar bar-footer-secondary">
+    <a href="{{path('loginpage')}}"><button class="button button-block" style="background:#007c84;height:45px;line-height:45px;">重新登录</button></a>
+</div>
+{%endblock%}
+
+{%block javascripts%}
+	
+{%endblock%}

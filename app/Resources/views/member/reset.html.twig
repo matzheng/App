@@ -20,7 +20,7 @@
    </div>
    <div class="ui-form-item ui-form-item-r ui-border-b"  style=" border-top:1px solid #ddd;">
     <input id='code' placeholder="请输入验证码" type="tel">
-     <button type="button" class="ui-border-l" id='sendsmscode'>发送验证码</button>
+     <button type="button" class="ui-border-l" id='sendsmscode' style='font-size:0.8em;'>发送验证码</button>
     </div>
        <div class="ui-form-item ui-form-item-pure ui-border-b" style=" border-top:1px solid #ddd;border-bottom:1px solid #ddd;">
         <input id='pwd' placeholder="请输入6至20位新密码" type="password">
@@ -84,8 +84,9 @@
                         {
                             //check mobile number if exists
                             $.ajax({
-                                url:'{{ path("regcheck") }}' + '/' + mob.val(),
-                                type: "GET",
+                                url:'{{ path("resetresult") }}',
+                                type: "POST",
+                                data: 'tel=' + $.trim(mob.val()) + "&pwd=" + $.trim(pwd.val()),
                                 success: function (data) {
                                     if(data.success == "0")
                                     {
@@ -95,7 +96,7 @@
                                     }
                                     else
                                     {
-                                        $('#form1').submit();
+                                        window.location.href = "{{path('resetdonepage')}}";
                                     }
                                 }
                             });

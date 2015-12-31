@@ -46,6 +46,43 @@ class SmsController extends Controller{
 		return new JsonResponse(array('success'=>'1', 'msg'=>'OK'));
 	}
 
+	/**
+	 * @Route("/resetpwdget/{tel}", name="resetpwdget", defaults={"tel"=""}, methods={"GET"})
+	 */
+	public function resetpwdgetAction(){
+		$smsconf = $this->container->getParameter('sms');
+		//sms random code
+		$code = rand(1111, 9999);
+		//url
+		$url = "http://106.veesing.com/webservice/sms.php?method=Submit";
+		$post_data = "account=".$smsconf['account']."&password=".md5($smsconf['password'])."&mobile=".$tel."&content=您的验证码是：".$code."。请不要把验证码泄露给其他人。";
+		$gets = $this->xml_to_array($this->Post($post_data, $url));
+		if($gets['SubmitResult']['code'] == "2")
+		{
+			$this->getRequest()->getSession()->set('resettel', $tel);
+			$this->getRequest()->getSession()->set('resetcode', $code);
+		}
+		return new JsonResponse(array('success'=>$gets['SubmitResult']['code'] == "2" ? '1' : '0',  'msg'=>$gets['SubmitResult']['code'] == "2" ? "验证码已发送到您的手机。" : $gets['SubmitResult']['msg']));
+	}
+
+	/**
+	 * @Route("/resetcheckcode", name="resetcheckcode", methods={"POST"})
+	 */
+	public function resetcheckcode(){
+		$tel = $_POST['tel'];
+		$code = $_POST['code'];
+
+		if($tel != $this->getRequest()->getSession()->get('resettel'))
+		{
+			return new JsonResponse(array('success'=>'0', 'msg'=>'请确认收到验证码的手机号'));
+		}
+		if($code != $this->getRequest()->getSession()->get('resetcode'))
+		{
+			return new JsonResponse(array('success'=>'0', 'msg'=>'验证码错误'));
+		}
+		return new JsonResponse(array('success'=>'1', 'msg'=>'OK'));
+	}
+
 	function Post($curlPost, $url){
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);

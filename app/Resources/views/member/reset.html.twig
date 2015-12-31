@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    忘记密码 -  安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/reg.css">
+{% endblock %}
+
+{% block body%}
+  <header class="bar bar-nav">
+   <a class="button button-link button-nav pull-left back" onclick="history.back()">
+      <span class="icon icon-left"></span>
+    </a>
+     <h1 class="title">忘记密码</h1>
+  </header>
+<div class="content">
+   <div class="ui-form-item ui-form-item-pure ui-border-b" style=" margin-top:1em;border-top:1px solid #ddd;">
+    <input id='mobile' placeholder="请输入手机号"  type="tel">
+   </div>
+   <div class="ui-form-item ui-form-item-r ui-border-b"  style=" border-top:1px solid #ddd;">
+    <input id='code' placeholder="请输入验证码" type="tel">
+     <button type="button" class="ui-border-l" id='sendsmscode'>发送验证码</button>
+    </div>
+       <div class="ui-form-item ui-form-item-pure ui-border-b" style=" border-top:1px solid #ddd;border-bottom:1px solid #ddd;">
+        <input id='pwd' placeholder="请输入6至20位新密码" type="password">
+       </div>
+	<div class="ui-btn-wrap">
+    <button class="ui-btn-lg ui-btn-primary">
+       更改密码
+    </button>
+  </div>   
+</div>
+{%endblock%}
+
+{%block javascripts%}
+	<script type='text/javascript'>
+     var wait_time = 60; //设置秒数(单位秒) 
+            var secs_time = 0;
+            function sTimer(num) {
+                if (num == wait_time) {
+                    $('#sendsmscode').removeAttr("disabled");
+                    $('#sendsmscode').html("获取验证码");
+                }
+                else {
+                    secs_time = wait_time - num;
+                    $('#sendsmscode').html("请过" + secs_time + "秒后重试");
+                }
+            }
+        $(document).ready(function(){           
+            //submit button
+            $('.ui-btn-primary').on('click', function () {
+                var mob = $('#mobile');
+                if($.trim(mob.val()) == ''){
+                    $.alert('请输入手机号');
+                    return false;
+                }
+                if (!/1[0-9]{10}/.test(mob.val())) {
+                    $.alert("手机号格式不正确！");
+                    return false;
+                }
+				var code = $('#code');
+				if($.trim(code.val()) == ''){
+					$.alert('请输入验证码');
+                    return false;
+				}
+                var pwd = $('#pwd');
+                if($.trim(pwd.val()) == ''){
+                    $.alert('请输入密码');
+                    return false;
+                }
+                //check sms code
+                $.ajax({
+                    url: "{{path('resetcheckcode')}}",
+                    type: 'POST',
+                    data: 'tel=' + $.trim(mob.val()) + "&code=" + code.val(),
+                    success: function(d){
+                        if(d.success != '1'){
+                            $.alert(d.msg);
+                            event.preventDefault();
+                            return false;
+                        }
+                        else
+                        {
+                            //check mobile number if exists
+                            $.ajax({
+                                url:'{{ path("regcheck") }}' + '/' + mob.val(),
+                                type: "GET",
+                                success: function (data) {
+                                    if(data.success == "0")
+                                    {
+                                        $.alert(data.msg);
+                                        event.preventDefault();
+                                        return false;
+                                    }
+                                    else
+                                    {
+                                        $('#form1').submit();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+                
+            });
+
+            //send sms code
+            $('#sendsmscode').on('click', function(){        
+                var mob = $('#mobile');
+                if($.trim(mob.val()) == ''){
+                    $.alert('请输入手机号');
+                    return false;
+                }
+                if (!/1[0-9]{10}/.test(mob.val())) {
+                    $.alert("手机号格式不正确！");
+                    return false;
+                }
+                $(this).attr("disabled", true);
+                $(this).html("请过" + wait_time + "秒后重试");
+                $.ajax({
+                    url: "{{path('resetpwdget', {'tel': ''})}}/" + $.trim(mob.val()),
+                    method: 'GET',
+                    success: function(d){
+                        if(d.success == '1')
+                        {
+                            for (var i = 1; i <= wait_time; i++) {
+                                window.setTimeout("sTimer(" + i + ")", i * 1000);
+                            }
+                        }
+                        else
+                        {
+                            $.alert(d.msg);
+                            $('#sendsmscode').removeAttr("disabled");
+                            $('#sendsmscode').html("获取验证码");
+                        }
+                    }
+                });
+                
+            });
+        });
+    </script>
+{%endblock%}

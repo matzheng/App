@@ -148,4 +148,12 @@ class MemberController extends Controller{
         $zanq->execute();
         return $this->render('member/memberdetail.html.twig', array('member'=> $mb,'answers'=>$q->fetchAll()[0]['answers'], 'zans'=>$zanq->fetchAll()[0]['zans']));
     }
+
+    /**
+     * @Route("/reset", name="resetpage", methods={"GET"})
+     */
+    public function resetAction()
+    {
+        return $this->render('member/reset.html.twig');
+    }
 }

@@ -17,6 +17,10 @@ class SearchController extends Controller{
      * @Route("/search", name="searchresultpage", methods={"GET"})
      */
     public function searchResultAction(){
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
         $keyword = $_GET['keyword'];
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery(

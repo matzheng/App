@@ -41,6 +41,8 @@ class PartmentController extends Controller{
     public function addAction(){
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
         //专家列表
         $sql = "select mid, uname, face, ifnull(product,'') product from dede_member where ifnull(mobile,'') != '' and isexpert=1 and mid!=".$ck;
         $em = $this->getDoctrine()->getManager();
@@ -60,6 +62,8 @@ class PartmentController extends Controller{
 
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
         //话题
         $t = new AzTopic();
         $t->setTid(time());
@@ -124,6 +128,8 @@ class PartmentController extends Controller{
         //当前登录用户
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
         //所有相关回答
         $sql = "select a.Aid,a.answer,a.mid,b.uname,b.face,ifnull(b.product,'') product,ifnull(c.zans,0) as zans,ifnull(d.zid,0) as myzan from az_answer a inner join dede_member b on a.mid=b.mid left join (select aid, ifnull(count(time),0) zans from az_answer_like group by aid) c on a.aid=c.aid left join (select aid, time as zid from az_answer_like where mid=".$ck.") d on a.aid=d.aid where a.tid=".$t->getTid()." order by a.Aid desc";
         $em = $this->getDoctrine()->getManager();
@@ -155,6 +161,8 @@ class PartmentController extends Controller{
         //当前登录用户
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
         return $this->render("partment/answer.html.twig", array('tid'=>$tid, 'mid'=>$ck));
     }
 }

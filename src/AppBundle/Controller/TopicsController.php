@@ -71,15 +71,17 @@ class TopicsController extends Controller{
      * @Route("/topic/{tid}",defaults={"tid"=""},name="topicdetail", methods={"GET"})
      */
     public function topicdetailAction($tid){
-        $rep = $this->getDoctrine()->getRepository('AppBundle:AzTopic');
-        $t = $rep->find($tid);
-        if(!$t)
-            return $this->redirectToRoute('homepage');
-        $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
-        $author = $rep->find($t->getMid());
         //当前登录用户
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('homepage');
+        $rep = $this->getDoctrine()->getRepository('AppBundle:AzTopic');
+        $t = $rep->find($tid);
+        
+        $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
+        $author = $rep->find($t->getMid());
+
         //所有相关回答
         $sql = "select a.Aid,a.answer,a.mid,b.uname,b.face,ifnull(b.product,'') product,ifnull(c.zans,0) as zans,ifnull(d.zid,0) as myzan from az_answer a inner join dede_member b on a.mid=b.mid left join (select aid, ifnull(count(time),0) zans from az_answer_like group by aid) c on a.aid=c.aid left join (select aid, time as zid from az_answer_like where mid=".$ck.") d on a.aid=d.aid where a.tid=".$t->getTid()." order by a.Aid desc";
         $em = $this->getDoctrine()->getManager();
@@ -99,6 +101,8 @@ class TopicsController extends Controller{
         //当前登录用户
         $req = Request::createFromGlobals();
         $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('homepage');
         return $this->render("topics/answer.html.twig", array('tid'=>$tid, 'mid'=>$ck));
     }
 }

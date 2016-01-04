@@ -9,6 +9,9 @@
 
 {% block body %}
     <header class="bar bar-nav">
+    	<a class="button button-link button-nav pull-left back" href="javascript:;" onclick="javascript:window.history.back();">
+    		<span class="icon icon-left"></span>
+      </a>
         <h1 class="title">{{tag.tagname}}</h1>
         <!--<button class="button pull-right" onclick="javascript:window.location.href='{{path("partmentadd")}}'">发布</button>-->
     </header>

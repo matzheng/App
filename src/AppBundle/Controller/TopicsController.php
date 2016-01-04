@@ -83,7 +83,7 @@ class TopicsController extends Controller{
         $author = $rep->find($t->getMid());
 
         //所有相关回答
-        $sql = "select a.Aid,a.answer,a.mid,b.uname,b.face,ifnull(b.product,'') product,ifnull(c.zans,0) as zans,ifnull(d.zid,0) as myzan from az_answer a inner join dede_member b on a.mid=b.mid left join (select aid, ifnull(count(time),0) zans from az_answer_like group by aid) c on a.aid=c.aid left join (select aid, time as zid from az_answer_like where mid=".$ck.") d on a.aid=d.aid where a.tid=".$t->getTid()." order by a.Aid desc";
+        $sql = "select a.Aid,a.answer,a.mid,b.uname,b.face,ifnull(b.product,'') product,ifnull(c.zans,0) as zans,ifnull(d.zid,0) as myzan from az_answer a inner join dede_member b on a.mid=b.mid left join (select aid, ifnull(count(time),0) zans from az_answer_like group by aid) c on a.aid=c.aid left join (select aid, time as zid from az_answer_like where mid=".$ck.") d on a.aid=d.aid where a.tid=".$t->getTid()." order by zans desc, a.Aid desc";
         $em = $this->getDoctrine()->getManager();
         $q = $em->getConnection()->prepare($sql);
         $q->execute();

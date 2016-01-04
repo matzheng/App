@@ -27,7 +27,7 @@ class MemberController extends Controller{
         $p = $_POST["p"];
         $rmb = $_POST["rmb"];
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
-        $user = $rep->findOneBy(array('mobile' => $m, 'pwd'=> md5($p)));
+        $user = $rep->findOneBy(array('mobile' => $m, 'pwd'=> md5($p), 'mtype'=>'安知'));
         if(!$user)
             return new JsonResponse(array('success'=>'0', 'msg'=>'手机号或密码错误！'));
         //if($rmb == "1"){

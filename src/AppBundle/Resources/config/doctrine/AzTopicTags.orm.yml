@@ -1,0 +1,27 @@
+AppBundle\Entity\AzTopicTags:
+    type: entity
+    table: az_topic_tags
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id
+            generator:
+                strategy: IDENTITY
+    fields:
+        tid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        tagid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+    lifecycleCallbacks: {  }

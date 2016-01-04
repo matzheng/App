@@ -132,9 +132,12 @@ a {
     margin: 0.75rem 0;
     font-size: .75rem;
 }
-.biaoqian { border:1px solid #007c84; padding:1px 5px; border-radius:5px; color:#007c84;}
+.biaoqian1 { border:1px solid #007c84; padding:1px 5px; border-radius:5px; color:#007c84;}
 .biaoqian2 { border:1px solid #F90; padding:1px 5px; border-radius:5px; color:#F90;}
 .biaoqian3 { border:1px solid #C00; padding:1px 5px; border-radius:5px; color:#C00;}
+.biaoqian4 { border:1px solid #007c84; padding:1px 5px; border-radius:5px; color:#007c84;}
+.biaoqian5 { border:1px solid #F90; padding:1px 5px; border-radius:5px; color:#F90;}
+.biaoqian6 { border:1px solid #C00; padding:1px 5px; border-radius:5px; color:#C00;}
  .item-title { height:26px;
 }
 .bar-tab ~ .content {

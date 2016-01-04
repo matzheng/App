@@ -38,12 +38,12 @@
       <ul style=" background:#f2f2f2;" class="zulist">
         {% for d in result %}
           <li>
-            <a href="{{path('partmentdetail', {'tid': d.tid})}}" class="item-link item-content">
+            <a href="{{path('tagtopicspage', {'tagid': d.id})}}" class="item-link item-content">
               <div class="item-inner">
                 <div class="item-title-row">
-                  <div class="item-title"><span class="biaoqian{{ d.tags == '安全技术' ? '2' : ''}}{{ d.tags == '职业健康' ? '3' : ''}}">{{d.tags}}</span>  {{d.title}}</div>
+                  <div class="item-title"><span class="biaoqian{{ d.id }}">{{d.tagname}}</span>  {{d.tagname}}</div>
                 </div>
-                <div class="item-subtitle">{{d.answercount}}人参与描述，{{d.favs}}人关注</div>
+                <div class="item-subtitle">{{d.membercount}}人参与描述，{{d.favcount}}人关注</div>
                 <div class="item-text">欢迎参加讨论我们的热门话题</div>
               </div>
             </a>

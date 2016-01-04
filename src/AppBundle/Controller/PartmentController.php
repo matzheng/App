@@ -12,6 +12,8 @@ use AppBundle\Entity\DedeMember;
 use AppBundle\Entity\DedeMemberPerson;
 use AppBundle\Entity\AzTopic;
 use AppBundle\Entity\AzTopicExpert;
+use AppBundle\Entity\AzTopicTags;
+use AppBundle\Entity\AzTags;
 
 class PartmentController extends Controller{
     /**
@@ -22,13 +24,18 @@ class PartmentController extends Controller{
         $ck = $req->cookies->get('anzhi_m');
         if(!$ck)
             return $this->redirectToRoute('loginpage');
-        $sql = "";
+        $sql = "select a.id,a.tagname, count(b.Id) as topiccount,count(distinct c.mid) membercount,count(distinct d.mid) favcount from az_tags a left join az_topic_tags b on a.id=b.tagid
+left join az_answer c on b.tid=c.tid left join az_member_fav d on b.tid=d.tid and c.tid=d.tid
+group by a.id,a.tagname order by membercount desc, favcount desc";
+        /*
         if(!$ck){
             $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,0 as myfav,ifnull(c.favs,0) favs,ifnull(f.answercount,0) as answercount  from az_topic  a left join dede_member b on a.mid=b.mid left join(select tid,count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid left join (select count(distinct mid) as answercount, tid from az_answer group by tid) f on a.tid=f.tid where a.qtypes='2' order by a.tid  desc";
         }
         else{
             $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,ifnull(e.fid,0) as myfav,ifnull(c.favs,0) as favs,ifnull(f.answercount,0) as answercount from az_topic  a left join dede_member b on a.mid=b.mid left join (select tid, count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid left join (select count(distinct mid) as answercount, tid from az_answer group by tid) f on a.tid=f.tid where a.qtypes='2' order by a.tid desc";
         }
+        */
+
         $em = $this->getDoctrine()->getManager(); 
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
@@ -48,9 +55,35 @@ class PartmentController extends Controller{
         $em = $this->getDoctrine()->getManager();
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
-    	return $this->render("partment/add.html.twig", array('experts'=>$q->fetchAll()));
+        //标签列表
+        $rep = $this->getDoctrine()->getRepository('AppBundle:AzTags');
+        $tags = $rep->findAll();
+    	return $this->render("partment/add.html.twig", array('experts'=>$q->fetchAll(), 'tags'=>$tags));
     }
 
+    /**
+     * @Route("/tagtopics/{tagid}", defaults={"tagid"=""}, name="tagtopicspage", methods={"GET"})
+     */
+    public function tagsPartmentAction($tagid){
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
+        //tag
+        $rep = $this->getDoctrine()->getRepository('AppBundle:AzTags');
+        $tag = $rep->find($tagid);
+        //topics
+        $sql = "select a.tid,a.title, a.detail,a.mid,a.tags,ifnull(b.uname,'') as uname,b.face,ifnull(b.product,'') product,ifnull(e.fid,0) as myfav,ifnull(c.favs,0) as favs,ifnull(f.answercount,0) as answercount from az_topic  a 
+        left join dede_member b on a.mid=b.mid 
+        left join (select tid, count(fid) as favs from az_member_fav group by tid) c on a.tid=c.tid 
+        left join (select fid,tid from az_member_fav where mid=".$ck.") e on a.tid=e.tid 
+        left join (select count(distinct mid) as answercount, tid from az_answer group by tid) f on a.tid=f.tid 
+        inner join az_topic_tags t on a.tid=t.tid where a.qtypes='2' and t.tagid=".$tagid." order by favs desc";
+        $em = $this->getDoctrine()->getManager();
+        $q = $em->getConnection()->prepare($sql);
+        $q->execute();
+        return $this->render('partment/tagtopics.html.twig', array('tag'=>$tag, 'result'=>$q->fetchAll(), 'mid'=>$ck));
+    }
     /**
      * @Route("/partment/adddone", name="partmentadddone", methods={"POST"})
      */
@@ -58,6 +91,7 @@ class PartmentController extends Controller{
         $title = $_POST['title'];
         $desc = $_POST['desc'];
         $tags = $_POST['tags'];
+        $tagname = $_POST['tagname'];
         $experts = $_POST['experts'];
 
         $req = Request::createFromGlobals();
@@ -70,19 +104,27 @@ class PartmentController extends Controller{
         $t->setTitle($title);
         $t->setDetail($desc);
         $t->setMid($ck);
-        $t->setTags($tags);
+        //$t->setTags($tags);
+        $t->setTags($tagname);
         $t->setQtypes('2');    //私董会
         $em = $this->getDoctrine()->getManager();
         $em->persist($t);
         
         $topicid = $t->getTid();
+
+        //标签
+        $newtag = new AzTopicTags();
+        $newtag->setTid($topicid);
+        $newtag->setTagid($tags);
+        $em->persist($newtag);
+
         //添加自己为专家之一
         $myself = new AzTopicExpert();
         $myself->setTid($topicid);
         $myself->setMid($ck);
         $myself->setAddtime(time());
         $em->persist($myself);
-        //专家   
+        //添加专家   
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');    
         foreach(explode(',', $experts) as $zj){            
             $exp = new AzTopicExpert();

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    私董会 - 安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/aq.css">
+{% endblock %}
+
+{% block body %}
+    <header class="bar bar-nav">
+        <h1 class="title">{{tag.tagname}}</h1>
+        <!--<button class="button pull-right" onclick="javascript:window.location.href='{{path("partmentadd")}}'">发布</button>-->
+    </header>
+    <nav class="bar bar-tab topbar">
+        <a class="tab-item" href="{{ path('homepage') }}">
+            <span class="icon iconfont">&#xe606;</span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item active" href="{{ path('partmentindex') }}">
+            <span class="icon iconfont" >&#xe619;</span>
+            <span class="tab-label">私董会</span>
+        </a>
+        <a class="tab-item " href="{{ path('topicindex') }}">
+            <span class="icon iconfont" >&#xe622;</span>
+            <span class="tab-label">快答</span>
+        </a>
+        <a class="tab-item " href="{{ path('myindex') }}">
+            <span class="icon iconfont" >&#xe613;</span>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+
+    <div class="content">
+        <div class="list-block cards-list">
+      <ul>
+        {% for d in result  %}
+            <li class="card">
+          <a href="{{ path('partmentdetail', {'tid': d.tid}) }}"><div class="card-header color-white no-border ui-nowrap-multi1">问：{{ d.title }}</div></a>
+          <div class="card-content">
+            <div class="card-content-inner">{{ d.detail | replace({'\n':'<br/>'}) | raw }}</div>
+          </div>
+          <div class="card-footer">
+        <a href="javascript:;" class="link fav" data-tid="{{ d.tid }}" data-mid="{{ mid }}" data-fid="{{ d.myfav }}" style="color:{{ d.myfav == 0 ? '#CCC': '' }}"><span class="icon iconfont" >&#xe60e;</span><i id="{{ d.tid }}">{{ d.favs }}</i></a>
+        <a href="{{ path('memberdetailpage', {'mid': d.mid}) }}" class="link infoaq" >{{ d.uname }}/<i>{{d.product}}</i></a>
+        </div>
+        </li>
+        {% endfor %}
+
+      </ul>
+    </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            //收藏
+            $(".fav").each(function(index,item){
+                $(item).on('click', function() {
+                    if ($(item).data('mid') == undefined) {
+                        $.alert('请先登录');
+                        window.setTimeout(function () {
+                            window.location.href = '{{ path("loginpage") }}';
+                        }, 1000);
+                        return false;
+                    }
+
+                    $.ajax({
+                        url:"{{ path('favpost') }}",
+                        type: "POST",
+                        data: "mid=" + $(item).data('mid') + "&tid=" + $(item).data('tid') + "&fid=" + $(item).data('fid'),
+                        success: function (d) {
+                            $(item).attr('data-fid', d.fid);
+                            if(d.fid == '0'){
+                                $(item).css('color', '#CCC;');
+                            }else{
+                                $(item).css('color', '');
+                            }
+                            $("#" + $(item).data('tid')).html(d.favs);
+                        }
+                    });
+                });
+            });
+            //搜索
+        });
+    </script>
+{% endblock %}

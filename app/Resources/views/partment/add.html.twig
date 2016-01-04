@@ -72,10 +72,15 @@
                     <div class="item-input">
                       <select id='options'>
                        <option value=''>请选择</option>
+                       {% for t in tags%}
+                        <option value='{{t.id}}'>{{t.tagname}}</option>
+                       {%endfor%}
+                       <!--
                         <option value='EHS安全'>EHS安全</option>
                         <option value='安全管理'>安全管理</option>
                         <option value='职业健康'>职业健康</option>
                         <option value='安全技术'>安全技术</option>
+                      -->
                       </select>
                     </div>
                   </div>
@@ -136,6 +141,7 @@
           return false;
         }
 
+        var tagname = $('#options option').not(function(){ return !this.selected }).html();
         //request
         var experts = [];
         $(".btn_ok").each(function(){
@@ -152,7 +158,7 @@
         $.ajax({
           url: '{{path("partmentadddone")}}',
           type: 'POST',
-          data: "title=" + $.trim($('#title').val()) + "&desc=" + $.trim($('#desc').val()) + "&tags=" + tag + "&experts=" + experts.join(","),
+          data: "title=" + $.trim($('#title').val()) + "&desc=" + $.trim($('#desc').val()) + "&tags=" + tag + "&tagname=" + tagname + "&experts=" + experts.join(","),
           success: function(d){
             if(d.success == '1'){
               $(this).prop('disabled', false);

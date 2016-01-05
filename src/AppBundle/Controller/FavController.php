@@ -28,7 +28,7 @@ class FavController extends Controller{
         $em = $this->getDoctrine()->getManager();
         if($fid == '0'){
             $mbfav = new AzMemberFav();
-            $mbfav->setFid(time());
+            $mbfav->setCreatetime(time());
             $mbfav->setTid($tid);
             $mbfav->setMid($mid);
             $em->persist($mbfav);

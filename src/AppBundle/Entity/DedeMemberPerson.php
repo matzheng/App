@@ -107,18 +107,7 @@ class DedeMemberPerson
     {
         return $this->mid;
     }
-	
-	/**
-     * Set mid
-     *
-     * @param integer $mid
-     *
-     * @return DedeMemberPerson
-     */
-	public function setMid($mid){
-		$this->mid = $mid;
-		return $this;
-	}
+
     /**
      * Set onlynet
      *

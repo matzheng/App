@@ -15,7 +15,8 @@ AppBundle\Entity\AzTopicExpert:
             type: integer
             nullable: false
             options:
-                default: '0'            
+                unsigned: false
+                default: '0'
         mid:
             type: integer
             nullable: true

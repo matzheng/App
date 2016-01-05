@@ -9,6 +9,8 @@ AppBundle\Entity\AzAnswer:
                 unsigned: false
             id: true
             column: Aid
+            generator:
+                strategy: IDENTITY
     fields:
         answer:
             type: text
@@ -28,5 +30,9 @@ AppBundle\Entity\AzAnswer:
             nullable: true
             options:
                 unsigned: false
-                comment: 'topic id'
+        createtime:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
     lifecycleCallbacks: {  }

@@ -30,7 +30,7 @@ class LikeController extends Controller{
         $em = $this->getDoctrine()->getManager();
         if($zid == '0'){
             $like = new AzTopicLike();
-            $like->setTime(time());
+            //$like->setCreatetime(time());
             $like->setTid($tid);
             $like->setMid($mid);
             $em->persist($like);
@@ -62,7 +62,7 @@ class LikeController extends Controller{
         $em = $this->getDoctrine()->getManager();
         if($zid == '0'){
             $like = new AzAnswerLike();
-            $like->setTime(time());
+            $like->setCreatetime(time());
             $like->setMid($mid);
             $like->setAid($aid);
             $em->persist($like);

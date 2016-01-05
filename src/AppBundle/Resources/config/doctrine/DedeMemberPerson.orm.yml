@@ -9,6 +9,8 @@ AppBundle\Entity\DedeMemberPerson:
                 unsigned: true
                 default: '0'
             id: true
+            generator:
+                strategy: IDENTITY
     fields:
         onlynet:
             type: boolean

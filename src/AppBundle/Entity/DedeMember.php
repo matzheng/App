@@ -125,12 +125,13 @@ class DedeMember
     /**
      * @var string
      */
-    private $product = '';
+    private $product;
 
     /**
      * @var integer
      */
     private $isexpert = '0';
+
 
     /**
      * Get mid
@@ -674,7 +675,7 @@ class DedeMember
      * Set product
      *
      * @param string $product
-     * 
+     *
      * @return DedeMember
      */
     public function setProduct($product)
@@ -686,36 +687,36 @@ class DedeMember
 
     /**
      * Get product
-     * 
+     *
      * @return string
      */
     public function getProduct()
     {
-        return $this->product;        
+        return $this->product;
     }
 
     /**
-     * set isexpert
+     * Set isexpert
      *
      * @param integer $isexpert
      *
      * @return DedeMember
      */
-     public function setIsexpert($isexpert)
-     {
+    public function setIsexpert($isexpert)
+    {
         $this->isexpert = $isexpert;
 
         return $this;
-     } 
+    }
 
     /**
      * Get isexpert
-     * 
+     *
      * @return integer
      */
     public function getIsexpert()
     {
-        return $this->isexpert;        
+        return $this->isexpert;
     }
 }
 

@@ -8,6 +8,8 @@ AppBundle\Entity\AzAnswerLike:
             options:
                 unsigned: false
             id: true
+            generator:
+                strategy: IDENTITY
     fields:
         mid:
             type: integer
@@ -15,6 +17,11 @@ AppBundle\Entity\AzAnswerLike:
             options:
                 unsigned: false
         aid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        createtime:
             type: integer
             nullable: true
             options:

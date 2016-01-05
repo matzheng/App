@@ -39,16 +39,6 @@ class AzTopicLike
     }
 
     /**
-     * @param integer $time
-     * @return $this
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-    /**
      * Set tid
      *
      * @param integer $tid

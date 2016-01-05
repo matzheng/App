@@ -100,7 +100,7 @@ group by a.id,a.tagname order by membercount desc, favcount desc";
             return $this->redirectToRoute('loginpage');
         //话题
         $t = new AzTopic();
-        $t->setTid(time());
+        $t->setCreatetime(time());
         $t->setTitle($title);
         $t->setDetail($desc);
         $t->setMid($ck);
@@ -109,7 +109,7 @@ group by a.id,a.tagname order by membercount desc, favcount desc";
         $t->setQtypes('2');    //私董会
         $em = $this->getDoctrine()->getManager();
         $em->persist($t);
-        
+        $em->flush();
         $topicid = $t->getTid();
 
         //标签
@@ -117,13 +117,14 @@ group by a.id,a.tagname order by membercount desc, favcount desc";
         $newtag->setTid($topicid);
         $newtag->setTagid($tags);
         $em->persist($newtag);
-
+        $em->flush();
         //添加自己为专家之一
         $myself = new AzTopicExpert();
         $myself->setTid($topicid);
         $myself->setMid($ck);
         $myself->setAddtime(time());
         $em->persist($myself);
+        $em->flush();
         //添加专家   
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');    
         foreach(explode(',', $experts) as $zj){            
@@ -132,6 +133,7 @@ group by a.id,a.tagname order by membercount desc, favcount desc";
             $exp->setMid($zj);
             $exp->setAddtime(time());
             $em->persist($exp);
+            $em->flush();
             //发送短信通知
             $smsconf = $this->container->getParameter('sms');
             $url = "http://106.veesing.com/webservice/sms.php?method=Submit";
@@ -173,7 +175,7 @@ group by a.id,a.tagname order by membercount desc, favcount desc";
         if(!$ck)
             return $this->redirectToRoute('loginpage');
         //所有相关回答
-        $sql = "select a.Aid,a.answer,a.mid,b.uname,b.face,ifnull(b.product,'') product,ifnull(c.zans,0) as zans,ifnull(d.zid,0) as myzan from az_answer a inner join dede_member b on a.mid=b.mid left join (select aid, ifnull(count(time),0) zans from az_answer_like group by aid) c on a.aid=c.aid left join (select aid, time as zid from az_answer_like where mid=".$ck.") d on a.aid=d.aid where a.tid=".$t->getTid()." order by zans desc,a.Aid desc";
+        $sql = "select a.Aid,a.answer,a.mid,a.createtime,b.uname,b.face,ifnull(b.product,'') product,ifnull(c.zans,0) as zans,ifnull(d.zid,0) as myzan from az_answer a inner join dede_member b on a.mid=b.mid left join (select aid, ifnull(count(time),0) zans from az_answer_like group by aid) c on a.aid=c.aid left join (select aid, time as zid from az_answer_like where mid=".$ck.") d on a.aid=d.aid where a.tid=".$t->getTid()." order by zans desc,a.Aid desc";
         $em = $this->getDoctrine()->getManager();
         $q = $em->getConnection()->prepare($sql);
         $q->execute();

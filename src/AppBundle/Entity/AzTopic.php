@@ -37,6 +37,21 @@ class AzTopic
      */
     private $deleted = '0';
 
+    /**
+     * @var string
+     */
+    private $tags;
+
+    /**
+     * @var integer
+     */
+    private $qtypes;
+
+    /**
+     * @var integer
+     */
+    private $createtime;
+
 
     /**
      * Get tid
@@ -48,12 +63,6 @@ class AzTopic
         return $this->tid;
     }
 
-    public function setTid($tid)
-    {
-        $this->tid = $tid;
-
-        return $this;
-    }
     /**
      * Set title
      *
@@ -173,16 +182,6 @@ class AzTopic
     {
         return $this->deleted;
     }
-    /**
-     * @var string
-     */
-    private $tags;
-
-    /**
-     * @var integer
-     */
-    private $qtypes;
-
 
     /**
      * Set tags
@@ -231,4 +230,29 @@ class AzTopic
     {
         return $this->qtypes;
     }
+
+    /**
+     * Set createtime
+     *
+     * @param integer $createtime
+     *
+     * @return AzTopic
+     */
+    public function setCreatetime($createtime)
+    {
+        $this->createtime = $createtime;
+
+        return $this;
+    }
+
+    /**
+     * Get createtime
+     *
+     * @return integer
+     */
+    public function getCreatetime()
+    {
+        return $this->createtime;
+    }
 }
+

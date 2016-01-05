@@ -28,6 +28,12 @@ class AzAnswer
     private $tid;
 
     /**
+     * @var integer
+     */
+    private $createtime;
+
+
+    /**
      * Get aid
      *
      * @return integer
@@ -37,16 +43,6 @@ class AzAnswer
         return $this->aid;
     }
 
-    /**
-     * @param integer $aid
-     *
-     * @return AnAnswer
-     */
-    public function setAid($aid){
-        $this->aid = $aid;
-
-        return $this;
-    }
     /**
      * Set answer
      *
@@ -96,25 +92,51 @@ class AzAnswer
     }
 
     /**
-     * Get tid
-     *
-     * @return integer
-     */
-    public function getTid(){
-        return $this->tid;
-    }
-
-    /**
      * Set tid
      *
      * @param integer $tid
      *
      * @return AzAnswer
      */
-    public function setTid($tid){
+    public function setTid($tid)
+    {
         $this->tid = $tid;
 
         return $this;
+    }
+
+    /**
+     * Get tid
+     *
+     * @return integer
+     */
+    public function getTid()
+    {
+        return $this->tid;
+    }
+
+    /**
+     * Set createtime
+     *
+     * @param integer $createtime
+     *
+     * @return AzAnswer
+     */
+    public function setCreatetime($createtime)
+    {
+        $this->createtime = $createtime;
+
+        return $this;
+    }
+
+    /**
+     * Get createtime
+     *
+     * @return integer
+     */
+    public function getCreatetime()
+    {
+        return $this->createtime;
     }
 }
 

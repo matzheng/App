@@ -9,6 +9,8 @@ AppBundle\Entity\AzMemberFav:
                 unsigned: false
                 comment: 收藏时间
             id: true
+            generator:
+                strategy: IDENTITY
     fields:
         mid:
             type: integer
@@ -24,4 +26,9 @@ AppBundle\Entity\AzMemberFav:
                 unsigned: false
                 comment: 'topic id'
                 default: '0'
+        createtime:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
     lifecycleCallbacks: {  }

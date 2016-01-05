@@ -23,6 +23,12 @@ class AzAnswerLike
     private $aid;
 
     /**
+     * @var integer
+     */
+    private $createtime;
+
+
+    /**
      * Get time
      *
      * @return integer
@@ -32,18 +38,6 @@ class AzAnswerLike
         return $this->time;
     }
 
-    /**
-     * Set time
-     *
-     * @param integer $time
-     *
-     * @return AzAnswerLike
-     */
-    public function setTime($time){
-        $this->time = $time;
-
-        return $this;
-    }
     /**
      * Set mid
      *
@@ -90,6 +84,30 @@ class AzAnswerLike
     public function getAid()
     {
         return $this->aid;
+    }
+
+    /**
+     * Set createtime
+     *
+     * @param integer $createtime
+     *
+     * @return AzAnswerLike
+     */
+    public function setCreatetime($createtime)
+    {
+        $this->createtime = $createtime;
+
+        return $this;
+    }
+
+    /**
+     * Get createtime
+     *
+     * @return integer
+     */
+    public function getCreatetime()
+    {
+        return $this->createtime;
     }
 }
 

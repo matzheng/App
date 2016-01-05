@@ -26,7 +26,7 @@ class AnswerController extends Controller{
         }
 
         $a = new AzAnswer();
-        $a->setAid(time());
+        $a->setCreatetime(time());
         $a->setAnswer($answer);
         $a->setMid($mid);
         $a->setTid($tid);

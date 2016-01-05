@@ -39,7 +39,7 @@
       <div class="card-header no-border">
         <div class="facebook-avatar"><img src="http://placeholder.qiniudn.com/100x100" width="34" height="34"></div>
         <div class="facebook-name">{{ author.uname }}</div>
-        <div class="facebook-date">{{ topic.tid | date("Y-m-d") }}</div>
+        <div class="facebook-date">{{ topic.createtime | date("Y-m-d") }}</div>
       </div>
     </a>
       <div class="card-header color-white no-border ui-nowrap-multi1">问：{{ topic.title }}</div>
@@ -58,7 +58,7 @@
                   <div class="card-header no-border nocolor">
                       <div class="facebook-avatar"></div>
                       <div class="facebook-name"></div>
-                      <div class="facebook-date">{{ d.Aid | date("Y-m-d") }}</div>
+                      <div class="facebook-date">{{ d.createtime | date("Y-m-d") }}</div>
                   </div>
                   <div class="card-content">
                       <div class="card-content-inner">{{ d.answer | replace({'\n':'<br/>'}) | raw }}</div>

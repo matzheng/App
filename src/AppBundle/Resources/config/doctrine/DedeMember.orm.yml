@@ -164,6 +164,8 @@ AppBundle\Entity\DedeMember:
             type: string
             nullable: true
             length: 200
+            options:
+                fixed: false
         isexpert:
             type: integer
             nullable: true

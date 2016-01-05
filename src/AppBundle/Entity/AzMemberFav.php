@@ -22,6 +22,11 @@ class AzMemberFav
      */
     private $tid = '0';
 
+    /**
+     * @var integer
+     */
+    private $createtime;
+
 
     /**
      * Get fid
@@ -31,19 +36,6 @@ class AzMemberFav
     public function getFid()
     {
         return $this->fid;
-    }
-
-    /**
-     * Set fid
-     *
-     * @param integer $fid
-     *
-     * @return AzMemberFav
-     */
-    public function setFid($fid){
-        $this->fid = $fid;
-
-        return $this;
     }
 
     /**
@@ -92,6 +84,30 @@ class AzMemberFav
     public function getTid()
     {
         return $this->tid;
+    }
+
+    /**
+     * Set createtime
+     *
+     * @param integer $createtime
+     *
+     * @return AzMemberFav
+     */
+    public function setCreatetime($createtime)
+    {
+        $this->createtime = $createtime;
+
+        return $this;
+    }
+
+    /**
+     * Get createtime
+     *
+     * @return integer
+     */
+    public function getCreatetime()
+    {
+        return $this->createtime;
     }
 }
 

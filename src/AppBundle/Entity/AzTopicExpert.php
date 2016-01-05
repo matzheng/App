@@ -15,7 +15,7 @@ class AzTopicExpert
     /**
      * @var integer
      */
-    private $tid;
+    private $tid = '0';
 
     /**
      * @var integer

@@ -9,6 +9,8 @@ AppBundle\Entity\AzTopicLike:
                 unsigned: false
                 comment: 时间
             id: true
+            generator:
+                strategy: IDENTITY
     fields:
         tid:
             type: integer

@@ -65,7 +65,7 @@ class MemberController extends Controller{
      */
     public function regCheckAction($mobile){
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');
-        $u = $rep->findOneBy(array('mobile'=>$mobile));
+        $u = $rep->findOneBy(array('mobile'=>$mobile, 'mtype'=>'安知'));
         if($u)
             return new JsonResponse(array('success'=>'0','msg'=>'此手机号已注册过'));
         return new JsonResponse(array('success'=>'1','msg'=>'可以注册'));

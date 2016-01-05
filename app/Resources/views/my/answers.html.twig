@@ -42,7 +42,7 @@
                     <div valign="bottom" class="card-header color-white no-border ui-nowrap-multi1">问: {{ d.title }}</div>
                     <div class="card-content">
                         <div class="card-content-inner">
-                            <p class="color-gray">发表于 {{ d.tid | date('Y-m-d') }}</p>
+                            <p class="color-gray">发表于 {{ d.createtime | date('Y-m-d') }}</p>
                             <div class="demo-block">
                                 <div class="ui-nowrap-multi3">
                                     我的回答: {{ d.answer | replace({'\n':'<br/>'}) | raw }}
@@ -53,5 +53,17 @@
                 </div>
             </a>
         {% endfor %}
+        {% for d in mytopics%}
+            <a href="{{ d.qtypes == '1' ? path('topicdetail', {'tid': d.tid}) : path('partmentdetail', {'tid': d.tid})}}">
+                <div class="card">
+                    <div valign="bottom" class="card-header color-white no-border ui-nowrap-multi1">我的提问: {{ d.title }}</div>
+                    <div class="card-content">
+                        <div class="card-content-inner">
+                            <p class="color-gray">发表于 {{ d.createtime | date('Y-m-d') }}</p>                            
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {%endfor%}
     </div>
 {% endblock %}

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\DedeMember;
 //use AppBundle\Entity\DedeMemberPerson;
+use AppBundle\Entity\AzTopic;
 
 class MyController extends Controller{
     /**
@@ -66,10 +67,13 @@ class MyController extends Controller{
         $ck = $req->cookies->get('anzhi_m');
         if(!$ck)
             return $this->redirectToRoute('loginpage');
-        $sql = "select a.Aid,a.answer,a.tid,b.title, b.detail,b.qtypes from az_answer a inner join az_topic b on a.tid=b.tid where a.mid=".$ck." order by a.Aid desc";
+        //所有回答
+        $sql = "select a.Aid,a.answer,a.tid,b.title, b.detail,b.qtypes,a.createtime from az_answer a inner join az_topic b on a.tid=b.tid where a.mid=".$ck." order by a.Aid desc";
         $em = $this->getDoctrine()->getManager();
         $q = $em->getConnection()->prepare($sql);
         $q->execute();
-        return $this->render('my/answers.html.twig',array('data'=>$q->fetchAll()));
+        //所有我的提问
+        $mytopics = $this->getDoctrine()->getRepository('AppBundle:AzTopic')->findBy(array('mid'=>$ck));
+        return $this->render('my/answers.html.twig',array('data'=>$q->fetchAll(), 'mytopics'=>$mytopics));
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}安知后台管理系统{% endblock %}</title>
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/admin/css/datepicker3.css" rel="stylesheet">
+<link href="/admin/css/styles.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="/admin/js/html5shiv.js"></script>
+<script src="/admin/js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>  
+  {% block body %}{% endblock %}
+  <script src="/admin/js/jquery-1.11.1.min.js"></script>
+  <script src="/admin/js/bootstrap.min.js"></script>
+  <!--
+  <script src="/admin/js/chart.min.js"></script>
+  <script src="/admin/js/chart-data.js"></script>
+  <script src="/admin/js/easypiechart.js"></script>
+  <script src="/admin/js/easypiechart-data.js"></script>
+  <script src="/admin/js/bootstrap-datepicker.js"></script>
+
+  <script>
+    !function ($) {
+      $(document).on("click","ul.nav li.parent > a > span.icon", function(){      
+        $(this).find('em:first').toggleClass("glyphicon-minus");    
+      }); 
+      $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+    }(window.jQuery);
+
+    $(window).on('resize', function () {
+      if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+    })
+    $(window).on('resize', function () {
+      if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+    })
+  </script> 
+  -->
+  {%block javascripts%}{%endblock%}
+</body>
+</html>

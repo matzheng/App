@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+   个人信息 - 安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/reg.css">
+{% endblock %}
+
+{%block body%}
+<header class="bar bar-nav" >
+	<a class="button button-link button-nav pull-left back" href="{{ path('myindex') }}">
+    		<span class="icon icon-left"></span>
+      </a>
+        <h1 class="title">修改个人信息</h1>
+    </header>
+
+    <nav class="bar bar-tab topbar">
+        <a class="tab-item" href="{{ path('homepage') }}">
+            <span class="icon iconfont">&#xe606;</span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item " href="{{ path('partmentindex') }}">
+            <span class="icon iconfont" >&#xe619;</span>
+            <span class="tab-label">私董会</span>
+        </a>
+        <a class="tab-item " href="{{ path('topicindex') }}">
+            <span class="icon iconfont" >&#xe622;</span>
+            <span class="tab-label">快答</span>
+        </a>
+        <a class="tab-item active" href="{{ path('myindex') }}">
+            <span class="icon iconfont" >&#xe613;</span>
+            <span class="tab-label">我的</span>
+        </a>
+    </nav>
+    <form method="POST" action="{{path('myprofilepage')}}" enctype="multipart/form-data">
+    <div class="content">
+            <!-- 这里是页面内容区 -->
+            <p class="tips"><span>所有资料均为必填。</span></p>
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">姓名</div>
+                                <div class="item-input">
+                                    <input name="uname" id="uname" placeholder="你的真实姓名" type="text" value="{{data.uname}}">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">E-mail</div>
+                                <div class="item-input">
+                                    <input name="email" id="email" placeholder="E-mail" type="email" value="{{data.email}}">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">性别</div>
+                                <div class="item-input">
+                                    <select name="sex" id="sex">
+                                        <option value="">请选择</option>
+                                        <option value="1">男士</option>
+                                        <option value="2">女士</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">关注的行业</div>
+                                <div class="item-input">
+                                    <select name="prod" id="prod">
+                                        <option value="">请选择</option>
+                                        <option value="消防管理">消防管理</option>
+                                        <option value="化学品管理">化学品管理</option>
+                                        <option value="机械安全">机械安全</option>
+                                        <option value="受限空间管理">受限空间管理</option>
+                                        <option value="用电安全">用电安全</option>
+                                        <option value="建筑安全">建筑安全</option>
+                                        <option value="应急救援">应急救援</option>
+                                        <option value="劳动防护">劳动防护</option>
+                                        <option value="职业健康">职业健康</option>
+                                        <option value="法律法规">法律法规</option>
+                                        <option value="安全培训">安全培训</option>
+                                        <option value="体系管理">体系管理</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                -->
+                <li>
+                	<div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">头像</div>
+                                <div class="item-input">
+                                	<img src='{{data.face}}' style='width:3em;height:3em;' />
+                                </div>
+                            </div>
+                        </div>
+                </li>
+                <li>
+                	<div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">更换头像</div>
+                                <div class="item-input">
+                                    <input type="file" id="upload" name="upload" />
+                                </div>
+                            </div>
+                        </div>
+                </li>
+                </ul>
+            </div>
+
+            <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary" type='submit'>
+                    修改
+                </button>
+            </div>
+        </div>
+    </form>
+{%endblock%}

@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\DedeMember;
-//use AppBundle\Entity\DedeMemberPerson;
 use AppBundle\Entity\AzTopic;
 
 class MyController extends Controller{
@@ -75,5 +74,36 @@ class MyController extends Controller{
         //所有我的提问
         $mytopics = $this->getDoctrine()->getRepository('AppBundle:AzTopic')->findBy(array('mid'=>$ck));
         return $this->render('my/answers.html.twig',array('data'=>$q->fetchAll(), 'mytopics'=>$mytopics));
+    }
+
+    /**
+     * @Route("/myprofile", name="myprofilepage", methods={"GET","POST"})
+     */
+    public function mydetail(){
+        $req = Request::createFromGlobals();
+        $ck = $req->cookies->get('anzhi_m');
+        if(!$ck)
+            return $this->redirectToRoute('loginpage');
+        $file = "";
+        //读取数据
+        $m = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->find($ck);
+        if($req->getMethod() == 'POST') 
+        {
+            $em = $this->getDoctrine()->getManager();
+            $m->setUname($req->request->get('uname'));
+            $m->setEmail($req->request->get('email'));
+            $file = $req->files->get('upload');
+            if($file != null)
+            {
+                $filename = str_replace('image/',$ck.'-'.time().'.', $file->getMimeType());
+                $path = $this->get('kernel')->getRootDir().'/../web/upload/';
+                $file->move($path, $filename);
+
+                $m->setFace("/upload/".$filename);
+            }
+            $em->flush();
+        }
+        
+        return $this->render('my/profile.html.twig', array('data'=>$m, 'file'=>$file));
     }
 }

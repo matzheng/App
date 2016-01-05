@@ -9,7 +9,6 @@
 
 {% block body %}
     <header class="bar bar-nav" >
-
         <h1 class="title">我的</h1>
     </header>
 
@@ -44,15 +43,19 @@
             <ul class="ui-list ui-list-link ui-border-tb">
                 <!--style="  background:#ff7900;-->
                 <li style=" background: url(images/bg011.jpg) no-repeat; background-size:cover;color:#FFF;height:150px;">
-                    <div class="ui-avatar" style=" margin:50px 15px 25px 20px">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                    </div>
-                    <div class="ui-list-info ui-border-t" style=" height:150px;">
-                        <div class="ui-list-info">
-                            <h4 class="ui-nowrap">{{ data.uname }}</h4>
-                            <p class="ui-nowrap">未认证专家</p>
+                    
+                        <div class="ui-avatar" style=" margin:50px 15px 25px 20px">
+                            <span style="background-image:url({{data.face}})"></span>
                         </div>
-                    </div>
+                        <div class="ui-list-info ui-border-t" style=" height:150px;">
+                            <a href="{{path('myprofilepage')}}">
+                            <div class="ui-list-info">
+                                <h4 class="ui-nowrap">{{ data.uname }}</h4>
+                                <p class="ui-nowrap">未认证专家</p>
+                            </div>
+                            </a>
+                        </div>
+                    
                 </li>
                 <div class="demo-item">
                     <div class="demo-block" style=" border-top: 1px solid #eee; padding-top:0.2rem;">

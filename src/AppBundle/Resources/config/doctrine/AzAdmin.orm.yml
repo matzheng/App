@@ -1,0 +1,29 @@
+AppBundle\Entity\AzAdmin:
+    type: entity
+    table: az_admin
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id
+            generator:
+                strategy: IDENTITY
+    fields:
+        uname:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        pwd:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+                default: ''
+    lifecycleCallbacks: {  }

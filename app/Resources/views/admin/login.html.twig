@@ -1,0 +1,36 @@
+{% extends 'adminbase.html.twig' %}
+{%block bodyid%}login{%endblock%}
+{%block body%}
+<div class="container form-signin">
+
+        <h2 class="form-signin-heading">安知后台管理系统</h2>
+        <input type="text" id='uname' class="input-block-level" placeholder="用户名">
+        <input type="password" id='password' class="input-block-level" placeholder="密码">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> 记住密码
+        </label>
+        <button class="btn btn-large btn-primary" >登录</button>
+
+    </div> <!-- /container -->
+
+{%endblock%}
+
+{%block javascripts%}
+    <script>
+    	$(document).ready(function(){
+    		$('.btn-primary').click(function(){
+    			$.ajax({
+					url: "{{path('adminlogincheck')}}",  
+					type: "POST",
+					data: "uname=" + $('#uname').val() + "&password=" + $('#password').val(), 
+					success: function(d){
+						if(d.success == '0')
+							alert(d.msg);
+						else
+							window.location.href="{{path('adminindexpage')}}";
+					} 				
+    			});
+    		});
+    	});
+    </script>
+{%endblock%}

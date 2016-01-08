@@ -4,43 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}安知后台管理系统{% endblock %}</title>
-<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
-<link href="/admin/css/datepicker3.css" rel="stylesheet">
-<link href="/admin/css/styles.css" rel="stylesheet">
-
-<!--[if lt IE 9]>
-<script src="/admin/js/html5shiv.js"></script>
-<script src="/admin/js/respond.min.js"></script>
-<![endif]-->
-
+<link href="/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+ <link href="/admin/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="/admin/assets/styles.css" rel="stylesheet" media="screen">
+     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/admin/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
-<body>  
+<body id="{%block bodyid%}{%endblock%}">  
   {% block body %}{% endblock %}
-  <script src="/admin/js/jquery-1.11.1.min.js"></script>
-  <script src="/admin/js/bootstrap.min.js"></script>
-  <!--
-  <script src="/admin/js/chart.min.js"></script>
-  <script src="/admin/js/chart-data.js"></script>
-  <script src="/admin/js/easypiechart.js"></script>
-  <script src="/admin/js/easypiechart-data.js"></script>
-  <script src="/admin/js/bootstrap-datepicker.js"></script>
-
-  <script>
-    !function ($) {
-      $(document).on("click","ul.nav li.parent > a > span.icon", function(){      
-        $(this).find('em:first').toggleClass("glyphicon-minus");    
-      }); 
-      $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
-
-    $(window).on('resize', function () {
-      if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-      if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
-  </script> 
-  -->
+  <script src="/admin/vendors/jquery-1.9.1.min.js"></script>
+  <script src="/admin/bootstrap/js/bootstrap.min.js"></script>
   {%block javascripts%}{%endblock%}
 </body>
 </html>

@@ -38,7 +38,7 @@ class DedeMember
     private $uname = '';
 
     /**
-     * @var boolean
+     * @var integer
      */
     private $sex = '0';
 
@@ -266,7 +266,7 @@ class DedeMember
     /**
      * Set sex
      *
-     * @param boolean $sex
+     * @param integer $sex
      *
      * @return DedeMember
      */
@@ -280,7 +280,7 @@ class DedeMember
     /**
      * Get sex
      *
-     * @return boolean
+     * @return integer
      */
     public function getSex()
     {

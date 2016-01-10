@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\AzAdmin;
 use AppBundle\Entity\DedeMember;
+use AppBundle\Entity\AzTopic;
+
 class AdminController extends Controller{
 	/**
 	 * @Route("/azadmin", name="adminloginpage", methods={"GET"})
@@ -69,7 +71,23 @@ class AdminController extends Controller{
 	 */
 	public function memberlistAction(){
 		$members = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->findBy(array('mtype'=>'安知'));
-		return $this->render('admin/memberlist.html.twig', array('result'=>$members));
+		$experts = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->findBy(array('mtype'=>'安知', 'isexpert'=>'1'));
+		return $this->render('admin/memberlist.html.twig', array('result'=>$members, 'experts'=>$experts));
+	}
+
+	/**
+	 * @Route("/azadmin/memberdetail/{mid}", name="adminmemberdetail",methods={"GET"}, defaults={"mid":""})
+	 */
+	public function memberdetailAction($mid)
+	{
+		//会员详情
+		$mb = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->findOneBy(array('mid'=>$mid));
+		//所有提问
+		$q = $this->getDoctrine()->getRepository('AppBundle:AzTopic')->findBy(array('mid'=>$mid));
+		//所有回答
+		//$a = $this->getDoctrine()->getRepository('AppBundle:AzTopic')->findBy(array('mid'=>$mid));
+
+		return $this->render('admin/memberdetail.html.twig', array('member'=>$mb,'questions'=>$q));
 	}
 
 	/**
@@ -79,5 +97,25 @@ class AdminController extends Controller{
 	{
 		$members = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->findBy(array('mtype'=>'安知'));
 		return new JsonResponse($members);
+	}
+
+	/**
+	 * @Route("/azadmin/updateexpert", name="updateExpert", methods={"POST"})
+	 */
+	public function updateExpertAction()
+	{
+		$mid = $_POST['mid'];
+		$isexpert = $_POST['isexpert'];
+		$mb = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->find($mid);
+		$em = $this->getDoctrine()->getManager();
+		$mb->setIsexpert($isexpert);
+		$em->flush();
+
+		$mb = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->find($mid);
+		//$experts = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->findBy(array('mtype'=>'安知', 'isexpert'=>'1'));
+		$sql = "select count(mid) as experts from dede_member where mtype='安知' and isexpert=1";
+		$q = $em->getConnection()->prepare($sql);
+        $q->execute();
+		return new JsonResponse(array('success'=>'1', 'msg'=>'更新专家成功。', 'mid'=>$mb->getMid(),'expert'=>$mb->getIsexpert(), 'experts'=>$q->fetchAll()[0]['experts']));
 	}
 }

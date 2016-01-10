@@ -55,7 +55,7 @@ AppBundle\Entity\DedeMember:
                 fixed: true
                 default: ''
         sex:
-            type: boolean
+            type: integer
             nullable: false
             options:
                 default: '0'

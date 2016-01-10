@@ -1,0 +1,76 @@
+{% extends 'admincontentbase.html.twig' %}
+
+{%block content%}
+<div class="row-fluid">
+	<div class="block">
+	    <div class="navbar navbar-inner block-header">
+	        <div class="muted pull-left">会员</div>
+	        <div class="pull-right"><span class="badge badge-info">{{result | length}}个安知会员</span>
+			<span class="badge badge-success" id="allexperts">{{experts | length}}个专家</span>
+	        </div>
+	    </div>
+	    <div class="block-content collapse in">
+	        <table class="table table-hover table-bordered" id="mytable">
+	            <thead>
+	                <tr>
+	                    <th>#</th>
+	                    <th>头像</th>
+	                    <th>手机号</th>
+	                    <th>姓名</th>
+	                    <th>性别</th>
+	                    <th>Email</th>
+	                    <th>注册时间</th>
+	                    <th>注册ip</th>
+	                    <th>最后登录时间</th>
+	                    <th>最后登录ip</th>
+	                    <th>关注产业</th>
+	                    <th>是否专家</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	            	{%for d in result%}
+	            	<tr>
+	            		<td>{{d.mid}}</td>
+	            		<td><img src='{{d.face}}' width='30' height='30'/></td>
+	            		<td><a href='{{path('adminmemberdetail', {'mid': d.mid})}}' target='_blank'>{{d.mobile}}</a></td>
+	            		<td>{{d.uname}}</td>
+	            		<td>{{d.sex == 0 ? "未设置" : ""}}{{d.sex == 1 ? "男" : ""}}{{d.sex == 2 ? "女" : ""}}{{d.sex == 3 ? "未知" : ""}}</td>
+	            		<td>{{d.email}}</td>
+	            		<td>{{d.jointime | date('Y-m-d')}}</td>
+	            		<td>{{d.joinip}}</td>
+	            		<td>{{d.logintime | date('Y-m-d')}}</td>
+	            		<td>{{d.loginip}}</td>
+	            		<td>{{d.product}}</td>
+	            		<td><input type="checkbox" name='cbexpert' data-mid="{{d.mid}}" data-expert="{{d.isexpert == 1 ? 0 : 1}}" {{d.isexpert == 1 ? "checked": ""}}/></td>
+	            	</tr>
+	            	{%endfor%}
+	            </tbody>
+	        </table>
+	    </div>
+	</div>
+</div>
+{%endblock%}
+
+{%block javascripts%}
+<script>
+$(document).ready(function(){
+	$("input[name='cbexpert']").each(function(){
+    	$(this).click(function(){
+    		//alert($(this).data('mid'));
+    		$.ajax({
+    			url: "{{path('updateExpert')}}",
+    			type: "POST",
+    			data: "mid=" + $(this).data('mid') + "&isexpert=" + $(this).data('expert'),
+    			success: function(d){
+    				$("#allexperts").html(d.experts + '个专家');
+    				$("input[data-mid='" + d.mid + "']").prop('data-expert', d.expert == 1 ? 0 : 1);
+    				alert(d.msg);
+    			}
+    		});
+    	});
+    });
+
+    $('#mytable').DataTable();
+});
+</script>
+{%endblock%}

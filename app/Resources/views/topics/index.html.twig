@@ -59,8 +59,14 @@
         </div>
         </li>
         {% endfor %}
-
       </ul>
+    </div>
+    {%set resultcount = result | length%}
+    <div class="content-block">
+        {%if resultcount == 0%}
+        <p>没有更多数据了</p>
+        {%endif%}
+        <p><a href="{{path('topicindex')}}?p={{resultcount == 0 ? page - 1 : page + 1}}" class="button button-fill button-warning" style="background:none; color:#066; border:1px solid #066;">{{resultcount == 0 ? "返回上一页" : "下一页"}}</a></p>
     </div>
   </div>
 </div>

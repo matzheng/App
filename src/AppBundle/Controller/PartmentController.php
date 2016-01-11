@@ -24,8 +24,9 @@ class PartmentController extends Controller{
         $ck = $req->cookies->get('anzhi_m');
         if(!$ck)
             return $this->redirectToRoute('loginpage');
-        $sql = "select a.id,a.tagname, count(b.Id) as topiccount,count(distinct c.mid) membercount,count(distinct d.mid) favcount from az_tags a left join az_topic_tags b on a.id=b.tagid
-left join az_answer c on b.tid=c.tid left join az_member_fav d on b.tid=d.tid and c.tid=d.tid
+        $sql = "select a.id,a.tagname, count(distinct b.Id) as topiccount,count(distinct c.mid) membercount,count(distinct d.mid) favcount from az_tags a left join az_topic_tags b on a.id=b.tagid
+left join az_answer c on b.tid=c.tid left join az_member_fav d on b.tid=d.tid and c.tid=d.tid 
+left join az_topic e on b.tid=e.tid and e.qtypes='2'
 group by a.id,a.tagname order by membercount desc, favcount desc";
         /*
         if(!$ck){
@@ -127,21 +128,23 @@ group by a.id,a.tagname order by membercount desc, favcount desc";
         $em->flush();
         //添加专家   
         $rep = $this->getDoctrine()->getRepository('AppBundle:DedeMember');    
-        foreach(explode(',', $experts) as $zj){            
-            $exp = new AzTopicExpert();
-            $exp->setTid($topicid);
-            $exp->setMid($zj);
-            $exp->setAddtime(time());
-            $em->persist($exp);
-            $em->flush();
-            //发送短信通知
-            $smsconf = $this->container->getParameter('sms');
-            $url = "http://106.veesing.com/webservice/sms.php?method=Submit";
-            $mb = $rep->find($zj);
-            $post_data = "account=".$smsconf['account']."&password=".md5($smsconf['password'])."&mobile=".$mb->getMobile()."&content=专家".$mb->getUname()."，安知有新问题需要你来解答，请尽快登陆上线。";
-            $this->Post($post_data, $url);
+        if($experts)
+        {
+            foreach(explode(',', $experts) as $zj){            
+                $exp = new AzTopicExpert();
+                $exp->setTid($topicid);
+                $exp->setMid($zj);
+                $exp->setAddtime(time());
+                $em->persist($exp);
+                $em->flush();
+                //发送短信通知
+                $smsconf = $this->container->getParameter('sms');
+                $url = "http://106.veesing.com/webservice/sms.php?method=Submit";
+                $mb = $rep->find($zj);
+                $post_data = "account=".$smsconf['account']."&password=".md5($smsconf['password'])."&mobile=".$mb->getMobile()."&content=专家".$mb->getUname()."，安知有新问题需要你来解答，请尽快登陆上线。";
+                $this->Post($post_data, $url);
+            }
         }
-
         $em->flush();
         return new JsonResponse(array('success'=> '1', 'msg'=>'问题添加成功',  'data'=>$topicid));
     }

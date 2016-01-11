@@ -15,6 +15,7 @@
         <h1 class="title">添加问题</h1>
         <button class="button pull-right" id='addtopic' >发布</button>
     </header>
+    <!--
     <nav class="bar bar-tab topbar">
         <a class="tab-item" href="{{ path('homepage') }}">
             <span class="icon iconfont">&#xe606;</span>
@@ -33,9 +34,10 @@
             <span class="tab-label">我的</span>
         </a>
     </nav>
+  -->
 <div class="content javascript-scroll"><div class="content-inner" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
     <div class="buttons-tab">
-      <a href="#tab1" class="tab-link button active">问题</a>
+      <a href="#tab1" class="tab-link button active">标题</a>
       <a href="#tab2" class="tab-link button">描述</a>
       <a href="#tab3" class="tab-link button">标签</a>
        <a href="#tab4" class="tab-link button ">邀答</a>
@@ -96,13 +98,13 @@
                     <i></i>最多可邀请6个专家席位。<a class="ui-icon-close"></a>
                 </div>
             </div>
-       <div class="demo-block">
+       <div class="demo-block" style="max-height:500px;overflow-y:scroll">
             <ul class="ui-list ui-list-function ui-list-link ui-border-tb">
               {% for d in experts%}
                 <li class="ui-border-t">
                 <a href="{{ path('memberdetailpage', {'mid': d.mid}) }}">                  
                     <div class="ui-avatar-s">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>
+                        <span style="background-image:url({{d.face}})"></span>
                     </div></a>
                     <div class="ui-list-info">
                         <a href="{{ path('memberdetailpage', {'mid': d.mid}) }}"><h4 class="ui-nowrap">{{d.uname}}</h4></a>
@@ -125,7 +127,7 @@
       //add partment
       $('#addtopic').on('click', function(){
         if($.trim($('#title').val()) == ''){
-          $.alert('请输入问题');
+          $.alert('请输入标题');
           return false;
         }
 
@@ -148,10 +150,10 @@
             experts.push($(this).data('mid'));
           });
         //console.log(experts.join(","));
-        if(experts.join(",") == ''){
-          $.alert('请选择邀答专家');
-          return;
-        }
+        //if(experts.join(",") == ''){
+        //  $.alert('请选择邀答专家');
+        //  return;
+        //}
 
         //按钮置灰
         $(this).prop('disabled', true);

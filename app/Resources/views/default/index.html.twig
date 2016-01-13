@@ -61,6 +61,7 @@
       </ul>
     </div>
 
+<!--
     {%set resultcount = result | length%}
     <div class="content-block">
         {%if resultcount == 0%}
@@ -68,6 +69,7 @@
         {%endif%}
         <p><a href="{{path('homepage')}}?p={{resultcount == 0 ? page - 1 : page + 1}}" class="button button-fill button-warning" style="background:none; color:#066; border:1px solid #066;">{{resultcount == 0 ? "返回上一页" : "下一页"}}</a></p>
     </div>
+-->
   </div>
 </div>
 {% endblock %}

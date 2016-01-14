@@ -24,8 +24,8 @@ class PartmentController extends Controller{
         $ck = $req->cookies->get('anzhi_m');
         if(!$ck)
             return $this->redirectToRoute('loginpage');
-        $sql = "select a.id,a.tagname, count(distinct e.tid) as topiccount,count(distinct c.mid) membercount,count(distinct d.mid) favcount from az_tags a left join az_topic_tags b on a.id=b.tagid
-left join az_answer c on b.tid=c.tid left join az_member_fav d on b.tid=d.tid and c.tid=d.tid 
+        $sql = "select a.id,a.tagname, count(distinct e.tid) as topiccount,count(distinct c.mid) + count(distinct e.mid) membercount,count(distinct d.mid) favcount from az_tags a left join az_topic_tags b on a.id=b.tagid
+left join az_answer c on b.tid=c.tid left join az_member_fav d on b.tid=d.tid
 left join az_topic e on b.tid=e.tid and e.qtypes='2'
 group by a.id,a.tagname order by topiccount desc, favcount desc";
         /*

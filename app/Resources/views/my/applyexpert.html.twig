@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+   成为专家 - 安知
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/reg.css">
+{% endblock %}
+
+{%block body%}
+<div class="page-group">
+  <div id="page-city-picker" class="page page-current">
+  <header class="bar bar-nav">
+    <a class="button button-link button-nav pull-left back" onclick="history.back()">
+      <span class="icon icon-left" style="color:#FFF;"></span>
+    </a>
+     <h1 class="title">成为专家</h1>
+  </header>
+  
+
+  
+  <div class="content native-scroll">
+    <!-- 这里是页面内容区 -->
+       <p class="tips"><span>所有资料均为必填。</span></p> 
+     <div class="list-block">
+      <ul>
+        <!-- Text inputs -->
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title label">姓名</div>
+              <div class="item-input">
+                <input placeholder="你的真实姓名" type="text" id='name'>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title label">任职单位</div>
+              <div class="item-input">
+                <input placeholder="单位" type="text" id='company'>
+              </div>
+            </div>
+          </div>
+        </li>
+     <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title label">头衔</div>
+              <div class="item-input">
+                <input placeholder="头衔" type="text" id='title'>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+         
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title label">所在城市</div>
+                  <div class="item-input">
+                    <input type="text" placeholder="请选择" id="city-picker" readonly="">
+                  </div>
+                </div>
+              </div>
+            </li>
+         
+               <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title label">关注的行业</div>
+              <div class="item-input">
+                <select id='product'>
+                 <option value="">请选择</option>
+                  	<option value="消防管理">消防管理</option>
+	                <option value="化学品管理">化学品管理</option>
+	                <option value="机械安全">机械安全</option>
+	                <option value="受限空间管理">受限空间管理</option>
+	                <option value="用电安全">用电安全</option>
+	                <option value="建筑安全">建筑安全</option>
+	                <option value="应急救援">应急救援</option>
+	                <option value="劳动防护">劳动防护</option>
+	                <option value="职业健康">职业健康</option>
+	                <option value="法律法规">法律法规</option>
+	                <option value="安全培训">安全培训</option>
+	                <option value="体系管理">体系管理</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="align-top">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title label">个人简介</div>
+              <div class="item-input">
+                <textarea rows="8" placeholder="30字左右介绍" id='desc'></textarea>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+                  
+   <div class="ui-btn-wrap">
+                <button class="ui-btn-lg ui-btn-primary alert-text">
+                    提交审核
+                </button>
+    </div>
+   
+   </div>
+   
+  
+</div>
+</div>
+{%endblock%}
+
+{%block javascripts%}
+    <script src="js/sm.js"></script>
+    <!--<script src="js/sm-extend.js"></script>-->
+    <script src="js/sm-city-picker.js"></script>
+    <script src="js/demos.js"></script>
+    <script>
+    	$(document).ready(function(){
+    		$('.ui-btn-primary').click(function(){
+    			var name = $("#name").val();
+    			var company = $("#company").val();
+    			var title = $('#title').val();
+    			var address = $('#city-picker').val();
+    			var product = $('#product').val();
+    			var desc = $('#desc').val();
+
+    			$.ajax({
+    				url: "{{path('allpyexpertdone')}}",
+    				type: "POST",
+    				data: "name=" + name + "&company=" + company + "&title=" + title + "&address=" + address + "&product=" + product + "&desc=" + desc,
+    				success: function(d){
+    					if(d.success == "1")
+    					{
+    						$.alert(d.msg);
+    						setTimeout(function(){
+    							window.location.href= "{{path('myindex')}}";
+    						}, 2000);
+    						
+    					}
+						else
+    						$.alert(d.msg);		
+    				}
+    			});
+    		});
+    	});
+    </script>
+{%endblock%}

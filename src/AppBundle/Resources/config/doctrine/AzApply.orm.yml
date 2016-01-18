@@ -47,7 +47,7 @@ AppBundle\Entity\AzApply:
             nullable: true
             options:
                 unsigned: false
-        desc:
+        description:
             type: text
             nullable: true
             length: 65535

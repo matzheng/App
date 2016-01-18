@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\DedeMember;
 use AppBundle\Entity\AzTopic;
-
+use AppBundle\Entity\AzApply;
 class MyController extends Controller{
     /**
      * @Route("/my", name="myindex", methods={"GET"})
@@ -132,4 +132,39 @@ class MyController extends Controller{
         $mytopics = $this->getDoctrine()->getRepository('AppBundle:AzTopic')->findBy(array('mid'=>$ck, 'qtypes'=>2));
         return $this->render("my/partment.html.twig",array('data'=>$q->fetchAll(), 'mytopics'=>$mytopics));
     }
+	
+	/**
+	 * @Route("/applyexpert", name="applyexpertpage", methods={"GET"})
+	 */
+	public function applyexpertAction(){
+		return $this->render('my/applyexpert.html.twig');
+	}
+	
+	/**
+	 * @Route("/applyexpertdone", name="allpyexpertdone", methods={"POST"})
+	 */
+	public function applyexpertDoneAction(){
+		$req = Request::createFromGlobals();
+		$name = $req->request->get('name');
+		$company = $req->request->get('company');
+		$title = $req->request->get('title');
+		$product = $req->request->get('product');
+		$address = $req->request->get('address');
+		$desc = $req->request->get('desc');
+		
+		$a = new AzApply();
+		$a->setName($name);
+		$a->setCompany($company);
+		$a->setTitle($title);
+		$a->setProduct($product);
+		$a->setAddress($address);
+		$a->setMid($req->cookies->get('anzhi_m'));
+		$a->setDescription($desc);
+		$a->setInserttime(time());
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($a);
+        $em->flush();
+		
+		return new JsonResponse(array('success'=>'1', 'msg'=>'申请成功，我们将尽快审理您的申请。', 'id'=>$a->getId()));
+	}
 }

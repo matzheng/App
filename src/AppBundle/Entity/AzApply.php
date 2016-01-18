@@ -45,7 +45,7 @@ class AzApply
     /**
      * @var string
      */
-    private $desc;
+    private $description;
 
     /**
      * @var integer
@@ -210,25 +210,25 @@ class AzApply
     /**
      * Set desc
      *
-     * @param string $desc
+     * @param string $description
      *
      * @return AzApply
      */
-    public function setDesc($desc)
+    public function setDescription($description)
     {
-        $this->desc = $desc;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get desc
+     * Get description
      *
      * @return string
      */
-    public function getDesc()
+    public function getDescription()
     {
-        return $this->desc;
+        return $this->description;
     }
 
     /**

@@ -1,0 +1,61 @@
+AppBundle\Entity\AzApply:
+    type: entity
+    table: az_apply
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: Id
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        company:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        title:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        address:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+        product:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        mid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        desc:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        inserttime:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

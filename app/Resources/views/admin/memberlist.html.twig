@@ -25,6 +25,7 @@
 	                    <th>最后登录ip</th>
 	                    <th>关注产业</th>
 	                    <th>是否专家</th>
+	                    <th>是否VIP</th>
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -42,6 +43,7 @@
 	            		<td>{{d.loginip}}</td>
 	            		<td>{{d.product}}</td>
 	            		<td><input type="checkbox" name='cbexpert' data-mid="{{d.mid}}" data-expert="{{d.isexpert == 1 ? 0 : 1}}" {{d.isexpert == 1 ? "checked": ""}}/></td>
+	            		<td><input type="checkbox" name='cbvip' data-mid="{{d.mid}}" data-vip="{{d.vip == 1 ? 0 : 1}}" {{d.vip == 1 ? "checked": ""}}/></td>
 	            	</tr>
 	            	{%endfor%}
 	            </tbody>
@@ -64,6 +66,22 @@ $(document).ready(function(){
     			success: function(d){
     				$("#allexperts").html(d.experts + '个专家');
     				$("input[data-mid='" + d.mid + "']").prop('data-expert', d.expert == 1 ? 0 : 1);
+    				alert(d.msg);
+    			}
+    		});
+    	});
+    });
+
+    $("input[name='cbvip']").each(function(){
+    	$(this).click(function(){
+    		//alert($(this).data('mid'));
+    		$.ajax({
+    			url: "{{path('updateVip')}}",
+    			type: "POST",
+    			data: "mid=" + $(this).data('mid') + "&isvip=" + $(this).data('vip'),
+    			success: function(d){
+    				//$("#allexperts").html(d.experts + '个专家');
+    				$("input[data-mid='" + d.mid + "']").prop('data-vip', d.vip == 1 ? 0 : 1);
     				alert(d.msg);
     			}
     		});

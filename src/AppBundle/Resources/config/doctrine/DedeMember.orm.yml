@@ -172,4 +172,10 @@ AppBundle\Entity\DedeMember:
             options:
                 unsigned: false
                 default: '0'
+        vip:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
     lifecycleCallbacks: {  }

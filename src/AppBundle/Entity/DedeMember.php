@@ -132,6 +132,10 @@ class DedeMember
      */
     private $isexpert = '0';
 
+    /**
+     * @var integer
+     */
+    private $vip = '0';
 
     /**
      * Get mid
@@ -717,6 +721,30 @@ class DedeMember
     public function getIsexpert()
     {
         return $this->isexpert;
+    }
+
+    /**
+     * Set vip
+     *
+     * @param integer $vip
+     *
+     * @return DedeMember
+     */
+    public function setVip($vip)
+    {
+        $this->vip = $vip;
+
+        return $this;
+    }
+
+    /**
+     * Get vip
+     *
+     * @return integer
+     */
+    public function getVip()
+    {
+        return $this->vip;
     }
 }
 

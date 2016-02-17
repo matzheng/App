@@ -118,4 +118,19 @@ class AdminController extends Controller{
         $q->execute();
 		return new JsonResponse(array('success'=>'1', 'msg'=>'更新专家成功。', 'mid'=>$mb->getMid(),'expert'=>$mb->getIsexpert(), 'experts'=>$q->fetchAll()[0]['experts']));
 	}
+
+	/**
+	 * @Route("/azadmin/updatevip", name="updateVip", methods={"POST"})
+	 */
+	public function updateVipAction()
+	{
+		$mid = $_POST['mid'];
+		$isvip = $_POST['isvip'];
+		$mb = $this->getDoctrine()->getRepository('AppBundle:DedeMember')->find($mid);
+		$em = $this->getDoctrine()->getManager();
+		$mb->setVip($isvip);
+		$em->flush();
+
+		return new JsonResponse(array('success'=>'1', 'msg'=>'更新vip成功。', 'mid'=>$mb->getMid()));
+	}
 }
